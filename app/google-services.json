@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "428032758866-ueg3l080ohfq41kp1ebivbqoq559i314.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.saibaba.hackathon",
-            "certificate_hash": "b7c31fea9bfe962887432211facdec5e77c9575f"
-          }
-        },
-        {
           "client_id": "428032758866-7qtk2efj3577ut5h29tdplsmk42p3ig8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
