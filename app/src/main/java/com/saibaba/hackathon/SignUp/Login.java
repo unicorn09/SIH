@@ -193,14 +193,14 @@ public class Login extends AppCompatActivity {
     }
 
     private void secondActivity() {
-        Intent i=new Intent(getApplicationContext(), MainActivity.class);
+        Intent i=new Intent(getApplicationContext(), Registration.class);
         i.putExtra("Name2",name2);
         startActivity(i);
         finish();
     }
 
     private void nextActivity() {
-        Intent i=new Intent(getApplicationContext(), MainActivity.class);
+        Intent i=new Intent(getApplicationContext(), Registration.class);
         i.putExtra("Name2",name2);
         startActivity(i);
         finish();
@@ -220,7 +220,7 @@ public class Login extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     progressDialog.dismiss();
-                    secondActivity();
+                    startActivity(new Intent(Login.this,Registration.class));
 
                 }
             }

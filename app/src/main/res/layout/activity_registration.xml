@@ -3,8 +3,9 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/bg_color"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".SignUp.Registration">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -62,8 +63,8 @@
                 android:layout_margin="15dp"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
-                android:textColor="#fff"
-                android:textColorHint="#fff"/>
+                android:textColor="#798184"
+                android:textColorHint="#798184"/>
             <EditText
                 android:id="@+id/info_age"
                 android:layout_width="match_parent"
@@ -76,8 +77,8 @@
                 android:inputType="numberDecimal"
                 android:maxLength="3"
                 android:paddingLeft="15dp"
-                android:textColorHint="#fff"
-                android:textColor="#fff"/>
+                android:textColorHint="#798184"
+                android:textColor="#798184"/>
             <EditText
                 android:id="@+id/info_dob"
                 android:layout_width="match_parent"
@@ -89,8 +90,8 @@
                 android:layout_marginRight="15dp"
                 android:inputType="date"
                 android:paddingLeft="15dp"
-                android:textColorHint="#fff"
-                android:textColor="#fff"/>
+                android:textColorHint="#798184"
+                android:textColor="#798184"/>
 
             <LinearLayout
                 android:id="@+id/gender_layout"
@@ -103,8 +104,7 @@
                 android:weightSum="12">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gender"
                     android:gravity="start"
@@ -117,27 +117,20 @@
 
                 <TextView
                     android:id="@+id/info_male"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edittext"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
                     android:text="Male"
                     android:gravity="center"
                     android:textColor="#fff"
-                    android:textSize="15sp" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:textSize="15sp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
                 <TextView
                     android:id="@+id/info_female"
-                    android:layout_width="0dp"
-                    android:layout_weight="2.5"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:background="@drawable/bg_edittext"
@@ -147,16 +140,11 @@
                     android:paddingBottom="5dp"
                     android:text="Female"
                     android:textColor="#fff"
-                    android:textSize="15sp" />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-
+                    android:textSize="15sp"
+                    android:layout_marginHorizontal="15dp"/>
                 <TextView
                     android:id="@+id/info_other"
-                    android:layout_width="0dp"
-                    android:layout_weight="2.5"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edittext"
                     android:paddingStart="10dp"
@@ -177,11 +165,10 @@
                 android:background="@drawable/bg_edittext"
                 android:hint="Flat No./House No./Lane No."
                 android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="10dp"
-                android:inputType="textPersonName"
+                android:layout_marginTop="15dp"
                 android:paddingLeft="15dp"
-                android:textColor="#fff"
-                android:textColorHint="#fff"/>
+                android:textColor="#798184"
+                android:textColorHint="#798184"/>
             <EditText
                 android:id="@+id/info_Address2"
                 android:layout_width="match_parent"
@@ -189,11 +176,11 @@
                 android:background="@drawable/bg_edittext"
                 android:hint="Landmark"
                 android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
-                android:textColor="#fff"
-                android:textColorHint="#fff"/>
+                android:textColor="#798184"
+                android:textColorHint="#798184"/>
             <EditText
                 android:id="@+id/info_city"
                 android:layout_width="match_parent"
@@ -201,11 +188,11 @@
                 android:background="@drawable/bg_edittext"
                 android:hint="City"
                 android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
-                android:textColor="#fff"
-                android:textColorHint="#fff"/>
+                android:textColor="#798184"
+                android:textColorHint="#798184"/>
             <LinearLayout
                 android:id="@+id/state_layout"
                 android:layout_width="match_parent"
@@ -276,9 +263,10 @@
         android:hint="Mobile Number"
         android:inputType="number"
         android:paddingLeft="15dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff" />
+        android:textColor="#798184"
+        android:textColorHint="#798184" />
 <ImageView
+    android:id="@+id/userverified_success"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
