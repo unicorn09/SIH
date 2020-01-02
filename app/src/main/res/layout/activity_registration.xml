@@ -49,7 +49,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Registration"
-                android:fontFamily="@font/proximanovaregular"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#fff"
                 android:textSize="15sp" />
@@ -207,7 +206,6 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:text="State"
-                    android:fontFamily="@font/proximanovaregular"
                     android:textSize="15sp"
                     android:textColor="#fff"
                     android:paddingTop="5dp"
@@ -234,7 +232,6 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:text="District"
-                    android:fontFamily="@font/proximanovaregular"
                     android:textSize="15sp"
                     android:textColor="#fff"
                     android:paddingTop="5dp"
@@ -248,17 +245,16 @@
 
             </LinearLayout>
 <LinearLayout
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <EditText
         android:id="@+id/info_phone"
-        android:layout_width="331dp"
+        android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
         android:background="@drawable/bg_edittext"
         android:hint="Mobile Number"
         android:inputType="number"
@@ -273,6 +269,15 @@
     android:src="@drawable/ic_verified_user_black_24dp"
     android:visibility="gone">
 </ImageView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verify"
+        android:layout_marginLeft="5dp"
+        android:textColor="#01DCF7"
+        android:id="@+id/verify_number"
+        android:layout_marginTop="10dp"
+        />
 </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -300,7 +305,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_submit_btn"
-            android:fontFamily="@font/proximanovasemibold"
             android:gravity="center"
             android:text="Save"
             android:lineSpacingExtra="3sp"
