@@ -169,19 +169,7 @@ public class Login extends AppCompatActivity {
 
                 }
                 else{
-                    String mailid = "";
-                    String name = "";
-                    String photo = "";
-                    try{
-                        mailid = auth.getCurrentUser().getEmail();
-                        name = auth.getCurrentUser().getDisplayName();
-                        photo = auth.getCurrentUser().getPhotoUrl().toString();
-                    }
-                    catch (Exception e){
-                        Log.e("Getting Started",e.getMessage());
-                    }
-                    progressDialog.setMessage("Creating New User...");
-                    createNewUser(mailid,name,photo);
+                    createNewUser();
                 }
             }
 
@@ -205,32 +193,10 @@ public class Login extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-    public void createNewUser( String mailid, String name, String photo) {
+    public void createNewUser( ) {
         String key = auth.getCurrentUser().getUid();
         Log.e("Harsh-------->",key);
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("USERS").child(key);
-        db.child("user").setValue(mailid);
-        db.child("USER_name").setValue(name);
-        db.child("USER_USER_UID").setValue(key);
-
-
-        db.child("USER_IMAGE").setValue(photo);
-        db.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    progressDialog.dismiss();
-                    startActivity(new Intent(Login.this,Registration.class));
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                progressDialog.dismiss();
-                nextActivity();
-            }
-        });
+        startActivity(new Intent(this,Registration.class));
     }
     @Override
     public void onStart() {

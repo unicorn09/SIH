@@ -120,6 +120,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edittext"
                     android:text="Male"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:textColor="#fff"
                     android:textSize="15sp"
@@ -213,9 +214,11 @@
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/state_spinner"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"/>
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/bg_edittextselected"
+                   />
 
             </LinearLayout>
             <LinearLayout
@@ -239,9 +242,11 @@
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/district_spinner1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"/>
+                    android:layout_marginLeft="15dp"
+
+                    />
 
             </LinearLayout>
 <LinearLayout

@@ -14,5 +14,7 @@ public class StringVariable {
     public static final String USER_STATE="State";
     public static final String USER_PIN="Pincode";
     public static final String USER_AGE="Age";
+    public static final String USER_CITY="city";
     public static final String USER_MOBILE="mobileNo";
+    public static final String USER_EMAIL="email";
 }
