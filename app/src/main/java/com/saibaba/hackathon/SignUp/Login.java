@@ -41,6 +41,7 @@ import com.saibaba.hackathon.MainActivity;
 import com.saibaba.hackathon.R;
 
 public class Login extends AppCompatActivity {
+    private static final String TAG = "Login";
     private static final String EMAIL = "email";
     private static final int RC_SIGN_IN = 101;
     Button googleSignUp;
@@ -164,6 +165,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    Log.d(TAG, "onDataChange: user already exists");
                     progressDialog.dismiss();
                     secondActivity();
 
@@ -171,17 +173,20 @@ public class Login extends AppCompatActivity {
                 else{
                     String mailid = "";
                     String name = "";
+                    String key="";
                     String photo = "";
                     try{
                         mailid = auth.getCurrentUser().getEmail();
                         name = auth.getCurrentUser().getDisplayName();
                         photo = auth.getCurrentUser().getPhotoUrl().toString();
+                        key=auth.getCurrentUser().getUid();
                     }
                     catch (Exception e){
                         Log.e("Getting Started",e.getMessage());
                     }
+                    Log.d(TAG, "onDataChange: creating new user");
                     progressDialog.setMessage("Creating New User...");
-                    createNewUser(mailid,name,photo);
+                    createNewUser(mailid,name,photo,key);
                 }
             }
 
@@ -205,8 +210,8 @@ public class Login extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-    public void createNewUser( String mailid, String name, String photo) {
-        String key = auth.getCurrentUser().getUid();
+    public void createNewUser( String mailid, String name, String photo,String key) {
+        Log.d(TAG, "createNewUser: inside createNewUser");
         Log.e("Harsh-------->",key);
         DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("USERS").child(key);
         db.child("user").setValue(mailid);
@@ -220,8 +225,8 @@ public class Login extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     progressDialog.dismiss();
-                    secondActivity();
-
+                    
+                    activityForRegistration();
                 }
             }
 
@@ -332,5 +337,9 @@ public class Login extends AppCompatActivity {
             auth.removeAuthStateListener(authStateListener);
         }
         super.onStop();
+    }
+
+    private void activityForRegistration(){
+        startActivity(new Intent(this,Registration.class));
     }
 }
