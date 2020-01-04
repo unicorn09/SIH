@@ -17,4 +17,5 @@ public class StringVariable {
     public static final String USER_CITY="city";
     public static final String USER_MOBILE="mobileNo";
     public static final String USER_EMAIL="email";
+    public static final String USERS ="Users" ;
 }
