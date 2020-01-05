@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -27,7 +28,12 @@ dependencies {
     implementation 'com.facebook.fresco:fresco:1.11.0'
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:design:28.0.0'
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
+    implementation 'android.arch.navigation:navigation-ui:1.0.0'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'com.android.support:support-vector-drawable:28.0.0'
     testImplementation 'junit:junit:4.12'
+    implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
@@ -42,4 +48,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-analytics:15.0.2'
     implementation 'com.google.firebase:firebase-crash:15.0.2'
     implementation 'com.google.firebase:firebase-messaging:15.0.2'
+    implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
+//    implementation 'androidx.multidex:multidex:2.0.1'
+//    implementation group: "com.twilio.sdk", name: "twilio", version: "7.42.0"
 }

@@ -7,7 +7,7 @@
     android:background="#000000">
 
     <ImageView
-        android:id="@+id/imageViewLogin"
+        android:id="@+id/imageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3567"
-        android:text="LOGIN" />
+        android:text="SIGNUP" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -56,7 +56,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/enter_emailLogin"
+            android:id="@+id/enter_emailSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -83,11 +83,64 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="28.6dp"
         android:layout_marginTop="88dp"
+        android:layout_marginRight="28.6dp"
+        android:background="@drawable/roundcorner_sign_mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <ImageView
+            android:id="@+id/key_image1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="21.4dp"
+            android:src="@drawable/ic_key"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/enter_passwordSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="52.4dp"
+            android:layout_marginRight="15dp"
+            android:layout_toEndOf="@+id/key_image1"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:letterSpacing="0.02"
+            android:lineSpacingExtra="4sp"
+            android:textColorHint="#98a1a4"
+            android:textColor="#98a1a4"
+            android:textSize="12sp"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:hint="Password"
+            app:layout_constraintVertical_bias="0.578" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28.6dp"
+        android:layout_marginTop="148dp"
         android:layout_marginRight="28.6dp"
         android:background="@drawable/roundcorner_sign_mail"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +162,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/enter_passwordLogin"
+            android:id="@+id/confirm_passwordSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -130,14 +183,14 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:hint="Password"
+            android:hint="Confirm Password"
             app:layout_constraintVertical_bias="0.578" />
 
     </android.support.constraint.ConstraintLayout>
 
 
     <Button
-        android:id="@+id/login_getin"
+        android:id="@+id/signup_getin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -158,20 +211,6 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/forgot_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:letterSpacing="0.02"
-        android:lineSpacingExtra="5sp"
-        android:text="Forgot Password?"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout7"
-        android:textColor="#ffffff"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.2"/>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout7"
@@ -181,7 +220,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_getin"
+        app:layout_constraintTop_toBottomOf="@+id/signup_getin"
         app:layout_constraintVertical_bias="0.7">
 
         <TextView
@@ -190,7 +229,7 @@
             android:layout_height="wrap_content"
             android:letterSpacing="0.02"
             android:lineSpacingExtra="5sp"
-            android:text="Did’t have an account?"
+            android:text="Already have an account?"
             android:textColor="#ffffff"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -201,13 +240,13 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/enter_signup_page"
+            android:id="@+id/enter_login_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             android:letterSpacing="0.02"
             android:lineSpacingExtra="5sp"
-            android:text="Signup"
+            android:text="Login"
             android:textColor="#2bff85"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
