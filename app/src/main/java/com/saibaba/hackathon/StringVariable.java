@@ -17,5 +17,9 @@ public class StringVariable {
     public static final String USER_CITY="city";
     public static final String USER_MOBILE="mobileNo";
     public static final String USER_EMAIL="email";
-    public static final String USERS ="Users" ;
+    public static final String USERS ="USERS" ;
+
+    //Twilio SMS sending API
+    public static final String TWILIO_ACCOUNT_SID = "ACe99215b3a25231fd2c3b90e38e2aee1c";
+    public static final String TWILIO_AUTH_TOKEN = "0406c8f018de6737b7c2b1e70cb8fc1f";
 }

@@ -11,17 +11,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Home"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_home"></activity>
         <activity
             android:name=".SignUp.Signup"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".SignUp.Registration"
             android:screenOrientation="portrait" />
@@ -34,9 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
