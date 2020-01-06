@@ -1,6 +1,8 @@
 package com.saibaba.hackathon;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
+
+import java.util.Map;
 
 
 public class Home extends AppCompatActivity {
@@ -42,7 +46,9 @@ public class Home extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Toast.makeText(Home.this,menuItem.getItemId()+"",Toast.LENGTH_LONG).show();
+                if(menuItem.getItemId()==R.id.nav_map){
+                    startActivity(new Intent(Home.this, MapsActivity.class));
+                }
                 return true;
             }
         });
