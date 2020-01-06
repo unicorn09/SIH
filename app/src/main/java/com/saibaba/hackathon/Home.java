@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,8 +18,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.saibaba.hackathon.Home1.HomeFragment;
+
 
 public class Home extends AppCompatActivity {
+
+
+    Fragment fragment;
+
 
 
     @Override
@@ -39,10 +47,34 @@ public class Home extends AppCompatActivity {
         ActionBarDrawerToggle actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
+        fragment=new HomeFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,fragment).commit();
+
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Toast.makeText(Home.this,menuItem.getItemId()+"",Toast.LENGTH_LONG).show();
+                menuItem.setChecked(false);
+                int id=menuItem.getItemId();
+                if(id==R.id.nav_home)
+                {
+                    fragment=new HomeFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,fragment).commit();
+                    fragment=null;
+                }
+                else if(id==R.id.nav_gallery)
+                {
+
+                }
+                else if(id==R.id.nav_slideshow)
+                {
+
+                }
+                else
+                {
+
+                }
                 return true;
             }
         });
@@ -53,4 +85,5 @@ public class Home extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
+
 }
