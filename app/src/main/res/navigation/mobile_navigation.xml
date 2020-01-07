@@ -7,37 +7,37 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.saibaba.hackathon.ui.HomeFragment"
+        android:name="com.saibaba.hackathon.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.saibaba.hackathon.ui.GalleryFragment"
+        android:name="com.saibaba.hackathon.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.saibaba.hackathon.ui.SlideshowFragment"
+        android:name="com.saibaba.hackathon.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="com.saibaba.hackathon.ui.ToolsFragment"
+        android:name="com.saibaba.hackathon.ui.tools.ToolsFragment"
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
         android:id="@+id/nav_share"
-        android:name="com.saibaba.hackathon.ui.ShareFragment"
+        android:name="com.saibaba.hackathon.ui.share.ShareFragment"
         android:label="@string/menu_share"
         tools:layout="@layout/fragment_share" />
 
     <fragment
         android:id="@+id/nav_send"
-        android:name="com.saibaba.hackathon.ui.SendFragment"
+        android:name="com.saibaba.hackathon.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
 </navigation>

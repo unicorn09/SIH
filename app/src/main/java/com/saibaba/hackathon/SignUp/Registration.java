@@ -3,8 +3,6 @@ package com.saibaba.hackathon.SignUp;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,22 +17,19 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.saibaba.hackathon.MainActivity;
+import com.saibaba.hackathon.NavigationDrawer;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.StringVariable;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import java.util.Random;
 
 public class Registration extends AppCompatActivity {
 
@@ -52,6 +47,7 @@ public class Registration extends AppCompatActivity {
     private ImageView verifiedImageView;
     private ProgressDialog progressDialog;
     FirebaseUser firebaseUser;
+    String otp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +116,8 @@ public class Registration extends AppCompatActivity {
     }
 
     private void initView() {
+//        Twilio.init(StringVariable.TWILIO_ACCOUNT_SID,StringVariable.TWILIO_AUTH_TOKEN);
+        otp="";
         isVerified=false;
         gender=null;
         progressDialog=new ProgressDialog(this);
@@ -150,33 +148,21 @@ public class Registration extends AppCompatActivity {
     }
 
     public void verifyNumberUsingOTP(){
-        String phoneNumber=infoPhone.getText().toString();
-        phoneNumber="+91"+phoneNumber;
-        onVerificationStateChangedCallbacks=new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            @Override
-            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-
-            }
-
-            @Override
-            public void onVerificationFailed(FirebaseException e) {
-                Log.d(TAG, "onVerificationFailed: "+e.getMessage());
-            }
-
-            @Override
-            public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                super.onCodeSent(s, forceResendingToken);
-                verificationID=s;
-                goForOTP();
-            }
-        };
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber,
-                120,
-                TimeUnit.SECONDS,
-                this,
-                onVerificationStateChangedCallbacks
-        );
+        long number=0;
+        long x;
+        Random random=new Random();
+        for(int i=1;i<=6;i++){
+            x=random.nextInt(10)+1;
+            number=number*10+x;
+        }
+        otp="123456";
+//        String mobileNumber=mobile.getText().toString();
+//        Message message= Message
+//                .creator(new PhoneNumber("+91"+mobileNumber),
+//                        new PhoneNumber("+15203326524"),
+//                        "Your OTP for Police Sahayak app is "+otp).create();
+//        Log.d(TAG, "verifyNumberUsingOTP: "+message.getSid());
+        goForOTP();
     }
 
     private void goForOTP(){
@@ -190,6 +176,7 @@ public class Registration extends AppCompatActivity {
         verifyOTPButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mDialog.dismiss();
                 String otpCode=otpEditText.getText().toString();
                 validateNumber(otpCode);
             }
@@ -197,22 +184,15 @@ public class Registration extends AppCompatActivity {
     }
 
     private void validateNumber(String otpCode){
-        PhoneAuthCredential phoneAuthCredential=PhoneAuthProvider.getCredential(verificationID,otpCode);
-        mDialog.dismiss();
-        FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Log.d(TAG, "onComplete: phone number verified");
-                    isVerified=true;
-                    verifyNumber.setVisibility(View.GONE);
-                    verifiedImageView.setVisibility(View.VISIBLE);
-                }else{
-                    Log.d(TAG, "onComplete: invalid otp");
-                    displayToast("invalid otp");
-                }
-            }
-        });
+        if(otp.equals(otpCode)){
+            Log.d(TAG, "onComplete: phone number verified");
+            isVerified=true;
+            verifyNumber.setVisibility(View.GONE);
+            verifiedImageView.setVisibility(View.VISIBLE);
+        }else{
+            Log.d(TAG, "onComplete: invalid otp");
+            displayToast("invalid otp");
+        }
     }
 
     private void populateUserNode(){
@@ -268,15 +248,16 @@ public class Registration extends AppCompatActivity {
         mp.put(StringVariable.USER_IMAGE,firebaseUser.getPhotoUrl());
         mp.put(StringVariable.USER_EMAIL,firebaseUser.getEmail());
         progressDialog.show();
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("USERS").child(firebaseUser.getUid()).push();
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(StringVariable.USERS).child(firebaseUser.getUid());
         databaseReference.setValue(mp).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(!task.isSuccessful()){
                     displayToast("Some Error Occurred");
+                    progressDialog.dismiss();
                 }else{
                     progressDialog.dismiss();
-                    startActivity(new Intent(Registration.this, MainActivity.class));
+                    startActivity(new Intent(Registration.this, NavigationDrawer.class));
                 }
             }
         });
@@ -286,6 +267,7 @@ public class Registration extends AppCompatActivity {
         view.setError("empty");
         view.requestFocus();
     }
+
     private void displayToast(String msg){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }

@@ -1,17 +1,15 @@
 package com.saibaba.hackathon.SignUp;
 
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -19,15 +17,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.google.android.gms.common.oob.SignUp;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,22 +33,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
-import com.saibaba.hackathon.MainActivity;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.StringVariable;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "Login";
     private FirebaseAuth mAuth;
     private EditText enter_email, enter_password, enter_reset_email;
     private Button login_getin;
     private TextView enter_signup_page, forgot_password;
+    private AlertDialog dialog;
     private ProgressDialog progressDialog;
     private FirebaseAuth.AuthStateListener authStateListener;
     Tracker mTracker;
     private SharedPreferences sharedPreferences;
     private Gson gson;
+    private FirebaseUser firebaseUser;
 
     private String Email = "";
     private String Password = "";
@@ -65,7 +65,25 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         mAuth = FirebaseAuth.getInstance();
         init();
-
+        firebaseUser=mAuth.getCurrentUser();
+        if(firebaseUser!=null){
+            Log.d(TAG, "onCreate: "+firebaseUser.isEmailVerified());
+            if(firebaseUser.isEmailVerified()){
+                checkingUserExist(firebaseUser.getUid());
+            }else{
+                firebaseUser.reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        firebaseUser=mAuth.getCurrentUser();
+                    }
+                });
+                if(!firebaseUser.isEmailVerified()) {
+                    dialog.show();
+                }else{
+                    checkingUserExist(firebaseUser.getUid());
+                }
+            }
+        }
     }
 
     private void init() {
@@ -75,8 +93,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
 
-        enter_password = findViewById(R.id.enter_password);
-        enter_email = findViewById(R.id.enter_email);
+        enter_password = findViewById(R.id.enter_passwordLogin);
+        enter_email = findViewById(R.id.enter_emailLogin);
         enter_signup_page = findViewById(R.id.enter_signup_page);
         login_getin = findViewById(R.id.login_getin);
         forgot_password = findViewById(R.id.forgot_password);
@@ -84,6 +102,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         enter_signup_page.setOnClickListener(this);
         login_getin.setOnClickListener(this);
         forgot_password.setOnClickListener(this);
+        dialog=new AlertDialog.Builder(this)
+                .setTitle("Email Not Verified")
+                .setMessage("Please verify your email")
+                .create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
 
 
     }
@@ -92,7 +116,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.enter_signup_page:
-                startActivity(new Intent(this, SignUp.class));
+                startActivity(new Intent(this,Signup.class));
+                finish();
                 break;
             case R.id.login_getin:
                 check_Fields();
@@ -143,8 +168,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            progressDialog.setMessage("Checking User...");
-                            checkingUserExist(mAuth.getCurrentUser().getUid());
+                            firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+                            if(firebaseUser.isEmailVerified()) {
+                                checkingUserExist(firebaseUser.getUid());
+                            }else{
+                                dialog.show();
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
                             progressDialog.dismiss();
@@ -157,27 +186,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void checkingUserExist(String UID) {
+        progressDialog.setMessage("checking user...");
+        progressDialog.show();
+        Log.d(TAG, "checkingUserExist: "+UID);
         DatabaseReference db = FirebaseDatabase.getInstance().getReference().child(StringVariable.USERS);
         db.child(UID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange: datasnapshot.exist"+dataSnapshot.exists());
+                Log.d(TAG, "onDataChange: datasnapshot"+dataSnapshot.toString());
                 if (dataSnapshot.exists()) {
                     progressDialog.dismiss();
-                    nextActivity();
-
+                   // startActivity(new Intent(Login.this, Home.class));
+                    finish();
                 } else {
-                    String mailid = "";
-                    String name = "";
-                    String photo = "";
-                    try {
-                        mailid = mAuth.getCurrentUser().getEmail();
-                        name = mAuth.getCurrentUser().getDisplayName();
-                        photo = mAuth.getCurrentUser().getPhotoUrl().toString();
-                    } catch (Exception e) {
-                        Log.e("Getting Started", e.getMessage());
-                    }
-                    progressDialog.setMessage("Creating New User...");
-                    startActivity(new Intent(Login.this,SignUp.class));
+                    startActivity(new Intent(Login.this,Registration.class));
+                    progressDialog.dismiss();
+                    finish();
                 }
             }
 
@@ -188,12 +213,5 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             }
         });
     }
-
-    private void nextActivity() {
-
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
-    }
-
 }
 

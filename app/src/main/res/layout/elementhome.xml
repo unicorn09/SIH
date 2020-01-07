@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<android.support.v7.widget.CardView
+    android:layout_marginTop="9dp"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:id="@+id/parentRV"
+    android:layout_marginHorizontal="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="#000000"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <RelativeLayout
+            android:layout_height="90dp"
+            android:layout_width="match_parent"
+            android:background="#000000"
+            android:id="@+id/rellay_home">
+            <ImageView
+                android:id="@+id/iconrecycle1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/ic_person_black_24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/circlebackground"
+                android:padding="5dp"
+                >
+            </ImageView>
+            <TextView
+                android:id="@+id/namerecycle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iconrecycle1"
+                android:layout_marginTop="20dp"
+                android:text="YOUR DASHBOARD"
+                android:textColor="#ffff"
+                android:textStyle="bold"
+                android:layout_marginLeft="18dp"
+                android:textSize="20dp"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/descrecycle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/namerecycle1"
+                android:layout_marginLeft="18dp"
+                android:layout_toRightOf="@+id/iconrecycle1"
+                android:text="ENTER TO VIEW "
+                android:textColor="#ffff"
+                >
+            </TextView>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>

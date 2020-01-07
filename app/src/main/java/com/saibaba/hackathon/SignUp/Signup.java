@@ -1,11 +1,15 @@
 package com.saibaba.hackathon.SignUp;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.SignUp.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,13 +42,14 @@ import java.util.Map;
 
 public class Signup extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "Signup";
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
     Tracker mTracker;
     private EditText enter_email_signup,enter_password_signup,retype_password;
     private Button Signup_getin;
     private TextView enter_login_page;
-
+    private AlertDialog dialog;
     private SharedPreferences sharedPreferences;
     private Gson gson;
 
@@ -69,25 +75,37 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
 
-        enter_email_signup = findViewById(R.id.enter_email_signup);
-        enter_password_signup = findViewById(R.id.enter_password_signup);
-        retype_password = findViewById(R.id.retype_password);
+        enter_email_signup = findViewById(R.id.enter_emailSignup);
+        enter_password_signup = findViewById(R.id.enter_passwordSignup);
+        retype_password = findViewById(R.id.confirm_passwordSignup);
 
-        Signup_getin = findViewById(R.id.Signup_getin);
+        Signup_getin = findViewById(R.id.signup_getin);
         enter_login_page = findViewById(R.id.enter_login_page);
 
         Signup_getin.setOnClickListener(this);
         enter_login_page.setOnClickListener(this);
+        dialog=new AlertDialog.Builder(this)
+                .setTitle("Verification Link Sent")
+                .setMessage("Please verify your email")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        startActivity(new Intent(Signup.this,Login.class));
+                        finish();
+                    }
+                }).create();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.Signup_getin:
+            case R.id.signup_getin:
                 check_Fields();
                 break;
             case R.id.enter_login_page:
                 startActivity(new Intent(this, Login.class));
+                finish();
                 break;
         }
     }
@@ -113,9 +131,13 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
                                 Toast.makeText(this, "Password Doesn't Match", Toast.LENGTH_LONG).show();
                             }
                             else if(Password.equals(RePassword)){
-                                progressDialog.setMessage("Creating User...");
-                                progressDialog.show();
-                                checking_Exsiting_user();
+                                if(Password.length()<6){
+                                    Toast.makeText(this, "Password Should Contain Atleast 6 Characters", Toast.LENGTH_LONG).show();
+                                }else {
+                                    progressDialog.setMessage("Checking User...");
+                                    progressDialog.show();
+                                    checking_Exsiting_user();
+                                }
                             }
                         }catch (Exception e){
                             Toast.makeText(this, "Please Confirm Your Password", Toast.LENGTH_LONG).show();
@@ -145,11 +167,12 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(getApplicationContext(),"Email Id Already In Our Database",Toast.LENGTH_LONG).show();
-                            Toast.makeText(getApplicationContext(),"Please Sign In",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Email Already Exists, Please Sign In",Toast.LENGTH_LONG).show();
+                            auth.signOut();
                             progressDialog.dismiss();
                         } else {
-                            progressDialog.setMessage("Please Wait...");
-                            try_signin();
+                            progressDialog.setMessage("Signing up...");
+                            try_signup();
                         }
 
                         // ...
@@ -157,57 +180,31 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
                 });
     }
 
-    private void try_signin() {
+    private void try_signup() {
         auth.createUserWithEmailAndPassword(Email, Password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            String mailid = "";
-                            String name = "";
-                            String photo = "";
-                            try {
-                                mailid = auth.getCurrentUser().getEmail();
-                                name = auth.getCurrentUser().getDisplayName();
-                                photo = auth.getCurrentUser().getPhotoUrl().toString();
-                            } catch (Exception e) {
-                                Log.e("Getting Started", e.getMessage());
-                            }
-                            progressDialog.setMessage("Creating New User In Database ...");
-                            createNewUser(mailid, name, photo);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
-                        }
-
+                            FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
+                            dialog.show();
+                        } 
                         // ...
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: "+e.getMessage());
+                progressDialog.dismiss();
+            }
+        });
     }
 
     private void nextActivity() {
 
-        startActivity(new Intent(getApplicationContext(), Login.class));
+        startActivity(new Intent(getApplicationContext(), Registration.class));
         finish();
-    }
-
-
-    public void createNewUser(String mailid, String name, String photo) {
-        String key = auth.getCurrentUser().getUid();
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child(StringVariable.USERS).child(key);
-
-        db.child(StringVariable.USER_EMAIL).setValue(mailid);
-        db.child(StringVariable.USER_NAME).setValue(name);
-        db.child(StringVariable.USER_UID).setValue(key);
-        db.child(StringVariable.USER_IMAGE).setValue(photo);
-
-        //TODO send verification email
-        auth.getCurrentUser().sendEmailVerification();
-        nextActivity();
-        Toast.makeText(this,"Registration Done",Toast.LENGTH_LONG).show();
     }
 }
 
