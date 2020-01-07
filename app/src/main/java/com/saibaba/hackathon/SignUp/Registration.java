@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.saibaba.hackathon.Home;
+import com.saibaba.hackathon.NavigationDrawer;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.StringVariable;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
@@ -257,7 +257,7 @@ public class Registration extends AppCompatActivity {
                     progressDialog.dismiss();
                 }else{
                     progressDialog.dismiss();
-                    startActivity(new Intent(Registration.this, Home.class));
+                    startActivity(new Intent(Registration.this, NavigationDrawer.class));
                 }
             }
         });

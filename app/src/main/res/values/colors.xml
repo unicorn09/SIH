@@ -4,4 +4,13 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="bg_color">#00171d</color>
+    <color name="list_color8">#33515c</color>
+    <color name="list_color2">#365c33</color>
+    <color name="list_color3">#5c5333</color>
+    <color name="list_color4">#5c3333</color>
+    <color name="list_color5">#333c5c</color>
+    <color name="list_color6">#5c3357</color>
+    <color name="list_color7">#535c33</color>
+    <color name="list_color9">#5c3333</color>
+    <color name="list_color10">#33515c</color>
 </resources>

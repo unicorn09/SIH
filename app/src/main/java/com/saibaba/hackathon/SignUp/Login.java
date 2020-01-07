@@ -33,7 +33,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
-import com.saibaba.hackathon.Home;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.StringVariable;
 
@@ -198,7 +197,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Log.d(TAG, "onDataChange: datasnapshot"+dataSnapshot.toString());
                 if (dataSnapshot.exists()) {
                     progressDialog.dismiss();
-                    startActivity(new Intent(Login.this, Home.class));
+                   // startActivity(new Intent(Login.this, Home.class));
                     finish();
                 } else {
                     startActivity(new Intent(Login.this,Registration.class));

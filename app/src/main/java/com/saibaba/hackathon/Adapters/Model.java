@@ -1,13 +1,21 @@
-package com.saibaba.hackathon.Home1;
+package com.saibaba.hackathon.Adapters;
 
-public class ModalHome {
+public class Model {
 
-    String name,desc;
 
-    public ModalHome(String name, String desc) {
-        this.name = name;
+
+    private String name, desc;
+
+    public Model(String username, String desc) {
+        this.name = username;
         this.desc = desc;
     }
+
+    public String getDesc() {
+        return desc;
+    }
+
+
 
     public String getName() {
         return name;
@@ -17,11 +25,10 @@ public class ModalHome {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+
+
 }

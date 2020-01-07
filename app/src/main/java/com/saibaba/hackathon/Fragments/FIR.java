@@ -1,5 +1,7 @@
-package com.saibaba.hackathon.Home1;
+package com.saibaba.hackathon.Fragments;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,16 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.saibaba.hackathon.Adapters.Model;
+import com.saibaba.hackathon.Adapters.Model_Adapter;
 import com.saibaba.hackathon.R;
 
 import java.util.ArrayList;
 
-
-public class HomeFragment extends Fragment {
+public class FIR extends Fragment {
     private RecyclerView recyclerView;
-    private ArrayList<ModalHome> arrayList;
-    HomeAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Model> arrayList;
+    Model_Adapter adapter;
 
 
 
@@ -31,18 +33,15 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_home,container,false);
-        recyclerView=v.findViewById(R.id.recyclerviewhome);
+        View v=inflater.inflate(R.layout.fragment_fir,container,false);
+        recyclerView=v.findViewById(R.id.recylerviewfir);
         recyclerView.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(getContext());
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
         arrayList=new ArrayList<>();
-        arrayList.add(new ModalHome("FIR",""));
-        arrayList.add(new ModalHome("COMPLAIN",""));
-        arrayList.add(new ModalHome("NOC",""));
-        arrayList.add(new ModalHome("LOST/FOUND",""));
-        arrayList.add(new ModalHome("MISSING PERSON",""));
-        arrayList.add(new ModalHome("VERIFICATION",""));
-        adapter=new HomeAdapter(getContext(),arrayList);
+        arrayList.add(new Model("View FIR","File eFIR / View FIR"));
+        arrayList.add(new Model("View FIR","File eFIR / View FIR"));
+        adapter=new Model_Adapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
         return v;
     }

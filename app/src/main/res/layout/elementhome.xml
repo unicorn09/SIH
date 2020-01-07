@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<android.support.v7.widget.CardView android:layout_marginTop="9dp"
+<android.support.v7.widget.CardView
+    android:layout_marginTop="9dp"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:id="@+id/parentRV"
@@ -13,7 +14,8 @@
         <RelativeLayout
             android:layout_height="90dp"
             android:layout_width="match_parent"
-            android:background="#000000">
+            android:background="#000000"
+            android:id="@+id/rellay_home">
             <ImageView
                 android:id="@+id/iconrecycle1"
                 android:layout_width="40dp"
@@ -47,7 +49,8 @@
                 android:layout_toRightOf="@+id/iconrecycle1"
                 android:text="ENTER TO VIEW "
                 android:textColor="#ffff"
-                ></TextView>
+                >
+            </TextView>
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
