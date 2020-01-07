@@ -9,7 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeDesc"></activity>
+        <activity android:name=".Forms.MissingPerson">
+
+        </activity>
+        <activity android:name=".Forms.VehicleLost" >
+
+        </activity>
+        <activity android:name=".Forms.TenantVerification" >
+
+        </activity>
+        <activity android:name=".Forms.EmployeeVerification" />
+
+        <activity android:name=".Forms.CharacterCertificate" />
+        <activity android:name=".Forms.FilmShooting" />
+        <activity android:name=".Forms.EventPerformance" />
+        <activity android:name=".Forms.ProtestRequest" />
+        <activity android:name=".Forms.ProcessionRequest" />
+        <activity android:name=".Forms.ViewFIR"/>
+        <activity android:name=".Forms.RegisterFIR" >
+        </activity>
+        <activity android:name=".HomeDesc"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"

@@ -41,7 +41,6 @@ public class LostAndFound extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         arrayList=new ArrayList<>();
         arrayList.add(new Model("VEHICLE LOST","File eFIR / View FIR"));
-        arrayList.add(new Model("VEHICLE FOUND","Threat / Defamation / Anonymous"));
         arrayList.add(new Model("ARTICLE LOST","Event Request / Protest Request etc."));
         arrayList.add(new Model("ARTICLE FOUND","Vehicle /  Article Lost / Recovered"));
         adapter=new Model_Adapter(getContext(),arrayList);
