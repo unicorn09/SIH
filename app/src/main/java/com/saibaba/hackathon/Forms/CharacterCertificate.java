@@ -2,6 +2,7 @@ package com.saibaba.hackathon.Forms;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,6 +24,8 @@ public class CharacterCertificate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_certificate);
         initView();
+        getSupportActionBar().setTitle("Character Certificate");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         relations=new String[]{"Select","Father","Guardian","Husband","Mother","Wife"};
         services=new String[]{"Select","Public Services","Government Services"};
         modes=new String[]{"Select","Online"};
@@ -52,5 +55,14 @@ public class CharacterCertificate extends AppCompatActivity {
         photo=findViewById(R.id.photo);
         identity=findViewById(R.id.identity);
         addressProof=findViewById(R.id.address_proof);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

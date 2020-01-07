@@ -2,6 +2,7 @@ package com.saibaba.hackathon.Forms;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ EditText content;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_fir);
         initView();
+        getSupportActionBar().setTitle("Register FIR");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     private void initView()
     {
@@ -34,5 +37,14 @@ EditText content;
         yes=findViewById(R.id.yes);
         no=findViewById(R.id.no);
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

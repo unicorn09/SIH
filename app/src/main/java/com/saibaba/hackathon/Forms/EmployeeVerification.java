@@ -2,6 +2,7 @@ package com.saibaba.hackathon.Forms;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -25,6 +26,8 @@ SearchableSpinner relation_spinner;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_verification);
         initView();
+        getSupportActionBar().setTitle("Employee Verification");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         state = new String[]{"Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh",
                 "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand",
                 "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry",
@@ -77,5 +80,14 @@ SearchableSpinner relation_spinner;
         station_spinner2=findViewById(R.id.station_spinner2);
         checkbox=findViewById(R.id.checkbox);
         pbirth=findViewById(R.id.pbirth);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

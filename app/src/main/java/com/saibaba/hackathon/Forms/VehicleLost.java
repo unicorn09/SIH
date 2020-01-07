@@ -12,13 +12,13 @@ EditText regno,engno,chassisno;
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vehicle_lost);
+//        setContentView(R.layout.activity_vehicle_lost);
         initView();
     }
     private void initView()
     {
-        regno=findViewById(R.id.regno);
-        engno=findViewById(R.id.engno);
-        chassisno=findViewById(R.id.chassisno);
+//        regno=findViewById(R.id.regno);
+//        engno=findViewById(R.id.engno);
+//        chassisno=findViewById(R.id.chassisno);
     }
 }
