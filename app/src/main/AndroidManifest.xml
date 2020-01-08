@@ -9,49 +9,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Forms.MissingPerson">
+        <activity android:name=".Forms.ArticleLost"></activity>
+        <activity android:name=".Forms.MissingPerson"></activity>
+        <activity android:name=".Forms.VehicleLost"></activity>
+        <activity android:name=".Forms.TenantVerification"></activity>
+        <activity android:name=".Forms.EmployeeVerification">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        </activity>
-        <activity android:name=".Forms.VehicleLost" >
-
-        </activity>
-        <activity android:name=".Forms.TenantVerification" >
-
-        </activity>
-        <activity android:name=".Forms.EmployeeVerification" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Forms.CharacterCertificate" />
         <activity android:name=".Forms.FilmShooting" />
         <activity android:name=".Forms.EventPerformance" />
         <activity android:name=".Forms.ProtestRequest" />
         <activity android:name=".Forms.ProcessionRequest" />
-        <activity android:name=".Forms.ViewFIR" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".Forms.ViewFIR">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".Forms.RegisterFIR" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".Forms.RegisterFIR">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".HomeDesc" />
         <activity
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".SignUp.Signup"
             android:screenOrientation="portrait" />
