@@ -1,14 +1,14 @@
 package com.saibaba.hackathon;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.saibaba.hackathon.Forms.missingpersonfrag;
 import com.saibaba.hackathon.Fragments.Complaints;
 import com.saibaba.hackathon.Fragments.FIR;
 import com.saibaba.hackathon.Fragments.LostAndFound;
-import com.saibaba.hackathon.Fragments.MisssingPerson;
 import com.saibaba.hackathon.Fragments.NOC;
 import com.saibaba.hackathon.Fragments.Verification;
 
@@ -31,7 +31,11 @@ Fragment fragment;
         else if(name.equalsIgnoreCase("Verification"))
                 fragment=new Verification();
         else if(name.equalsIgnoreCase("Missing Person"))
-            fragment=new MisssingPerson();
+        {
+            getSupportActionBar().setTitle("Missing Person");
+            fragment=new missingpersonfrag();
+        }
+
         else if(name.equalsIgnoreCase("Lost & Found"))
             fragment=new LostAndFound();
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_homedesc,fragment).commit();

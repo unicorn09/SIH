@@ -21,7 +21,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_navigation_drawer"
         app:menu="@menu/activity_navigation_drawer_drawer"
-        android:background="#000000"
+        android:background="#0F0F0F"
         app:itemTextColor="#ffff"
         app:itemIconTint="#ffff"
         />

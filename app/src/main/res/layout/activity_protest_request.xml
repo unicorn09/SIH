@@ -1,9 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".Forms.ProtestRequest">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/birl1">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#000000">
+
+
+        <EditText
+            android:id="@+id/oname"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Organizing Institution Name"
+            android:layout_margin="15dp"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:textColor="#798184"
+            android:textColorHint="#798184"/>
+
+        <EditText
+            android:id="@+id/mobile"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Mobile Number"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:inputType="number"
+
+            android:paddingLeft="15dp"
+            android:textColorHint="#798184"
+            android:textColor="#798184"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address Details"
+            android:gravity="start"
+            android:textColor="#fff"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="15dp"
+            android:textSize="19sp"
+            />
+        <EditText
+            android:id="@+id/flat1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Flat No./House No./Lane No."
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="15dp"
+            android:textColor="#798184"
+            android:textColorHint="#798184"/>
+        <EditText
+            android:id="@+id/landmark1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Landmark"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:textColor="#798184"
+            android:textColorHint="#798184"/>
+        <EditText
+            android:id="@+id/city1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="City"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:textColor="#798184"
+            android:textColorHint="#798184"/>
+        <LinearLayout
+            android:id="@+id/state_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:textSize="15sp"
+                android:textColor="#fff"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"/>
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/state_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_edittextselected"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/district_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="District"
+                android:textSize="15sp"
+                android:textColor="#fff"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"/>
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/district_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_edittextselected"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/type_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Type of Protest/Strike"
+                android:textSize="15sp"
+                android:textColor="#fff"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"/>
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_edittextselected"
+                />
+
+        </LinearLayout>
+        <EditText
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Description of Protest/ Strike"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:textColor="#798184"
+            android:textColorHint="#798184"/>
+        <EditText
+            android:id="@+id/loc"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Name of the Location(Place of Protest/ Strike"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:textColor="#798184"
+            android:textColorHint="#798184"/>
+        <EditText
+            android:id="@+id/sdate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Start Date of Protest/ Strike"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:inputType="date"
+            android:paddingLeft="15dp"
+            android:textColor="#798184"
+            android:textColorHint="#798184"/>
+        <EditText
+            android:id="@+id/edate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Edd Date of Protest/ Strike"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:inputType="date"
+            android:paddingLeft="15dp"
+            android:textColor="#798184"
+            android:textColorHint="#798184"/>
+        <EditText
+            android:id="@+id/stime"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Start Time of Protest/ Strike"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:inputType="time"
+            android:paddingLeft="15dp"
+            android:textColor="#798184"
+            android:textColorHint="#798184"/>
+        <LinearLayout
+            android:id="@+id/struct_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Type of Structure Planned"
+                android:textSize="15sp"
+                android:textColor="#fff"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"/>
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/structure_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_edittextselected"
+                />
+
+        </LinearLayout>
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Address of the location"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:textColor="#798184"
+            android:textColorHint="#798184"/>
+    </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:id="@+id/birl1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true">
+
+        <ProgressBar
+            android:id="@+id/info_progress"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:elevation="10dp"
+            android:progressTint="#ffffff"
+            android:indeterminateTint="#ffffff"
+            android:backgroundTint="#ffffff"
+            android:visibility="gone"
+            android:layout_centerInParent="true" />
+
+        <Button
+            android:id="@+id/basic_info_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_submit_btn"
+            android:gravity="center"
+            android:text="Save"
+            android:lineSpacingExtra="3sp"
+            android:textColor="#ffffff" />
+
+    </RelativeLayout>
+</RelativeLayout>
