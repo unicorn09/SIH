@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Forms.PersonalDetails"></activity>
+        <activity android:name=".Forms.ComplaintForm"></activity>
+        <activity android:name=".Forms.PersonalDetails" />
         <activity android:name=".Forms.ArticleLost" />
         <activity android:name=".Forms.MissingPerson" />
         <activity android:name=".Forms.VehicleLost" />
