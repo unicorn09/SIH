@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.saibaba.hackathon">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-feature android:name="android.hardware.location.gps" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,27 +16,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Forms.MissingPerson">
-
-        </activity>
-        <activity android:name=".Forms.VehicleLost" >
-
-        </activity>
-        <activity android:name=".Forms.TenantVerification" >
-
-        </activity>
+        <activity android:name=".chatbot.chat"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Forms.ArticleFound" />
+        <activity android:name=".Forms.ArticleLost" />
+        <activity android:name=".Forms.MissingPerson" />
+        <activity android:name=".Forms.VehicleLost" />
+        <activity android:name=".Forms.TenantVerification" />
         <activity android:name=".Forms.EmployeeVerification" />
-
         <activity android:name=".Forms.CharacterCertificate" />
         <activity android:name=".Forms.FilmShooting" />
         <activity android:name=".Forms.EventPerformance" />
         <activity android:name=".Forms.ProtestRequest" />
         <activity android:name=".Forms.ProcessionRequest" />
-        <activity android:name=".Forms.ViewFIR"/>
-        <activity android:name=".Forms.RegisterFIR" >
-        </activity>
-        <activity android:name=".HomeDesc"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".Forms.ViewFIR" />
+        <activity android:name=".Forms.RegisterFIR" />
+        <activity android:name=".HomeDesc" />
         <activity
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
@@ -50,6 +52,13 @@
         <activity
             android:name=".SignUp.Login"
             android:screenOrientation="portrait" />
+
+        <receiver android:name=".MyBroadcastReciever">
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.SCREEN_ON" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
