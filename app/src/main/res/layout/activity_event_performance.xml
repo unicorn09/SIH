@@ -15,17 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#00171d">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Event Performance"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#fff"
-                android:textSize="20sp" />
+            android:background="#000000">
+            
             <EditText
                 android:id="@+id/lname"
                 android:layout_width="match_parent"

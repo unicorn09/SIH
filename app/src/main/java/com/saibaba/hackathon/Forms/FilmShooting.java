@@ -2,6 +2,7 @@ package com.saibaba.hackathon.Forms;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,6 +41,9 @@ EditText ptype,splace,rspace;
 
         state_spinner.setAdapter(stateAdapter);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Film Shooting");
+
         district_spinner.setAdapter(districtsAdapter);
     }
     private  void initView()
@@ -68,5 +72,14 @@ EditText ptype,splace,rspace;
         ptype=findViewById(R.id.ptype);
         splace=findViewById(R.id.splace);
         rspace=findViewById(R.id.rspace);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

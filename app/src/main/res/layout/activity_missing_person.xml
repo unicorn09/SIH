@@ -60,6 +60,7 @@
                 android:textSize="15sp"
                 />
             <EditText
+
                 android:id="@+id/tdate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -93,6 +94,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
+
                     android:id="@+id/male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -121,6 +123,7 @@
                     android:textSize="15sp"
                     android:layout_marginHorizontal="15dp"/>
                 <TextView
+
                     android:id="@+id/other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -251,6 +254,7 @@
                 android:textSize="15sp"
                 />
             <EditText
+
                 android:id="@+id/fage"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -288,7 +292,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Face"
-
                 android:gravity="start"
                 android:textColor="#fff"
                 android:paddingStart="15dp"

@@ -2,6 +2,7 @@ package com.saibaba.hackathon.Forms;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
@@ -32,6 +33,8 @@ SearchableSpinner state_spinner,district_spinner,type_spinner,structure_spinner;
         state_spinner.setAdapter(stateAdapter);
 
         district_spinner.setAdapter(districtsAdapter);
+        getSupportActionBar().setTitle("Protest Request");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     private void initView()
     {
@@ -50,5 +53,14 @@ SearchableSpinner state_spinner,district_spinner,type_spinner,structure_spinner;
         stime=findViewById(R.id.stime);
         structure_spinner=findViewById(R.id.structure_spinner);
         address=findViewById(R.id.address);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

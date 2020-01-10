@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".chatbot.chat"
+    android:background="#0f0f0f">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/conversation"
+        android:layout_width="match_parent"
+        android:layout_height="508dp"
+        android:textSize="16sp"
+        android:background="#0f0f0f"/>
+
+    <RelativeLayout
+        android:id="@+id/rellayout_chatbot"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        android:background="#0f0f0f"
+        android:paddingHorizontal="15dp">
+
+        <EditText
+            android:id="@+id/userinput"
+            android:layout_width="383dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/back_chat_edittext"
+            android:hint="Type....."
+            android:paddingLeft="18dp"
+            android:textColor="#EDEDED"
+            android:textColorHint="#EDEDED">
+
+        </EditText>
+
+        <ImageView
+            android:id="@+id/btn_send"
+            android:layout_width="49dp"
+            android:layout_height="31dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_send_black_24dp">
+        </ImageView>
+    </RelativeLayout>
+    
+</RelativeLayout>

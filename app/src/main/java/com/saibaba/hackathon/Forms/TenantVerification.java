@@ -2,6 +2,7 @@ package com.saibaba.hackathon.Forms;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -22,7 +23,8 @@ SearchableSpinner district_spinner2,state_spinner2,station_spinner2,station_spin
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tenant_verification);
         initView();
-
+        getSupportActionBar().setTitle("Tenant Verification");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         state = new String[]{"Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh",
                 "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand",
                 "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry",
@@ -76,5 +78,14 @@ SearchableSpinner district_spinner2,state_spinner2,station_spinner2,station_spin
         occupation_spinner=findViewById(R.id.occupation_spinner);
         relation_spinner=findViewById(R.id.relation_spinner);
         purpose_spinner=findViewById(R.id.purpose_spinner);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

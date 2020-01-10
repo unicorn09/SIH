@@ -30,7 +30,7 @@ String[] complexion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_missing_person);
+        //setContentView(R.layout.activity_missing_person);
         initView();
         body=new String[]{"Fat","Very Fat","Normal/Medium","Strong","Muscular","Thin","Very Lanky(Skeletal)"};
         ArrayAdapter<String> bodyAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,body);
@@ -77,7 +77,7 @@ String[] complexion;
     }
     private void initView()
     {
-        fdate=findViewById(R.id.fdate);
+       /* fdate=findViewById(R.id.fdate);
         tdate=findViewById(R.id.tdate);
         fheight=findViewById(R.id.fheight);
         theight=findViewById(R.id.theight);
@@ -99,7 +99,7 @@ String[] complexion;
         length_spinner=findViewById(R.id.length_spinner);
         color_spinner=findViewById(R.id.color_spinner);
         habits_spinner=findViewById(R.id.habits_spinner);
-        speech_spinner=findViewById(R.id.speech_spinner);
+        speech_spinner=findViewById(R.id.speech_spinner);*/
 
 
     }

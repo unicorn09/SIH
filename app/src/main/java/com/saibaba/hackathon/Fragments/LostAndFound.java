@@ -1,7 +1,7 @@
 package com.saibaba.hackathon.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,7 +12,13 @@ import android.view.ViewGroup;
 
 import com.saibaba.hackathon.Adapters.Model;
 import com.saibaba.hackathon.Adapters.Model_Adapter;
+import com.saibaba.hackathon.Forms.ArticleFound;
+import com.saibaba.hackathon.Forms.ArticleLost;
+
+import com.saibaba.hackathon.Forms.VehicleLost;
+
 import com.saibaba.hackathon.R;
+import com.saibaba.hackathon.RecyclerViewItemListner;
 
 import java.util.ArrayList;
 
@@ -41,11 +47,25 @@ public class LostAndFound extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         arrayList=new ArrayList<>();
         arrayList.add(new Model("VEHICLE LOST","File eFIR / View FIR"));
-        arrayList.add(new Model("VEHICLE FOUND","Threat / Defamation / Anonymous"));
         arrayList.add(new Model("ARTICLE LOST","Event Request / Protest Request etc."));
         arrayList.add(new Model("ARTICLE FOUND","Vehicle /  Article Lost / Recovered"));
         adapter=new Model_Adapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerViewItemListner(getActivity(), recyclerView ,new RecyclerViewItemListner.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        if(position==0)
+                            startActivity(new Intent(getActivity(), VehicleLost.class));
+                        else if(position==1)
+                            startActivity(new Intent(getActivity(), ArticleLost.class));
+                        else if (position==2)
+                            startActivity(new Intent(getActivity(), ArticleFound.class));
+                    }
+                    @Override public void onLongItemClick(View view, int position) {
+
+                    }
+                })
+        );
         return v;
     }
 }

@@ -1,5 +1,6 @@
 package com.saibaba.hackathon.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +11,11 @@ import android.view.ViewGroup;
 
 import com.saibaba.hackathon.Adapters.Model;
 import com.saibaba.hackathon.Adapters.Model_Adapter;
+import com.saibaba.hackathon.Forms.MissingPerson;
+import com.saibaba.hackathon.Forms.RegisterFIR;
+import com.saibaba.hackathon.Forms.ViewFIR;
 import com.saibaba.hackathon.R;
+import com.saibaba.hackathon.RecyclerViewItemListner;
 
 import java.util.ArrayList;
 
@@ -46,6 +51,7 @@ public class HomeFragment extends Fragment {
         arrayList.add(new Model("VERIFICATION","Employee / Tenant / Character "));
         adapter=new Model_Adapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
+
         return v;
     }
 }

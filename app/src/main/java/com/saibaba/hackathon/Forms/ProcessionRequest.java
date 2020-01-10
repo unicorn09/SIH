@@ -2,6 +2,7 @@ package com.saibaba.hackathon.Forms;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
@@ -32,6 +33,8 @@ public class ProcessionRequest extends AppCompatActivity {
         state_spinner.setAdapter(stateAdapter);
 
         district_spinner.setAdapter(districtsAdapter);
+        getSupportActionBar().setTitle("Process Request");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     private void initView()
     {
@@ -55,5 +58,14 @@ public class ProcessionRequest extends AppCompatActivity {
         eaddress=findViewById(R.id.eaddress);
         paddress=findViewById(R.id.paddress);
         oaddress=findViewById(R.id.oaddress);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

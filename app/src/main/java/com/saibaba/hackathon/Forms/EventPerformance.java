@@ -2,6 +2,7 @@ package com.saibaba.hackathon.Forms;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -39,6 +40,8 @@ SearchableSpinner nature_spinner,type_spinner,state_spinner,district_spinner,sta
         state_spinner.setAdapter(stateAdapter);
 
         district_spinner.setAdapter(districtsAdapter);
+        getSupportActionBar().setTitle("Event Performance");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     private  void initView()
     {
@@ -63,5 +66,14 @@ SearchableSpinner nature_spinner,type_spinner,state_spinner,district_spinner,sta
         syn=findViewById(R.id.syn);
         yes=findViewById(R.id.edate);
         no=findViewById(R.id.no);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
-    tools:context=".Forms.EmployeeVerification">
+    tools:context=".Forms.MissingPerson">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,99 +16,52 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="#000000">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose Your Organization"
+                android:text="From Date"
                 android:gravity="start"
                 android:textColor="#fff"
-                android:paddingTop="20dp"
                 android:paddingStart="15dp"
+                android:paddingTop="20dp"
                 android:paddingEnd="15dp"
-                android:textSize="18sp" />
-            <LinearLayout
-                android:id="@+id/re_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="12">
-
-
-
-
-                <TextView
-                    android:id="@+id/govt_org"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_edittext"
-                    android:text="Govt. Organization"
-                    android:layout_marginLeft="15dp"
-                    android:gravity="center"
-                    android:textColor="#fff"
-                    android:textSize="15sp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-                <TextView
-                    android:id="@+id/private_org"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/bg_edittext"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="Private Organization"
-                    android:textColor="#fff"
-                    android:textSize="15sp"
-                    android:layout_marginHorizontal="15dp"/>
-
-
-
-            </LinearLayout>
-
+                android:textSize="15sp"
+                />
             <EditText
-                android:id="@+id/dname"
+                android:id="@+id/info_fdate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
-                android:hint="Concerned Department Name"
-                android:layout_margin="15dp"
-                android:inputType="textPersonName"
+                android:hint="Enter Date"
+                android:layout_margin="8dp"
+                android:inputType="date"
                 android:paddingLeft="15dp"
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To Date"
+                android:gravity="start"
+                android:textColor="#fff"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:textSize="15sp"
+                />
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/info_tdate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
-                android:hint="Your Nmae"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:inputType="textPersonName"
-
-                android:paddingLeft="15dp"
-                android:textColorHint="#798184"
-                android:textColor="#798184"/>
-            <EditText
-                android:id="@+id/dob"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="DOB"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:hint="Enter Date"
+                android:layout_margin="8dp"
                 android:inputType="date"
                 android:paddingLeft="15dp"
-                android:textColorHint="#798184"
-                android:textColor="#798184"/>
-
+                android:textColor="#798184"
+                android:textColorHint="#798184"/>
             <LinearLayout
                 android:id="@+id/gender_layout"
                 android:layout_width="match_parent"
@@ -132,7 +85,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/male"
+                    android:id="@+id/info_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edittext"
@@ -146,7 +99,7 @@
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"/>
                 <TextView
-                    android:id="@+id/female"
+                    android:id="@+id/info_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -160,7 +113,7 @@
                     android:textSize="15sp"
                     android:layout_marginHorizontal="15dp"/>
                 <TextView
-                    android:id="@+id/other"
+                    android:id="@+id/info_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edittext"
@@ -176,9 +129,8 @@
 
             </LinearLayout>
 
-
             <LinearLayout
-                android:id="@+id/relation_layout"
+                android:id="@+id/purpose_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -190,14 +142,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Relation  "
+                    android:text="Body Build Type"
                     android:textSize="15sp"
                     android:textColor="#fff"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/relation_spinner"
+                    android:id="@+id/body_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
@@ -206,32 +158,128 @@
 
 
             </LinearLayout>
-            <EditText
-                android:id="@+id/rname"
+            <LinearLayout
+                android:id="@+id/complexion_layout"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="Relative Name"
-                android:layout_margin="15dp"
-                android:inputType="textPersonName"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:paddingLeft="15dp"
-                android:textColor="#798184"
-                android:textColorHint="#798184"/>
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Body Complexion Type"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/complexion_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Height Ranges From"
+                android:gravity="start"
+                android:textColor="#fff"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:textSize="15sp"
+                />
             <EditText
-                android:id="@+id/pbirth"
+                android:id="@+id/info_fheight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
-                android:hint="Place Of Birth"
-                android:layout_margin="15dp"
-                android:inputType="textPersonName"
+                android:hint="Enter Height(in cm)"
+                android:layout_margin="8dp"
+                android:inputType="number"
                 android:paddingLeft="15dp"
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Present Address"
+                android:text="Height Ranges To"
+                android:gravity="start"
+                android:textColor="#fff"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:textSize="15sp"
+                />
+            <EditText
+                android:id="@+id/info_theight"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="Enter Height(in cm)"
+                android:layout_margin="8dp"
+                android:inputType="number"
+                android:paddingLeft="15dp"
+                android:textColor="#798184"
+                android:textColorHint="#798184"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age Ranges From"
+                android:gravity="start"
+                android:textColor="#fff"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:textSize="15sp"
+                />
+            <EditText
+                android:id="@+id/info_fage"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="Enter Age(in yrs)"
+                android:layout_margin="8dp"
+                android:inputType="number"
+                android:paddingLeft="15dp"
+                android:textColor="#798184"
+                android:textColorHint="#798184"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age Ranges To"
+                android:gravity="start"
+                android:textColor="#fff"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:textSize="15sp"
+                />
+            <EditText
+                android:id="@+id/info_tage"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="Enter Age(in yrs)"
+                android:layout_margin="8dp"
+                android:inputType="number"
+                android:paddingLeft="15dp"
+                android:textColor="#798184"
+                android:textColorHint="#798184"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="face"
                 android:gravity="start"
                 android:textColor="#fff"
                 android:paddingStart="15dp"
@@ -239,156 +287,126 @@
                 android:paddingEnd="15dp"
                 android:textSize="19sp"
                 />
-            <EditText
-                android:id="@+id/flat1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="Flat No./House No./Lane No."
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="15dp"
-                android:textColor="#798184"
-                android:textColorHint="#798184"/>
-            <EditText
-                android:id="@+id/landmark1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="Landmark"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="15dp"
-                android:inputType="textPersonName"
-                android:paddingLeft="15dp"
-                android:textColor="#798184"
-                android:textColorHint="#798184"/>
-            <EditText
-                android:id="@+id/city1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="City"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="15dp"
-                android:inputType="textPersonName"
-                android:paddingLeft="15dp"
-                android:textColor="#798184"
-                android:textColorHint="#798184"/>
             <LinearLayout
-                android:id="@+id/state_layout"
+                android:id="@+id/face_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:layout_marginTop="20dp"
+                android:paddingTop="15dp"
                 android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:text="State"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/state_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/bg_edittextselected"
-                    />
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/district_layout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:text="District"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/district_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/bg_edittextselected"
-                    />
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/station_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:text="Police Station"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/station_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/bg_edittextselected"
-                    />
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/check_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical">
-
-                <CheckBox
-                    android:id="@+id/checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="#ffffff"
-                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="If Permanent Address is same as Present Address then click on check box"
-                    android:gravity="start"
+                    android:text="Face Type"
+                    android:textSize="15sp"
                     android:textColor="#fff"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
 
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/face_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/nose_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nose"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/nose_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/beard_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Beard"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/beard_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/moustaches_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Moustaches"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/moustaches_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+
+            </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Permanent Address"
+                android:text="@string/eyes"
                 android:gravity="start"
                 android:textColor="#fff"
                 android:paddingStart="15dp"
@@ -396,125 +414,262 @@
                 android:paddingEnd="15dp"
                 android:textSize="19sp"
                 />
-            <EditText
-                android:id="@+id/flat2"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="Flat No./House No./Lane No."
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="15dp"
-                android:textColor="#798184"
-                android:textColorHint="#798184"/>
-            <EditText
-                android:id="@+id/landmark2"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="Landmark"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="15dp"
-                android:inputType="textPersonName"
-                android:paddingLeft="15dp"
-                android:textColor="#798184"
-                android:textColorHint="#798184"/>
-            <EditText
-                android:id="@+id/city2"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="City"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="15dp"
-                android:inputType="textPersonName"
-                android:paddingLeft="15dp"
-                android:textColor="#798184"
-                android:textColorHint="#798184"/>
             <LinearLayout
-                android:id="@+id/state2_layout"
+                android:id="@+id/eyes_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:layout_marginTop="20dp"
+                android:paddingTop="15dp"
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="State"
+                    android:text="Eyes Type"
                     android:textSize="15sp"
                     android:textColor="#fff"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/state_spinner2"
+                    android:id="@+id/eyes_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
                     android:background="@drawable/bg_edittextselected"
                     />
 
+
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/district_layout2"
+                android:id="@+id/specs_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:layout_marginTop="20dp"
+                android:paddingTop="15dp"
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="District"
+                    android:text="Using Specs"
                     android:textSize="15sp"
                     android:textColor="#fff"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/district_spinner2"
+                    android:id="@+id/specs_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
                     android:background="@drawable/bg_edittextselected"
                     />
 
+
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/station2_layout"
+                android:id="@+id/blind_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:layout_marginTop="20dp"
+                android:paddingTop="15dp"
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Police Station"
+                    android:text="Blind"
                     android:textSize="15sp"
                     android:textColor="#fff"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/station_spinner2"
+                    android:id="@+id/blind_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
                     android:background="@drawable/bg_edittextselected"
                     />
 
+
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hair"
+                android:gravity="start"
+                android:textColor="#fff"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:textSize="19sp"
+                />
+            <LinearLayout
+                android:id="@+id/hair_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hair Type"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/hair_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/length_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hair Length"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/length_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/color_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hair Color"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/color_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Habits"
+                android:gravity="start"
+                android:textColor="#fff"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:textSize="19sp"
+                />
+            <LinearLayout
+                android:id="@+id/habits_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Habits"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/habits_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/speech_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Speech"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/speech_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
     </ScrollView>
     <RelativeLayout

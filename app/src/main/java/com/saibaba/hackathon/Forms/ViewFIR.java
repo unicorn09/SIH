@@ -2,6 +2,7 @@ package com.saibaba.hackathon.Forms;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
@@ -17,6 +18,8 @@ SearchableSpinner district_spinner,station_spinner;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_fir);
         initView();
+        getSupportActionBar().setTitle("View FIR");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         district = new String[]{"Araria", "Arwal", "Aurangabad", "Banka", "Begusarai", "Bhagalpur", "Bhojpur", "Buxar", "Darbhanga", "Gaya", "Gopalganj",
                 "Jamui", "Jehanabad", "Kaimur", "Katihar", "Khagaria", "Kishanganj", "Lakhisarai", "Madhepura", "Madhubani", "Munger", "Muzaffarpur",
                 "Nalanda", "Nawada", "Pashchim Champaran", "Patna", "Purbi Champaran", "Purnia", "Rohtas", "Saharsa", "Samastipur", "Saran", "Sheikhpura",
@@ -34,5 +37,14 @@ SearchableSpinner district_spinner,station_spinner;
         firno=findViewById(R.id.firno);
         fdate=findViewById(R.id.fdate);
         tdate=findViewById(R.id.tdate);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
