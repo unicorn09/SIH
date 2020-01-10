@@ -500,8 +500,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_submit_btn"
             android:gravity="center"
+            android:text="Save"
             android:lineSpacingExtra="3sp"
-            android:text="Continue"
             android:textColor="#ffffff" />
 
     </RelativeLayout>

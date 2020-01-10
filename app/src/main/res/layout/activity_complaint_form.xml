@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
-    tools:context=".Forms.VehicleLost">
+    tools:context=".Forms.ComplaintForm">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,104 +17,68 @@
             android:orientation="vertical"
             android:background="#00171d">
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Stolen/Recovered Vehicle"
+                android:text="Complaint Details"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#fff"
                 android:textSize="20sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Registration Number"
-                android:gravity="start"
-                android:textColor="#fff"
-                android:paddingStart="15dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="15dp"
-                android:textSize="15sp"
-                />
+
             <EditText
-                android:id="@+id/regno"
+                android:id="@+id/csub"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
-                android:hint="Enter Registration No."
-                android:layout_margin="8dp"
-                android:inputType="number"
+                android:hint="Subject"
+                android:layout_margin="15dp"
+                android:inputType="textPersonName"
                 android:paddingLeft="15dp"
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="OR"
-                android:textAlignment="center"
-                android:gravity="start"
-                android:textColor="#fff"
-                android:paddingStart="15dp"
-                android:paddingTop="0dp"
-                android:paddingEnd="15dp"
-                android:textSize="19sp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Engine Number"
-                android:gravity="start"
-                android:textColor="#fff"
-                android:paddingStart="15dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="15dp"
-                android:textSize="15sp"
-                />
             <EditText
-                android:id="@+id/engno"
+                android:id="@+id/cdate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
-                android:hint="Enter Engine No."
-                android:layout_margin="8dp"
-                android:inputType="number"
+                android:hint="Date Of Incident"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:inputType="date"
+
                 android:paddingLeft="15dp"
-                android:textColor="#798184"
-                android:textColorHint="#798184"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="OR"
-                android:textAlignment="center"
-                android:gravity="start"
-                android:textColor="#fff"
-                android:paddingStart="15dp"
-                android:paddingTop="0dp"
-                android:paddingEnd="15dp"
-                android:textSize="19sp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chassis Number"
-                android:gravity="start"
-                android:textColor="#fff"
-                android:paddingStart="15dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="15dp"
-                android:textSize="15sp"
-                />
+                android:textColorHint="#798184"
+                android:textColor="#798184"/>
             <EditText
-                android:id="@+id/chassisno"
+                android:id="@+id/ctime"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
-                android:hint="Enter Chassis No."
-                android:layout_margin="8dp"
-                android:inputType="number"
+                android:hint="Time Of Incident"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:inputType="time"
+                android:paddingLeft="15dp"
+                android:textColorHint="#798184"
+                android:textColor="#798184"/>
+
+
+            <EditText
+                android:id="@+id/ccomplaint"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="Write Complaint"
+                android:layout_margin="15dp"
+                android:inputType="textPersonName"
                 android:paddingLeft="15dp"
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
+
 
         </LinearLayout>
     </ScrollView>

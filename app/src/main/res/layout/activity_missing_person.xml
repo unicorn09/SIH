@@ -37,7 +37,7 @@
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/info_fdate"
+                android:id="@+id/fdate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -60,7 +60,8 @@
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/info_tdate"
+
+                android:id="@+id/tdate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -93,7 +94,8 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/info_male"
+
+                    android:id="@+id/male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edittext"
@@ -107,7 +109,7 @@
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"/>
                 <TextView
-                    android:id="@+id/info_female"
+                    android:id="@+id/female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -121,7 +123,8 @@
                     android:textSize="15sp"
                     android:layout_marginHorizontal="15dp"/>
                 <TextView
-                    android:id="@+id/info_other"
+
+                    android:id="@+id/other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edittext"
@@ -207,7 +210,7 @@
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/info_fheight"
+                android:id="@+id/fheight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -229,7 +232,7 @@
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/info_theight"
+                android:id="@+id/theight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -251,7 +254,8 @@
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/info_fage"
+
+                android:id="@+id/fage"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -273,7 +277,7 @@
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/info_tage"
+                android:id="@+id/tage"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -287,7 +291,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="face"
+                android:text="Face"
                 android:gravity="start"
                 android:textColor="#fff"
                 android:paddingStart="15dp"
@@ -414,7 +418,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/eyes"
+                android:text="Eyes"
                 android:gravity="start"
                 android:textColor="#fff"
                 android:paddingStart="15dp"

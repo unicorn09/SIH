@@ -11,14 +11,14 @@ EditText csub,cdate,ctime,ccomplaint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  setContentView(R.layout.activity_complaint_form);
+        setContentView(R.layout.activity_complaint_form);
         initView();
     }
     private void initView()
     {
-//        csub=findViewById(R.id.csub);
-//        cdate=findViewById(R.id.cdate);
-//        ctime=findViewById(R.id.ctime);
-//        ccomplaint=findViewById(R.id.ccomplaint);
+        csub=findViewById(R.id.csub);
+        cdate=findViewById(R.id.cdate);
+        ctime=findViewById(R.id.ctime);
+        ccomplaint=findViewById(R.id.ccomplaint);
     }
 }

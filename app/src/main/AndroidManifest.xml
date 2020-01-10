@@ -17,6 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+                <action android:name="android.intent.action.MAIN" />
+
         <activity android:name=".Forms.ComplaintForm"></activity>
         <activity android:name=".Forms.PersonalDetails" />
         <activity android:name=".chatbot.chat"
@@ -43,12 +45,9 @@
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".SignUp.Signup"
             android:screenOrientation="portrait" />
