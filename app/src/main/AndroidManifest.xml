@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.saibaba.hackathon">
 
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
@@ -16,26 +16,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
 
+                <action android:name="android.intent.action.MAIN" />
+
+        <activity android:name=".Forms.ComplaintForm"></activity>
+        <activity android:name=".Forms.PersonalDetails" />
+        <activity android:name=".chatbot.chat"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Forms.ArticleFound" />
+
+        <activity android:name=".Forms.ArticleLost" />
+        <activity android:name=".Forms.MissingPerson" />
+        <activity android:name=".Forms.VehicleLost" />
+        <activity android:name=".Forms.TenantVerification" />
+        <activity android:name=".Forms.EmployeeVerification">
+        </activity>
+        <activity android:name=".Forms.CharacterCertificate" />
+        <activity android:name=".Forms.FilmShooting" />
+        <activity android:name=".Forms.EventPerformance" />
+        <activity android:name=".Forms.ProtestRequest" />
+        <activity android:name=".Forms.ProcessionRequest" />
+        <activity android:name=".Forms.ViewFIR">
+        </activity>
+        <activity android:name=".Forms.RegisterFIR">
+        </activity>
+        <activity android:name=".HomeDesc" />
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <activity
-            android:name=".Home"
-            android:label="@string/title_activity_home"
+            android:name=".NavigationDrawer"
+            android:label="@string/title_activity_navigation_drawer"
+            android:screenOrientation="portrait"
+
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".SignUp.Signup"
             android:screenOrientation="portrait" />
@@ -44,13 +56,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SignUp.Login"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:screenOrientation="portrait" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+        <receiver android:name=".MyBroadcastReciever">
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.SCREEN_ON" />
             </intent-filter>
-        </activity>
+        </receiver>
     </application>
 
 </manifest>
