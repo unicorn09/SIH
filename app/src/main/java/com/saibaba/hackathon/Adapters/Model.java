@@ -1,9 +1,6 @@
 package com.saibaba.hackathon.Adapters;
 
 public class Model {
-
-
-
     private String name, desc;
 
     public Model(String username, String desc) {

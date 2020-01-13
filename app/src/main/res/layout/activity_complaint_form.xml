@@ -70,11 +70,11 @@
             <EditText
                 android:id="@+id/ccomplaint"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="300dp"
                 android:background="@drawable/bg_edittext"
                 android:hint="Write Complaint"
                 android:layout_margin="15dp"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:paddingLeft="15dp"
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>

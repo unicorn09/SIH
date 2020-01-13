@@ -10,8 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/birl1">
-
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/vehicle_lost_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -21,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Stolen/Recovered Vehicle"
+                android:text="Stolen Vehicle"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#fff"
                 android:textSize="20sp" />
@@ -37,7 +40,7 @@
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/regno"
+                android:id="@+id/info_reg"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -50,7 +53,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="OR"
                 android:textAlignment="center"
                 android:gravity="start"
                 android:textColor="#fff"
@@ -71,7 +73,7 @@
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/engno"
+                android:id="@+id/info_engine"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -84,7 +86,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="OR"
+
                 android:textAlignment="center"
                 android:gravity="start"
                 android:textColor="#fff"
@@ -105,7 +107,7 @@
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/chassisno"
+                android:id="@+id/info_chassis"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -115,8 +117,42 @@
                 android:paddingLeft="15dp"
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
-
         </LinearLayout>
+            <ProgressBar
+                android:id="@+id/vehicle_lostIMG_progress"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:elevation="10dp"
+                android:progressTint="#ffffff"
+                android:indeterminateTint="#ffffff"
+                android:backgroundTint="#ffffff"
+                android:visibility="gone"
+                android:layout_marginTop="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/vehicle_lost_ll" />
+            <ImageView
+                android:id="@+id/btn_upload_ownerdetails"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="150dp"
+                android:layout_below="@+id/vehicle_lost_ll"
+                app:srcCompat="@drawable/ic_file_upload_black_24dp"></ImageView>
+            <TextView
+                android:id="@+id/ownerbooktext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Owner Book Copy"
+                android:gravity="start"
+                android:textColor="#fff"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:textSize="15sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/btn_upload_ownerdetails"
+                />
+        </RelativeLayout>
     </ScrollView>
     <RelativeLayout
         android:id="@+id/birl1"
@@ -126,7 +162,7 @@
         android:layout_alignParentBottom="true">
 
         <ProgressBar
-            android:id="@+id/info_progress"
+            android:id="@+id/vehicle_lost_progress"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:elevation="10dp"
@@ -137,7 +173,7 @@
             android:layout_centerInParent="true" />
 
         <Button
-            android:id="@+id/basic_info_next"
+            android:id="@+id/btn_vehicle_lost_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_submit_btn"
@@ -145,6 +181,6 @@
             android:text="Save"
             android:lineSpacingExtra="3sp"
             android:textColor="#ffffff" />
-
     </RelativeLayout>
+
 </RelativeLayout>
