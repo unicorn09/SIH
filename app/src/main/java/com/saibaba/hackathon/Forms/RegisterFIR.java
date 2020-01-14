@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,16 +24,17 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
 
-public class RegisterFIR extends AppCompatActivity implements View.OnClickListener {
+public class RegisterFIR extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 Spinner nationality_spinner,nature_spinner,sub_spinner,file_spinner,filesub_spinner;
 TextView present,not_present,yes,no;
 ImageView uploadapp,uploadsign;
 EditText content;
 Button basic_info_text;
 FirebaseDatabase firebaseDatabase;
-ArrayList<String> natureArrayList;
+ArrayList<String> natureArrayList,subNatureArrayList;
 DatabaseReference databaseReference;
-ArrayAdapter<String> natureArrayAdapter;
+ArrayAdapter<String> natureArrayAdapter,subNatureArrayAdapter;
+int victimPresent;
 
     private static final String TAG = "RegisterFIR";
 
@@ -44,9 +46,15 @@ ArrayAdapter<String> natureArrayAdapter;
         getSupportActionBar().setTitle("Register FIR");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-    private void initView()
-    {
+    private void initView(){
         firebaseDatabase=FirebaseDatabase.getInstance();
+        natureArrayList=new ArrayList<>();
+        subNatureArrayList=new ArrayList<>();
+        natureArrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,natureArrayList);
+        subNatureArrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,subNatureArrayList);
+        getNatureList();
+        natureArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        subNatureArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         nature_spinner=findViewById(R.id.nature_spinner);
         sub_spinner=findViewById(R.id.sub_spinner);
         file_spinner=findViewById(R.id.file_spinner);
@@ -59,11 +67,26 @@ ArrayAdapter<String> natureArrayAdapter;
         no=findViewById(R.id.no);
         basic_info_text=findViewById(R.id.basic_info_next);
         basic_info_text.setOnClickListener(this);
-        natureArrayList=new ArrayList<>();
-        natureArrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,natureArrayList);
-        natureArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         nature_spinner.setAdapter(natureArrayAdapter);
-        getNatureList();
+        nature_spinner.setOnItemSelectedListener(this);
+        sub_spinner.setAdapter(subNatureArrayAdapter);
+        not_present.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                not_present.setBackgroundResource(R.drawable.bg_edittextselected);
+                present.setBackgroundResource(R.drawable.bg_edittext);
+                victimPresent=0;
+            }
+        });
+        present.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                present.setBackgroundResource(R.drawable.bg_edittextselected);
+                not_present.setBackgroundResource(R.drawable.bg_edittext);
+                victimPresent=1;
+            }
+        });
+        present.performClick();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -102,4 +125,29 @@ ArrayAdapter<String> natureArrayAdapter;
         });
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        subNatureArrayList.clear();
+        databaseReference.child(natureArrayList.get(position)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                        subNatureArrayList.add(dataSnapshot1.getKey());
+                    }
+                    subNatureArrayAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
