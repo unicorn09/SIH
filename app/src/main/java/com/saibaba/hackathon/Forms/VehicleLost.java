@@ -39,8 +39,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VehicleLost extends AppCompatActivity {
-    private static final int GALLERY_REQUEST = 9;
-    private EditText regno,engno,chassisno;
+    private static final int GALLERY_REQUEST = 9;private EditText regno,engno,chassisno;
 private String reg,eng,chas;
 private DatabaseReference db;
 private Button save;
@@ -50,7 +49,7 @@ private TextView imagename;
 Uri uri;
 private UploadTask uploadTask;
 private String mUri;
-    private String signature;
+private String signature;
 
 
     @Override
