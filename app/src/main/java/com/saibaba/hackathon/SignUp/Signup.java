@@ -65,6 +65,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_signup);
+        getSupportActionBar().hide();
         auth = FirebaseAuth.getInstance();
         init();
     }

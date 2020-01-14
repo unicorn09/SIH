@@ -65,6 +65,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
           mAuth = FirebaseAuth.getInstance();
             init();
             firebaseUser = mAuth.getCurrentUser();
@@ -84,17 +85,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     } else { SharedPreferences prefs = getSharedPreferences(StringVariable.SHAREDPREFERNCE, MODE_PRIVATE);
                         String check = prefs.getString(StringVariable.USER_NAME, "def");
                         Log.e("onstart-->", check);
-                        if (!check.equals("def")) {
-                            startActivity(new Intent(this, NavigationDrawer.class));
-                            Log.e("onstart-->", "reached");
-                        } else {
-                            Log.e("onstart-->", "notreached");
-
+                        Log.e("onstart-->", "reached");
                             checkingUserExist(firebaseUser.getUid());
                     }
                 }
             }
-        }
     }
 
     private void init() {
@@ -232,19 +227,5 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             }
         });
     }
-
-    @Override
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        SharedPreferences prefs = getSharedPreferences(StringVariable.SHAREDPREFERNCE, MODE_PRIVATE);
-        String check = prefs.getString(StringVariable.USER_NAME, "def");
-        Log.e("onstart-->", check);
-        if (!check.equals("def")) {
-            startActivity(new Intent(this, NavigationDrawer.class));
-            Log.e("onstart-->", "reached");
-        } else {
-            Log.e("onstart-->", "notreached");
-
-        }}
 }
 

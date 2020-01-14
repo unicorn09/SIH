@@ -5,16 +5,82 @@
     android:layout_height="match_parent"
     android:background="#000000">
     <ImageView
+        android:id="@+id/frag_gallery_img"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
         app:srcCompat="@drawable/ic_location"
         android:tint="#4CAF50"
-        ></ImageView>
+        >
+
+    </ImageView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frag_gallery_img"
+        android:layout_centerInParent="true"
+        >
     <TextView
         android:id="@+id/frag_gallery_district"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#4CAF50"
+        android:textSize="25sp"
+        android:text="Patna"
+        android:textStyle="bold"
+        />
+        <TextView
+            android:id="@+id/frag_gallery_comma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#4CAF50"
+            android:textSize="25sp"
+            android:text=", "
+            android:textStyle="bold"
+            >
+        </TextView>
+    <TextView
+        android:id="@+id/frag_gallery_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_toRightOf="@+id/frag_gallery_comma"
+        android:textColor="#4CAF50"
+        android:textSize="25sp"
+        android:text="Bihar"
+        android:textStyle="bold"
+        >
 
-        ></TextView>
+    </TextView>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rellayout_chatbot"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentTop="true"
+        android:background="#000000"
+        android:paddingHorizontal="15dp"
+        android:layout_marginTop="20dp">
+
+        <Spinner
+            android:id="@+id/frag_gallery_spinner"
+            android:layout_width="383dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/back_chat_edittext"
+            android:paddingLeft="18dp"
+            android:textColor="#ffff"
+            android:textColorHint="#fff"
+            >
+        </Spinner>
+
+        <ImageView
+            android:id="@+id/frag_gallery_btn_search"
+            android:layout_width="49dp"
+            android:layout_height="31dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_search">
+        </ImageView>
+    </RelativeLayout>
 </RelativeLayout>

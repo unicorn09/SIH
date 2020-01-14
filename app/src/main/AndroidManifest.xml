@@ -7,8 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-feature    android:name="android.hardware.location.gps" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
@@ -17,12 +18,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Signature"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".Forms.ComplaintForm"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Forms.PersonalDetails"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".SignUp.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PoliceStation.PoliceStat"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Signature"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Forms.ComplaintForm"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Forms.PersonalDetails"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".chatbot.chat"
             android:screenOrientation="portrait" />
@@ -41,7 +55,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Forms.EmployeeVerification"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Forms.CharacterCertificate"
             android:screenOrientation="portrait" />
@@ -59,10 +73,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Forms.ViewFIR"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Forms.RegisterFIR"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".HomeDesc"
             android:screenOrientation="portrait" />
@@ -70,25 +84,18 @@
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SignUp.Signup"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SignUp.Registration"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SignUp.Login"
-            android:screenOrientation="portrait" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:screenOrientation="portrait">
+        </activity>
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
         <receiver android:name=".MyBroadcastReciever">
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_OFF" />

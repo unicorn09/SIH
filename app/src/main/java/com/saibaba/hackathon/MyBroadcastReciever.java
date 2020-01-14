@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -172,6 +173,7 @@ public class MyBroadcastReciever extends BroadcastReceiver {
             Log.e("harsh","exception occured");
         }
         Map<String, Object> map = new HashMap<>();
+        map.put(StringVariable.USER_UID, FirebaseAuth.getInstance().getUid());
         map.put("Latitude", l.getLatitude());
         map.put("Longitude",l.getLongitude());
         map.put("Address", address);
