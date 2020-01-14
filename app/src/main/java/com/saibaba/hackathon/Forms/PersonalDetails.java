@@ -1,8 +1,13 @@
 package com.saibaba.hackathon.Forms;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,13 +21,16 @@ EditText dname,dage,dphone,demail,ddob,dflat1,dlandmark1,dcity1,dflat2,dlandmark
 ImageView dphoto;
 SearchableSpinner ddistrict_spinner,dstate_spinner,dstation_spinner,ddistrict_spinner2,dstate_spinner2,dstation_spinner2;
 TextView dmale,dfemale,dother;
+String nextactivity;
 CheckBox dcheck;
+Button next;
     String[] station,district,state;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_details);
         initView();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         state = new String[]{"Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh",
                 "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand",
                 "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry",
@@ -45,32 +53,62 @@ CheckBox dcheck;
         dstate_spinner2.setAdapter(stateAdapter);
 
         ddistrict_spinner2.setAdapter(districtsAdapter);
+        nextactivity=getIntent().getStringExtra("NOC");
+        if(nextactivity.contains("NOC"))
+            getSupportActionBar().setTitle("NOC PERSONAL DETAILS");
+        else
+            getSupportActionBar().setTitle("FIR PERSONAL DETAILS");
+        next=findViewById(R.id.pd_personal_details_next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nextactivity.equalsIgnoreCase("NOC PROCESSION"))
+                    startActivity(new Intent(PersonalDetails.this,ProcessionRequest.class));
+                else if(nextactivity.equalsIgnoreCase("NOC PROTEST"))
+                    startActivity(new Intent(PersonalDetails.this,ProtestRequest.class));
+                else if(nextactivity.equalsIgnoreCase("NOC EVENT"))
+                    startActivity(new Intent(PersonalDetails.this,EventPerformance.class));
+                else if(nextactivity.equalsIgnoreCase("fir registry"))
+                    startActivity(new Intent(PersonalDetails.this,RegisterFIR.class));
+                else
+                    startActivity(new Intent(PersonalDetails.this,FilmShooting.class));
+            }
+        });
     }
     private void initView()
     {
 
         dname=findViewById(R.id.dname);
-        dage=findViewById(R.id.dage);
-        ddob=findViewById(R.id.ddob);
-        dmale=findViewById(R.id.dmale);
-        dfemale=findViewById(R.id.dfemale);
-        dother=findViewById(R.id.dother);
-        dphone=findViewById(R.id.dphone);
-        demail=findViewById(R.id.demail);
-        dflat1=findViewById(R.id.dflat1);
-        dlandmark1=findViewById(R.id.dlandmark1);
-        dcity1=findViewById(R.id.dcity1);
-        dflat2=findViewById(R.id.dflat2);
-        dlandmark2=findViewById(R.id.dlandmark2);
-        dcity2=findViewById(R.id.dcity2);
-        ddistrict_spinner=findViewById(R.id.ddistrict_spinner);
-        dstate_spinner=findViewById(R.id.dstate_spinner);
-        dstation_spinner=findViewById(R.id.dstation_spinner);
-        ddistrict_spinner2=findViewById(R.id.ddistrict_spinner2);
-        dstate_spinner2=findViewById(R.id.dstate_spinner2);
-        dstation_spinner2=findViewById(R.id.dstation_spinner2);
-        dcheck=findViewById(R.id.dcheck);
-       dphoto=findViewById(R.id.dphoto);
+        dage=findViewById(R.id.pd_age);
+        ddob=findViewById(R.id.pd_dob);
+        dmale=findViewById(R.id.pd_male);
+        dfemale=findViewById(R.id.pd_female);
+        dother=findViewById(R.id.pd_other);
+        dphone=findViewById(R.id.pd_phone);
+        demail=findViewById(R.id.pd_email);
+        dflat1=findViewById(R.id.pd_flat1);
+        dlandmark1=findViewById(R.id.pd_landmark1);
+        dcity1=findViewById(R.id.pd_city1);
+        dflat2=findViewById(R.id.pd_flat2);
+        dlandmark2=findViewById(R.id.pd_landmark2);
+        dcity2=findViewById(R.id.pd_city2);
+        ddistrict_spinner=findViewById(R.id.pd_district_spinner);
+        dstate_spinner=findViewById(R.id.pd_state_spinner);
+        dstation_spinner=findViewById(R.id.pd_station_spinner);
+        ddistrict_spinner2=findViewById(R.id.pd_district_spinner2);
+        dstate_spinner2=findViewById(R.id.pd_state_spinner2);
+        dstation_spinner2=findViewById(R.id.pd_station_spinner2);
+        dcheck=findViewById(R.id.pd_dcheck);
+       dphoto=findViewById(R.id.pd_dphoto);
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

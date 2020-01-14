@@ -2,7 +2,9 @@ package com.saibaba.hackathon.SignUp;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +26,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.saibaba.hackathon.NavigationDrawer;
+import com.saibaba.hackathon.OTPVerification;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.StringVariable;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
@@ -47,7 +51,7 @@ public class Registration extends AppCompatActivity {
     private ImageView verifiedImageView;
     private ProgressDialog progressDialog;
     FirebaseUser firebaseUser;
-    String otp;
+    String otp,passotp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,11 +116,9 @@ public class Registration extends AppCompatActivity {
                 male.setBackground(getResources().getDrawable(R.drawable.bg_edittext));
             }
         });
-
     }
 
     private void initView() {
-//        Twilio.init(StringVariable.TWILIO_ACCOUNT_SID,StringVariable.TWILIO_AUTH_TOKEN);
         otp="";
         isVerified=false;
         gender=null;
@@ -155,14 +157,11 @@ public class Registration extends AppCompatActivity {
             x=random.nextInt(10)+1;
             number=number*10+x;
         }
-        otp="123456";
-//        String mobileNumber=mobile.getText().toString();
-//        Message message= Message
-//                .creator(new PhoneNumber("+91"+mobileNumber),
-//                        new PhoneNumber("+15203326524"),
-//                        "Your OTP for Police Sahayak app is "+otp).create();
-//        Log.d(TAG, "verifyNumberUsingOTP: "+message.getSid());
+        OTPVerification otpVerification=new OTPVerification(this,"Harsh","7254043940");
+        otpVerification.execute();
+        passotp=otpVerification.getOtp();
         goForOTP();
+
     }
 
     private void goForOTP(){
@@ -184,91 +183,102 @@ public class Registration extends AppCompatActivity {
     }
 
     private void validateNumber(String otpCode){
-        if(otp.equals(otpCode)){
+        Log.e("otp",otpCode);
+        Log.e("otppass",passotp);
+        if(passotp.equals(otpCode)){
             Log.d(TAG, "onComplete: phone number verified");
             isVerified=true;
             verifyNumber.setVisibility(View.GONE);
             verifiedImageView.setVisibility(View.VISIBLE);
-        }else{
+        }else
+            {
             Log.d(TAG, "onComplete: invalid otp");
             displayToast("invalid otp");
-        }
+            }
     }
 
-    private void populateUserNode(){
-        if(isVerified==false){
+    private void populateUserNode() {
+        if (isVerified == false) {
             displayToast("Mobile number not verified");
             infoPhone.requestFocus();
             return;
         }
 
-        String name=infoName.getText().toString();
-        if(name.equals("")){
+        String name = infoName.getText().toString();
+        if (name.equals("")) {
             displayError(infoName);
             return;
         }
-        String ageText=age.getText().toString();
-        if(ageText.equals("")){
+        String ageText = age.getText().toString();
+        if (ageText.equals("")) {
             displayError(age);
             return;
         }
-        String dobText=dob.getText().toString();
-        if(dobText.equals("")){
+        String dobText = dob.getText().toString();
+        if (dobText.equals("")) {
             displayError(dob);
             return;
         }
-        String address1Text=address1.getText().toString();
-        if(address1Text.equals("")){
+        String address1Text = address1.getText().toString();
+        if (address1Text.equals("")) {
             displayError(address1);
             return;
         }
-        String address2Text=address2.getText().toString();
-        if(address2Text.equals("")){
+        String address2Text = address2.getText().toString();
+        if (address2Text.equals("")) {
             displayError(address2);
             return;
         }
-        String cityText=city.getText().toString();
-        if(cityText.equals("")){
+        String cityText = city.getText().toString();
+        if (cityText.equals("")) {
             displayError(city);
-            return;
-        }
-        String stateText=mstate.getSelectedItem().toString();
-        String districtText=mdistrict.getSelectedItem().toString();
-        String mobileNumber=infoPhone.getText().toString();
-        Map<String,Object> mp=new HashMap<>();
-        mp.put(StringVariable.USER_NAME,name);
-        mp.put(StringVariable.USER_AGE,ageText);
-        mp.put(StringVariable.USER_DOB,dobText);
-        mp.put(StringVariable.USER_GENDER,gender);
-        mp.put(StringVariable.USER_ADDRESS,address1Text+" "+address2Text);
-        mp.put(StringVariable.USER_CITY,cityText);
-        mp.put(StringVariable.USER_STATE,stateText);
-        mp.put(StringVariable.USER_DISTRICT,districtText);
-        mp.put(StringVariable.USER_MOBILE,mobileNumber);
-        mp.put(StringVariable.USER_IMAGE,firebaseUser.getPhotoUrl());
-        mp.put(StringVariable.USER_EMAIL,firebaseUser.getEmail());
-        progressDialog.show();
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(StringVariable.USERS).child(firebaseUser.getUid());
-        databaseReference.setValue(mp).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(!task.isSuccessful()){
-                    displayToast("Some Error Occurred");
-                    progressDialog.dismiss();
-                }else{
-                    progressDialog.dismiss();
-                    startActivity(new Intent(Registration.this, NavigationDrawer.class));
+            return;}
+
+            SharedPreferences.Editor editor = getSharedPreferences(StringVariable.SHAREDPREFERNCE, MODE_PRIVATE).edit();
+            editor.putString(StringVariable.USER_NAME, name);
+            editor.putString(StringVariable.USER_EMAIL, firebaseUser.getEmail());
+            //editor.putString(StringVariable.USER_IMAGE, firebaseUser.getPhotoUrl().toString());
+            editor.putString(StringVariable.USER_DISTRICT,mdistrict.getSelectedItem().toString());
+            editor.putString(StringVariable.USER_STATE,mstate.getSelectedItem().toString());
+            editor.putString(StringVariable.USER_MOBILE,mobile.getText().toString());
+            editor.apply();
+            String stateText = mstate.getSelectedItem().toString();
+            String districtText = mdistrict.getSelectedItem().toString();
+            String mobileNumber = infoPhone.getText().toString();
+            Map<String, Object> mp = new HashMap<>();
+            mp.put(StringVariable.USER_NAME, name);
+            mp.put(StringVariable.USER_AGE, ageText);
+            mp.put(StringVariable.USER_DOB, dobText);
+            mp.put(StringVariable.USER_GENDER, gender);
+            mp.put(StringVariable.USER_ADDRESS, address1Text + " " + address2Text);
+            mp.put(StringVariable.USER_CITY, cityText);
+            mp.put(StringVariable.USER_STATE, stateText);
+            mp.put(StringVariable.USER_DISTRICT, districtText);
+            mp.put(StringVariable.USER_MOBILE, mobileNumber);
+            mp.put(StringVariable.USER_IMAGE, firebaseUser.getPhotoUrl());
+            mp.put(StringVariable.USER_EMAIL, firebaseUser.getEmail());
+            progressDialog.show();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(StringVariable.USERS).child(firebaseUser.getUid());
+            databaseReference.setValue(mp).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (!task.isSuccessful()) {
+                        displayToast("Some Error Occurred");
+                        progressDialog.dismiss();
+                    } else {
+                        progressDialog.dismiss();
+                        startActivity(new Intent(Registration.this, NavigationDrawer.class));
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
 
-    private void displayError(EditText view){
-        view.setError("empty");
-        view.requestFocus();
-    }
+        private void displayError (EditText view){
+            view.setError("empty");
+            view.requestFocus();
+        }
 
-    private void displayToast(String msg){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        private void displayToast (String msg){
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        }
     }
-}

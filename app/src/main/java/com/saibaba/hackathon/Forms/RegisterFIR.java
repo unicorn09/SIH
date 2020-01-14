@@ -3,18 +3,29 @@ package com.saibaba.hackathon.Forms;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.saibaba.hackathon.R;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
-public class RegisterFIR extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class RegisterFIR extends AppCompatActivity implements View.OnClickListener {
 SearchableSpinner nationality_spinner,nature_spinner,sub_spinner,file_spinner,filesub_spinner;
 TextView present,not_present,yes,no;
 ImageView uploadapp,uploadsign;
 EditText content;
+Button basic_info_text;
+FirebaseDatabase firebaseDatabase;
+DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +36,7 @@ EditText content;
     }
     private void initView()
     {
+        firebaseDatabase=FirebaseDatabase.getInstance();
         nationality_spinner=findViewById(R.id.nationality_spinner);
         nature_spinner=findViewById(R.id.nature_spinner);
         sub_spinner=findViewById(R.id.sub_spinner);
@@ -36,7 +48,9 @@ EditText content;
         not_present=findViewById(R.id.not_present);
         yes=findViewById(R.id.yes);
         no=findViewById(R.id.no);
-
+        basic_info_text=findViewById(R.id.basic_info_next);
+        getNatureList();
+        basic_info_text.setOnClickListener(this);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -47,4 +61,18 @@ EditText content;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onClick(View v) {
+        if((Button)v==basic_info_text){
+
+        }
+    }
+
+    private ArrayList<String> getNatureList(){
+        firebaseDatabase.getReference().child("nature-of-complaint");
+//        firebaseDatabase.addListener
+        return null;
+    }
+
 }

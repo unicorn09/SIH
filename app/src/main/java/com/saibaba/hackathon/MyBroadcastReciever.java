@@ -17,6 +17,9 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -48,13 +51,14 @@ public class MyBroadcastReciever extends BroadcastReceiver {
     private LocationManager mLocationManager;
     private Location l;
     String address,city,country,postalCode,knownName,state;
+    private FusedLocationProviderClient fusedLocationClient;
 
 
     @Override
     public void onReceive(final Context context, Intent intent) {
 
         db = FirebaseDatabase.getInstance().getReference().child("Emergency").push();
-
+        fusedLocationClient= LocationServices.getFusedLocationProviderClient(context);
         cntx = context;
         vibe = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         Log.v("onReceive", "Power button is pressed.");
@@ -75,19 +79,15 @@ public class MyBroadcastReciever extends BroadcastReceiver {
                             actual_diff = cal_diff(seconds_screenon, seconds_screenoff);
                             if (actual_diff <= 4000) {
                                 sent_msg = true;
-                                if (sent_msg) { vibe.vibrate(300);
-                                if(gpsTracker.canGetLocation)
-                                    {
-                                        Log.e("loc--->",gpsTracker.getLocation().toString());
-                                        Log.e("harsh-->",Double.toString(gpsTracker.getLongitude()));
-
-                                    }
-                                    else
-                                        Log.e("harsh-->","Cant fetch Location");
-                                    Location l=getLastKnownLocation();
-                                    updateaddress(l);
-
-                                    Toast.makeText(cntx, "POWER BUTTON CLICKED 2 TIMES", Toast.LENGTH_LONG).show();
+                                if (sent_msg) {
+                                    vibe.vibrate(300);
+                                    fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                                        @Override
+                                        public void onSuccess(Location location) {
+                                            updateaddress(location);
+                                        }
+                                    });
+                                    context.startActivity(new Intent(context,NavigationDrawer.class));
                                     seconds_screenon = 0;
                                     seconds_screenoff = 0;
                                     sent_msg = false;
@@ -124,20 +124,13 @@ public class MyBroadcastReciever extends BroadcastReceiver {
                                 sent_msg = true;
                                 if (sent_msg) {
                                     vibe.vibrate(300);
-
-                                    if(gpsTracker.canGetLocation)
-                                    {
-                                        //Log.e("loc--->",gpsTracker.getLocation().toString());
-                                        Log.e("harsh-->",Double.toString(gpsTracker.getLongitude()));
-
-                                    }
-                                    else
-                                        Log.e("harsh-->","Cant fetch Location");
-                                    context.startActivity(new Intent(context, NavigationDrawer.class));
-
-                                    Location l=getLastKnownLocation();
-                                    updateaddress(l);
-                                     context.startActivity(new Intent(context, NavigationDrawer.class));
+                                    fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                                        @Override
+                                        public void onSuccess(Location location) {
+                                            updateaddress(location);
+                                        }
+                                    });
+                                    context.startActivity(new Intent(context,NavigationDrawer.class));
                                     seconds_screenon = 0;
                                     seconds_screenoff = 0;
                                     sent_msg = false;
@@ -180,6 +173,7 @@ public class MyBroadcastReciever extends BroadcastReceiver {
             Log.e("harsh","exception occured");
         }
         Map<String, Object> map = new HashMap<>();
+        map.put(StringVariable.USER_UID, FirebaseAuth.getInstance().getUid());
         map.put("Latitude", l.getLatitude());
         map.put("Longitude",l.getLongitude());
         map.put("Address", address);
@@ -209,26 +203,5 @@ public class MyBroadcastReciever extends BroadcastReceiver {
         }
 
         return diffrence;
-    }
-
-
-    private Location getLastKnownLocation() {
-        mLocationManager = (LocationManager) cntx.getSystemService(LOCATION_SERVICE);
-        List<String> providers = mLocationManager.getProviders(true);
-        Location bestLocation = null;
-        for (String provider : providers) {
-            if (ActivityCompat.checkSelfPermission(cntx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(cntx, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                Log.e("harsh","Permission not granted");
-            }
-            Location l = mLocationManager.getLastKnownLocation(provider);
-            if (l == null) {
-                continue;
-            }
-            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
-
-                bestLocation = l;
-            }
-        }
-        return bestLocation;
     }
 }

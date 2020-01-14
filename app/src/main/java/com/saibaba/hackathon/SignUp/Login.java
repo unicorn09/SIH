@@ -2,6 +2,7 @@ package com.saibaba.hackathon.SignUp;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,8 +32,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 
+import com.saibaba.hackathon.NavigationDrawer;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.StringVariable;
 
@@ -62,28 +65,31 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-
-        mAuth = FirebaseAuth.getInstance();
-        init();
-        firebaseUser=mAuth.getCurrentUser();
-        if(firebaseUser!=null){
-            Log.d(TAG, "onCreate: "+firebaseUser.isEmailVerified());
-            if(firebaseUser.isEmailVerified()){
-                checkingUserExist(firebaseUser.getUid());
-            }else{
-                firebaseUser.reload().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        firebaseUser=mAuth.getCurrentUser();
-                    }
-                });
-                if(!firebaseUser.isEmailVerified()) {
-                    dialog.show();
-                }else{
+        getSupportActionBar().hide();
+          mAuth = FirebaseAuth.getInstance();
+            init();
+            firebaseUser = mAuth.getCurrentUser();
+            if (firebaseUser != null) {
+                Log.d(TAG, "onCreate: " + firebaseUser.isEmailVerified());
+                if (firebaseUser.isEmailVerified()) {
                     checkingUserExist(firebaseUser.getUid());
+                } else {
+                    firebaseUser.reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            firebaseUser = mAuth.getCurrentUser();
+                        }
+                    });
+                    if (!firebaseUser.isEmailVerified()) {
+                        dialog.show();
+                    } else { SharedPreferences prefs = getSharedPreferences(StringVariable.SHAREDPREFERNCE, MODE_PRIVATE);
+                        String check = prefs.getString(StringVariable.USER_NAME, "def");
+                        Log.e("onstart-->", check);
+                        Log.e("onstart-->", "reached");
+                            checkingUserExist(firebaseUser.getUid());
+                    }
                 }
             }
-        }
     }
 
     private void init() {
@@ -106,8 +112,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 .setTitle("Email Not Verified")
                 .setMessage("Please verify your email")
                 .create();
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
 
 
     }
@@ -197,7 +203,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Log.d(TAG, "onDataChange: datasnapshot"+dataSnapshot.toString());
                 if (dataSnapshot.exists()) {
                     progressDialog.dismiss();
-                   // startActivity(new Intent(Login.this, Home.class));
+                    SharedPreferences.Editor editor = getSharedPreferences(StringVariable.SHAREDPREFERNCE, MODE_PRIVATE).edit();
+                    editor.putString(StringVariable.USER_NAME, dataSnapshot.child(StringVariable.USER_NAME).getValue().toString());
+                    editor.putString(StringVariable.USER_EMAIL, dataSnapshot.child(StringVariable.USER_EMAIL).getValue().toString());
+                    //editor.putString(StringVariable.USER_IMAGE, firebaseUser.getPhotoUrl().toString());
+                    editor.putString(StringVariable.USER_DISTRICT,dataSnapshot.child(StringVariable.USER_DISTRICT).getValue().toString());
+                    editor.putString(StringVariable.USER_STATE,dataSnapshot.child(StringVariable.USER_STATE).getValue().toString());
+                    editor.putString(StringVariable.USER_MOBILE,dataSnapshot.child(StringVariable.USER_MOBILE).getValue().toString());
+                    editor.apply();
+                    startActivity(new Intent(Login.this, NavigationDrawer.class));
                     finish();
                 } else {
                     startActivity(new Intent(Login.this,Registration.class));

@@ -33,7 +33,7 @@ public class ProcessionRequest extends AppCompatActivity {
         state_spinner.setAdapter(stateAdapter);
 
         district_spinner.setAdapter(districtsAdapter);
-        getSupportActionBar().setTitle("Process Request");
+        getSupportActionBar().setTitle("Procession Request");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     private void initView()

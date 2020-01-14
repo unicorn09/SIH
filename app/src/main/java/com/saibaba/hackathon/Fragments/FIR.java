@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.saibaba.hackathon.Adapters.Model;
 import com.saibaba.hackathon.Adapters.Model_Adapter;
+import com.saibaba.hackathon.Forms.PersonalDetails;
 import com.saibaba.hackathon.Forms.RegisterFIR;
 import com.saibaba.hackathon.Forms.ViewFIR;
 import com.saibaba.hackathon.R;
@@ -53,7 +54,11 @@ public class FIR extends Fragment {
                 new RecyclerViewItemListner(getActivity(), recyclerView ,new RecyclerViewItemListner.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                        if(position==0)
-                           startActivity(new Intent(getActivity(), RegisterFIR.class));
+                       {
+                           Intent i=new Intent(getActivity(), PersonalDetails.class);
+                           i.putExtra("NOC","FIR REGISTRY");
+                           startActivity(i);
+                       }
                        else if(position==1)
                            startActivity(new Intent(getActivity(), ViewFIR.class));
                     }

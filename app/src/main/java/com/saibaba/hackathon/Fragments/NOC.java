@@ -15,6 +15,7 @@ import com.saibaba.hackathon.Adapters.Model;
 import com.saibaba.hackathon.Adapters.Model_Adapter;
 import com.saibaba.hackathon.Forms.EventPerformance;
 import com.saibaba.hackathon.Forms.FilmShooting;
+import com.saibaba.hackathon.Forms.PersonalDetails;
 import com.saibaba.hackathon.Forms.ProcessionRequest;
 import com.saibaba.hackathon.Forms.ProtestRequest;
 import com.saibaba.hackathon.Forms.RegisterFIR;
@@ -57,13 +58,27 @@ public class NOC extends Fragment {
                 new RecyclerViewItemListner(getActivity(), recyclerView ,new RecyclerViewItemListner.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                         if(position==0)
-                            startActivity(new Intent(getActivity(), ProcessionRequest.class));
+                        {
+                            Intent i=new Intent(getActivity(), PersonalDetails.class);
+                            i.putExtra("NOC","NOC PROCESSION");
+                            startActivity(i);
+                        }
                         else if(position==1)
-                            startActivity(new Intent(getActivity(), ProtestRequest.class));
-                        else if (position==2)
-                            startActivity(new Intent(getActivity(), EventPerformance.class));
-                        else if(position==3)
-                            startActivity(new Intent(getActivity(), FilmShooting.class));
+                        {
+                            Intent i=new Intent(getActivity(), PersonalDetails.class);
+                            i.putExtra("NOC","NOC PROTEST");
+                            startActivity(i);
+                        }
+                        else if (position==2) {
+                            Intent i = new Intent(getActivity(), PersonalDetails.class);
+                            i.putExtra("NOC", "NOC EVENT");
+                            startActivity(i);}
+                        else if (position == 3)
+                        {
+                            Intent i = new Intent(getActivity(), PersonalDetails.class);
+                            i.putExtra("NOC", "NOC FILM");
+                            startActivity(i);
+                        }
                     }
                     @Override public void onLongItemClick(View view, int position) {
 

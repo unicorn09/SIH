@@ -9,7 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/birl1">
+        android:layout_above="@id/pd_birl1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,17 +18,8 @@
             android:background="#00171d">
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Personal Details"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#fff"
-                android:textSize="20sp" />
-
             <EditText
-                android:id="@+id/dname"
+                android:id="@+id/pd_name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -39,7 +30,7 @@
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
             <EditText
-                android:id="@+id/dage"
+                android:id="@+id/pd_age"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -53,7 +44,7 @@
                 android:textColorHint="#798184"
                 android:textColor="#798184"/>
             <EditText
-                android:id="@+id/ddob"
+                android:id="@+id/pd_dob"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -89,7 +80,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/dmale"
+                    android:id="@+id/pd_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edittext"
@@ -103,7 +94,7 @@
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"/>
                 <TextView
-                    android:id="@+id/dfemale"
+                    android:id="@+id/pd_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -117,7 +108,7 @@
                     android:textSize="15sp"
                     android:layout_marginHorizontal="15dp"/>
                 <TextView
-                    android:id="@+id/dother"
+                    android:id="@+id/pd_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edittext"
@@ -133,7 +124,7 @@
 
             </LinearLayout>
             <EditText
-                android:id="@+id/demail"
+                android:id="@+id/pd_email"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -145,7 +136,7 @@
                 android:textColorHint="#798184"/>
 
                 <EditText
-                    android:id="@+id/dphone"
+                    android:id="@+id/pd_phone"
                     android:layout_width="280dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
@@ -170,7 +161,7 @@
                 android:textSize="19sp"
                 />
             <EditText
-                android:id="@+id/dflat1"
+                android:id="@+id/pd_flat1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -181,7 +172,7 @@
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
             <EditText
-                android:id="@+id/dlandmark1"
+                android:id="@+id/pd_landmark1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -193,7 +184,7 @@
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
             <EditText
-                android:id="@+id/dcity1"
+                android:id="@+id/pd_city1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -205,7 +196,7 @@
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
             <LinearLayout
-                android:id="@+id/state_layout"
+                android:id="@+id/pd_state_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -224,7 +215,7 @@
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/dstate_spinner"
+                    android:id="@+id/pd_state_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -233,7 +224,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/district_layout1"
+                android:id="@+id/pd_district_layout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -252,7 +243,7 @@
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/ddistrict_spinner"
+                    android:id="@+id/pd_district_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -261,7 +252,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/station_layout"
+                android:id="@+id/pd_station_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -280,7 +271,7 @@
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/dstation_spinner"
+                    android:id="@+id/pd_station_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -289,7 +280,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/check_layout"
+                android:id="@+id/pd_check_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -299,7 +290,7 @@
                 android:gravity="center_vertical">
 
                 <CheckBox
-                    android:id="@+id/dcheck"
+                    android:id="@+id/pd_dcheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="#ffffff"
@@ -327,7 +318,7 @@
                 android:textSize="19sp"
                 />
             <EditText
-                android:id="@+id/dflat2"
+                android:id="@+id/pd_flat2"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -338,7 +329,7 @@
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
             <EditText
-                android:id="@+id/dlandmark2"
+                android:id="@+id/pd_landmark2"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -350,7 +341,7 @@
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
             <EditText
-                android:id="@+id/dcity2"
+                android:id="@+id/pd_city2"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -362,7 +353,7 @@
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
             <LinearLayout
-                android:id="@+id/state2_layout"
+                android:id="@+id/pd_state2_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -381,7 +372,7 @@
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/dstate_spinner2"
+                    android:id="@+id/pd_state_spinner2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -390,7 +381,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/district_layout2"
+                android:id="@+id/pd_district_layout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -409,7 +400,7 @@
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/ddistrict_spinner2"
+                    android:id="@+id/pd_district_spinner2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -418,7 +409,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/station2_layout"
+                android:id="@+id/pd_station2_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -437,7 +428,7 @@
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/dstation_spinner2"
+                    android:id="@+id/pd_station_spinner2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -446,7 +437,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/photo_layout"
+                android:id="@+id/pd_photo_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -466,7 +457,7 @@
                     android:paddingBottom="5dp"/>
 
                 <ImageView
-                    android:id="@+id/dphoto"
+                    android:id="@+id/pd_dphoto"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
@@ -477,14 +468,14 @@
         </LinearLayout>
     </ScrollView>
     <RelativeLayout
-        android:id="@+id/birl1"
+        android:id="@+id/pd_birl1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_alignParentBottom="true">
 
         <ProgressBar
-            android:id="@+id/info_progress"
+            android:id="@+id/pd_info_progress"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:elevation="10dp"
@@ -495,12 +486,12 @@
             android:layout_centerInParent="true" />
 
         <Button
-            android:id="@+id/basic_info_next"
+            android:id="@+id/pd_personal_details_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_submit_btn"
             android:gravity="center"
-            android:text="Save"
+            android:text="Continue"
             android:lineSpacingExtra="3sp"
             android:textColor="#ffffff" />
 
