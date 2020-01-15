@@ -70,21 +70,6 @@ Button next;
             @Override
             public void onClick(View v) {
                 gettext();
-                ModelPersonalDetails obj=new ModelPersonalDetails(sname,sage,gender,sadd,sdob,semail,sphone,sstate,sdistrict,sstation,sstate2,sdistrict2,sstation2,sadd2);
-                if(nextactivity.equalsIgnoreCase("NOC PROCESSION"))
-                    startActivity(new Intent(PersonalDetails.this,ProcessionRequest.class));
-                else if(nextactivity.equalsIgnoreCase("NOC PROTEST"))
-                    startActivity(new Intent(PersonalDetails.this,ProtestRequest.class));
-                else if(nextactivity.equalsIgnoreCase("NOC EVENT"))
-                    startActivity(new Intent(PersonalDetails.this,EventPerformance.class));
-                else if(nextactivity.equalsIgnoreCase("fir registry"))
-                {   Intent i=new Intent(PersonalDetails.this,RegisterFIR.class);
-                    Gson gson = new Gson();
-                    String DataObjectAsAString = gson.toJson(obj);
-                    i.putExtra("object",DataObjectAsAString);
-                    startActivity(i);}
-                else
-                    startActivity(new Intent(PersonalDetails.this,FilmShooting.class));
             }
         });
         ddistrict_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -206,7 +191,6 @@ Button next;
     }
 
     private void gettext() {
-        checkforempty();
         sname=dname.getText().toString();
         sage=dage.getText().toString();
         sdob=ddob.getText().toString();
@@ -214,12 +198,14 @@ Button next;
         sphone=dphone.getText().toString();
         sfalt1=dflat1.getText().toString();
         slandmark1=dlandmark1.getText().toString();
-        scity2=dcity1.getText().toString();
+        scity1=dcity1.getText().toString();
         sflat2=dflat2.getText().toString();
         slandmark2=dlandmark2.getText().toString();
         scity2=dcity2.getText().toString();
         sadd=sfalt1+" "+slandmark1+" "+scity1;
         sadd2=sflat2+" "+slandmark2+" "+scity2;
+        checkforempty();
+
     }
 
     private void initView() {
@@ -264,28 +250,69 @@ Button next;
         t.requestFocus();
     }
     private void checkforempty() {
-        if(sname.equals(""))
+        boolean isEmpty=true;
+        if(sname.equals("")) {
             seterror(dname);
+            return;
+        }
         else if(sage.equals(""))
+        {
             seterror(dage);
+            return;
+        }
         else if(sphone.equals(""))
+        {
             seterror(dphone);
+            return;
+        }
         else if(sdob.equals(""))
+        {
             seterror(ddob);
+            return;
+        }
         else if(sfalt1.equals(""))
+        {
             seterror(dflat1);
+            return;
+        }
         else if(slandmark1.equals(""))
+        {
             seterror(dlandmark1);
+            return;
+        }
         else if(scity1.equals(""))
+        {
             seterror(dcity1);
+            return;
+        }
         else if(sflat2.equals(""))
+        {
             seterror(dflat2);
+            return;
+        }
         else if(slandmark2.equals(""))
+        {
             seterror(dlandmark2);
-        else if(scity2.equals(""))
+            return;
+        }
+        else if(scity2.equals("")) {
             seterror(dcity2);
-
-
-
+            return;
+        }
+        ModelPersonalDetails obj=new ModelPersonalDetails(sname,sage,gender,sadd,sdob,semail,sphone,sstate,sdistrict,sstation,sstate2,sdistrict2,sstation2,sadd2);
+        if(nextactivity.equalsIgnoreCase("NOC PROCESSION"))
+            startActivity(new Intent(PersonalDetails.this,ProcessionRequest.class));
+        else if(nextactivity.equalsIgnoreCase("NOC PROTEST"))
+            startActivity(new Intent(PersonalDetails.this,ProtestRequest.class));
+        else if(nextactivity.equalsIgnoreCase("NOC EVENT"))
+            startActivity(new Intent(PersonalDetails.this,EventPerformance.class));
+        else if(nextactivity.equalsIgnoreCase("fir registry"))
+        {   Intent i=new Intent(PersonalDetails.this,RegisterFIR.class);
+            Gson gson = new Gson();
+            String DataObjectAsAString = gson.toJson(obj);
+            i.putExtra("object",DataObjectAsAString);
+            startActivity(i);}
+        else
+            startActivity(new Intent(PersonalDetails.this,FilmShooting.class));
     }
 }
