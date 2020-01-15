@@ -1,6 +1,7 @@
 package com.saibaba.hackathon.Forms;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -17,13 +18,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,6 +53,7 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
     DatabaseReference baseReference;
     ArrayList<String> natureArrayList,subNatureArrayList;
     DatabaseReference databaseReference;
+    ProgressBar progressBar;
     ArrayAdapter<String> natureArrayAdapter,subNatureArrayAdapter;
     int victimPresent;
     int occurenceKnown;
@@ -84,6 +89,7 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
         yes=findViewById(R.id.yes);
         no=findViewById(R.id.no);
         basic_info_text=findViewById(R.id.basic_info_next);
+        progressBar=findViewById(R.id.info_progress);
         basic_info_text.setOnClickListener(this);
         nature_spinner.setAdapter(natureArrayAdapter);
         nature_spinner.setOnItemSelectedListener(this);
@@ -229,7 +235,7 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
     }
 
     private void uploadDataToFirebase(){
-
+        progressBar.setVisibility(View.VISIBLE);
         long timestamp=System.currentTimeMillis();
 
         HashMap<String,Object> addressHashmap;
@@ -293,13 +299,25 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(TAG, "onSuccess: fir uploaded");
+                progressBar.setVisibility(View.GONE);
+                showToast("Fir registered");
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressBar.setVisibility(View.GONE);
                 Log.d(TAG, "onFailure: failed");
+                showToast("Some error occurred");
             }
         });
+        Log.d(TAG, "uploadDataToFirebase: user uid is "+FirebaseAuth.getInstance().getCurrentUser().getUid());
+        baseReference.child(StringVariable.USERS).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("fir").child(""+timestamp).setValue("0");
+
+    }
+
+    private void showToast(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 
 }

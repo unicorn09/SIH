@@ -188,6 +188,7 @@ Button next;
                 male.setBackground(getResources().getDrawable(R.drawable.bg_edittext));
             }
         });
+        others.performClick();
     }
 
     private void gettext() {
@@ -314,5 +315,6 @@ Button next;
             startActivity(i);}
         else
             startActivity(new Intent(PersonalDetails.this,FilmShooting.class));
+        finish();
     }
 }
