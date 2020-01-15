@@ -221,9 +221,7 @@ Button next;
         sadd2=sflat2+" "+slandmark2+" "+scity2;
     }
 
-    private void initView()
-    {
-
+    private void initView() {
         dname=findViewById(R.id.pd_name);
         dage=findViewById(R.id.pd_age);
         ddob=findViewById(R.id.pd_dob);
@@ -246,7 +244,6 @@ Button next;
         dstation_spinner2=findViewById(R.id.pd_station_spinner2);
         dcheck=findViewById(R.id.pd_dcheck);
        dphoto=findViewById(R.id.pd_dphoto);
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

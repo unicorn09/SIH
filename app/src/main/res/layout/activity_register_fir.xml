@@ -139,7 +139,7 @@
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/content"
+                android:id="@+id/"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:background="@drawable/bg_edittext"
