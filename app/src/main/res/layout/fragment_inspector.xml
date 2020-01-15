@@ -1,8 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#673AB7"
     tools:context=".PoliceStation.Inspector">
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="360dp"
+        android:layout_height="160dp"
+        android:src="@drawable/policeimg"
+        android:layout_marginLeft="0dp"
+        android:elevation="40dp"
+        android:layout_marginTop="0dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.3sp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="195dp"
+        android:layout_marginLeft="70.7dp"
+        android:letterSpacing="-0.02"
+        android:elevation="40dp"
+        android:lineSpacingExtra="-8.3sp"
+        android:text=" STATION HOUSE OFFICER"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/sho"
+        android:layout_height="wrap_content"
+        android:textSize="18.3sp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="220.7dp"
+        android:layout_marginLeft="135dp"
+        android:elevation="40dp"
+        android:letterSpacing="-0.02"
+        android:lineSpacingExtra="-8.3sp"
+        android:text="FULL NAME"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sho_mob"
+        android:textSize="18.3sp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="248.7dp"
+        android:layout_marginLeft="115dp"
+        android:elevation="40dp"
+        android:letterSpacing="-0.02"
+        android:lineSpacingExtra="-8.3sp"
+        android:text="MOBILE NUMBER"
+        />
+    <ImageView
+        android:id="@+id/stationoff"
+        android:layout_width="360dp"
+        android:elevation="30dp"
+        android:layout_height="192dp"
+        android:src="@drawable/station"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="132.3dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.3sp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="355dp"
+        android:layout_marginLeft="50dp"
+        android:letterSpacing="-0.02"
+        android:elevation="40dp"
+        android:lineSpacingExtra="-8.3sp"
+        android:text="SUB DIVISIONAL POLICE OFFICER"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.3sp"
+        android:textColor="#ffffff"
+        android:id="@+id/sdo"
+        android:layout_marginTop="384dp"
+        android:layout_marginLeft="135dp"
+        android:elevation="40dp"
+        android:letterSpacing="-0.02"
+        android:lineSpacingExtra="-8.3sp"
+        android:text="FULL NAME"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.3sp"
+        android:textColor="#ffffff"
+        android:id="@+id/sdo_mob"
+        android:layout_marginTop="415dp"
+        android:layout_marginLeft="115dp"
+        android:elevation="40dp"
+        android:letterSpacing="-0.02"
+        android:lineSpacingExtra="-8.3sp"
+        android:text="MOBILE NUMBER"
+        />
+    <ImageView
+        android:id="@+id/suboff"
+        android:layout_width="360dp"
+        android:layout_height="200.7dp"
+        android:src="@drawable/sub"
+        android:elevation="20dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="289.7dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.3sp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="520dp"
+        android:layout_marginLeft="60dp"
+        android:letterSpacing="-0.02"
+        android:elevation="40dp"
+        android:lineSpacingExtra="-8.3sp"
+        android:text=" SUPERINTENDENT OF POLICE"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.3sp"
+        android:textColor="#ffffff"
+        android:id="@+id/sp"
+        android:layout_marginTop="550dp"
+        android:layout_marginLeft="135dp"
+        android:elevation="40dp"
+        android:letterSpacing="-0.02"
+        android:lineSpacingExtra="-8.3sp"
+        android:text="FULL NAME"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18.3sp"
+        android:textColor="#ffffff"
+        android:id="@+id/sp_mob"
+        android:layout_marginTop="583dp"
+        android:layout_marginLeft="115dp"
+        android:elevation="40dp"
+        android:letterSpacing="-0.02"
+        android:lineSpacingExtra="-8.3sp"
+        android:text="MOBILE NUMBER"
+        />
+    <ImageView
+        android:layout_width="360dp"
+        android:layout_height="201.3dp"
+        android:src="@drawable/bg"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="463.7dp"
+
+        />
+    </FrameLayout>
+</ScrollView>
