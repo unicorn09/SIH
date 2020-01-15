@@ -34,7 +34,7 @@ public void execute()
             String apiKey = "apikey=" + URLEncoder.encode("6+8Mx1q7ERw-ETKOm14HmRm0glNtZTAPSj0BjoJLKd", "UTF-8");
             String message = "&message=" + URLEncoder.encode("Hi "+nam+ " your OTP for NCRA verification is "+s,"UTF-8");
             String sender = "&sender=" + URLEncoder.encode("TXTLCL", "UTF-8");
-            String numbers = "&numbers=" + URLEncoder.encode("917254043940", "UTF-8");
+            String numbers = "&numbers=" + URLEncoder.encode(num, "UTF-8");
 
             // Send data
             String data = "https://api.textlocal.in/send/?" + apiKey + numbers + message + sender;

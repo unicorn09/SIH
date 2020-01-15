@@ -209,9 +209,7 @@ Button next;
         checkforempty();
     }
 
-    private void initView()
-    {
-
+    private void initView() {
         dname=findViewById(R.id.pd_name);
         dage=findViewById(R.id.pd_age);
         ddob=findViewById(R.id.pd_dob);

@@ -38,7 +38,7 @@ import com.saibaba.hackathon.Adapters.ModelPersonalDetails;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.Signature;
 import com.saibaba.hackathon.StringVariable;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
@@ -216,7 +216,7 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
                 signURL=data.getStringExtra("result");
                 Log.d(TAG, "onActivityResult: "+signURL);
                 if(signURL!=""){
-                    Picasso.get().load(signURL).into(uploadsign);
+                   // Picasso.get().load(signURL).into(uploadsign);
                 }
             }catch (Exception e){
                 Log.e(TAG, "onActivityResult: "+e.getMessage() );
