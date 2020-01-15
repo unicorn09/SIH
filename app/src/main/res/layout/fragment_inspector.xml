@@ -10,14 +10,14 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <ImageView
+   <!-- <ImageView
         android:layout_width="360dp"
         android:layout_height="160dp"
         android:src="@drawable/policeimg"
         android:layout_marginLeft="0dp"
         android:elevation="40dp"
         android:layout_marginTop="0dp"
-        />
+        />-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
         android:lineSpacingExtra="-8.3sp"
         android:text="MOBILE NUMBER"
         />
-    <ImageView
+ <!--   <ImageView
         android:id="@+id/stationoff"
         android:layout_width="360dp"
         android:elevation="30dp"
@@ -64,7 +64,7 @@
         android:src="@drawable/station"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="132.3dp"
-        />
+        />-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
         android:lineSpacingExtra="-8.3sp"
         android:text="MOBILE NUMBER"
         />
-    <ImageView
+ <!--   <ImageView
         android:id="@+id/suboff"
         android:layout_width="360dp"
         android:layout_height="200.7dp"
@@ -111,7 +111,7 @@
         android:elevation="20dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="289.7dp"
-        />
+        />-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -150,13 +150,13 @@
         android:lineSpacingExtra="-8.3sp"
         android:text="MOBILE NUMBER"
         />
-    <ImageView
+ <!--   <ImageView
         android:layout_width="360dp"
         android:layout_height="201.3dp"
         android:src="@drawable/bg"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="463.7dp"
 
-        />
+        />-->
     </FrameLayout>
 </ScrollView>
