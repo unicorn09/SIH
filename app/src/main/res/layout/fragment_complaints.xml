@@ -49,27 +49,50 @@
                 android:background="@drawable/bg_edittext"
                 android:hint="Time Of Incident"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginHorizontal="15dp"
                 android:inputType="time"
                 android:paddingLeft="15dp"
                 android:textColorHint="#798184"
                 android:textColor="#798184"/>
-
-
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:autofillHints="Complain Type"
+                android:background="@drawable/bg_edittext"
+                ></Spinner>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                >
             <EditText
                 android:id="@+id/ccomplaint"
                 android:layout_width="match_parent"
                 android:layout_height="254dp"
-                android:layout_margin="15dp"
                 android:background="@drawable/bg_edittext"
                 android:inputType="textMultiLine"
+                android:lines="8"
+                android:minLines="6"
+                android:gravity="top|left"
+                android:maxLines="10"
+                android:scrollbars="vertical"
                 android:paddingLeft="15dp"
+                android:paddingRight="40dp"
                 android:textColor="#798184"
                 android:textColorHint="#798184"
-
                 />
-
+                <ImageView
+                    android:id="@+id/complaint_mic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_microphone"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    ></ImageView>
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -81,7 +104,7 @@
         android:layout_alignParentBottom="true">
 
         <ProgressBar
-            android:id="@+id/info_progress"
+            android:id="@+id/complain_progress"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:elevation="10dp"
@@ -92,7 +115,7 @@
             android:layout_centerInParent="true" />
 
         <Button
-            android:id="@+id/basic_info_next"
+            android:id="@+id/complain_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_submit_btn"

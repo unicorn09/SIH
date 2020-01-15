@@ -7,19 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.saibaba.hackathon.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Inspector.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Inspector#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Inspector extends Fragment {
 
+public class Inspector extends Fragment {
+TextView sho,sdo,sp,sho_mob,sdo_mob,sp_mob;
     public Inspector() {
         // Required empty public constructor
     }
@@ -29,6 +23,14 @@ public class Inspector extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inspector, container, false);
+        View root= inflater.inflate(R.layout.fragment_inspector, container, false);
+        sho=root.findViewById(R.id.sho);
+        sdo=root.findViewById(R.id.sdo);
+        sp=root.findViewById(R.id.sp);
+        sho_mob=root.findViewById(R.id.sho_mob);
+        sdo_mob=root.findViewById(R.id.sdo_mob);
+        sp_mob=root.findViewById(R.id.sp_mob);
+        return root;
     }
+
 }

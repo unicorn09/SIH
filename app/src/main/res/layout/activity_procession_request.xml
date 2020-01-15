@@ -210,7 +210,7 @@
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
             <EditText
-                android:id="@+id/stime"
+                android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"
@@ -294,6 +294,35 @@
                 android:paddingLeft="15dp"
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
+            <LinearLayout
+                android:id="@+id/sign_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload Signature"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <ImageView
+                    android:id="@+id/uploadsign"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_edittextselected"
+                    />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
     <RelativeLayout

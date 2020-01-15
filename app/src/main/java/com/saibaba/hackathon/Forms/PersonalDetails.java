@@ -37,6 +37,7 @@ Button next;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_details);
         initView();
+        male.setBackground(getResources().getDrawable(R.drawable.bg_edittextselected));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         state = new String[]{"Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh",
                 "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand",
@@ -188,8 +189,8 @@ Button next;
                 male.setBackground(getResources().getDrawable(R.drawable.bg_edittext));
             }
         });
-        others.performClick();
     }
+
 
     private void gettext() {
         sname=dname.getText().toString();
@@ -206,10 +207,11 @@ Button next;
         sadd=sfalt1+" "+slandmark1+" "+scity1;
         sadd2=sflat2+" "+slandmark2+" "+scity2;
         checkforempty();
-
     }
 
-    private void initView() {
+    private void initView()
+    {
+
         dname=findViewById(R.id.pd_name);
         dage=findViewById(R.id.pd_age);
         ddob=findViewById(R.id.pd_dob);
@@ -232,8 +234,8 @@ Button next;
         dstation_spinner2=findViewById(R.id.pd_station_spinner2);
         dcheck=findViewById(R.id.pd_dcheck);
        dphoto=findViewById(R.id.pd_dphoto);
-    }
 
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -243,63 +245,41 @@ Button next;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
     public void seterror(TextView t) {
         t.setError("Field Empty");
         t.requestFocus();
     }
     private void checkforempty() {
-        boolean isEmpty=true;
-        if(sname.equals("")) {
+        if(sname.equals("")){
             seterror(dname);
             return;
         }
-        else if(sage.equals(""))
-        {
+        else if(sage.equals("")){
             seterror(dage);
-            return;
-        }
-        else if(sphone.equals(""))
-        {
+        return;}
+        else if(sphone.equals("")){
             seterror(dphone);
-            return;
-        }
-        else if(sdob.equals(""))
-        {
+        return;}
+        else if(sdob.equals("")){
             seterror(ddob);
-            return;
-        }
-        else if(sfalt1.equals(""))
-        {
+        return;}
+        else if(sfalt1.equals("")){
             seterror(dflat1);
-            return;
-        }
-        else if(slandmark1.equals(""))
-        {
+        return;}
+        else if(slandmark1.equals("")){
             seterror(dlandmark1);
-            return;
-        }
-        else if(scity1.equals(""))
-        {
+        return;}
+        else if(scity1.equals("")){
             seterror(dcity1);
-            return;
-        }
-        else if(sflat2.equals(""))
-        {
+        return;}
+        else if(sflat2.equals("")){
             seterror(dflat2);
-            return;
-        }
-        else if(slandmark2.equals(""))
-        {
-            seterror(dlandmark2);
-            return;
-        }
-        else if(scity2.equals("")) {
-            seterror(dcity2);
-            return;
-        }
+        return;}
+        else if(slandmark2.equals("")){
+            seterror(dlandmark2);return;}
+        else if(scity2.equals("")){
+            seterror(dcity2);return;}
+
         ModelPersonalDetails obj=new ModelPersonalDetails(sname,sage,gender,sadd,sdob,semail,sphone,sstate,sdistrict,sstation,sstate2,sdistrict2,sstation2,sadd2);
         if(nextactivity.equalsIgnoreCase("NOC PROCESSION"))
             startActivity(new Intent(PersonalDetails.this,ProcessionRequest.class));
@@ -315,6 +295,7 @@ Button next;
             startActivity(i);}
         else
             startActivity(new Intent(PersonalDetails.this,FilmShooting.class));
-        finish();
+
     }
+
 }
