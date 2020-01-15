@@ -3,11 +3,13 @@ package com.saibaba.hackathon.Forms;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,14 +22,18 @@ import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.saibaba.hackathon.Adapters.ModelPersonalDetails;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.Signature;
+import com.saibaba.hackathon.StringVariable;
 import com.squareup.picasso.Picasso;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -37,7 +43,7 @@ import java.util.HashMap;
 public class RegisterFIR extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     Spinner nature_spinner,sub_spinner,file_spinner,filesub_spinner;
     TextView present,not_present,yes,no;
-    ImageView uploadapp,uploadsign;
+    ImageView uploadsign;
     EditText content;
     Button basic_info_text;
     DatabaseReference baseReference;
@@ -49,7 +55,6 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
     String signURL,natureComplaint,subNatureComplaint,contentComplaint;
     private static final String TAG = "RegisterFIR";
     private static final int REQUEST_SIGN=1;
-    private static final int REQUEST_APP=2;
     HashMap<String,Object> dataHashMap;
 
     @Override
@@ -73,9 +78,6 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
         nature_spinner=findViewById(R.id.nature_spinner);
         sub_spinner=findViewById(R.id.sub_spinner);
         content=findViewById(R.id.content);
-        file_spinner=findViewById(R.id.file_spinner);
-        filesub_spinner=findViewById(R.id.filesub_spinner);
-        uploadapp=findViewById(R.id.uploadapp);
         uploadsign=findViewById(R.id.uploadsign);
         present=findViewById(R.id.present);
         not_present=findViewById(R.id.not_present);
@@ -129,16 +131,6 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(RegisterFIR.this, Signature.class),REQUEST_SIGN);
-            }
-        });
-
-        uploadapp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_PICK);
-                startActivityForResult(intent,REQUEST_APP);
             }
         });
 
@@ -223,9 +215,6 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
             }catch (Exception e){
                 Log.e(TAG, "onActivityResult: "+e.getMessage() );
             }
-        }else if(requestCode==REQUEST_APP&&resultCode==Activity.RESULT_OK){
-                Uri uri=data.getData();
-            Log.d(TAG, "onActivityResult: "+uri);
         }
     }
 
@@ -240,16 +229,75 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
     }
 
     private void uploadDataToFirebase(){
+
+        long timestamp=System.currentTimeMillis();
+
+        HashMap<String,Object> addressHashmap;
+        Intent intent=getIntent();
+        String dataObjectAsString=intent.getStringExtra("object");
+        Gson gson=new Gson();
+        ModelPersonalDetails modelPersonalDetails=gson.fromJson(dataObjectAsString,new ModelPersonalDetails().getClass());
+
+        //complainant hashmap
+        HashMap<String,Object> complainantHashmap=new HashMap<>();
+
+        //permanent address hasmap
+        addressHashmap=new HashMap<>();
+        addressHashmap.put("address",modelPersonalDetails.getAddress2());
+        addressHashmap.put("district",modelPersonalDetails.getDistrict2());
+        addressHashmap.put("state",modelPersonalDetails.getState2());
+        addressHashmap.put("ps",modelPersonalDetails.getPolice2());
+
+        complainantHashmap.put("perm-address",addressHashmap);
+
+        //address hashmap
+        addressHashmap.put("address",modelPersonalDetails.getAddress());
+        addressHashmap.put("district",modelPersonalDetails.getDistrict());
+        addressHashmap.put("state",modelPersonalDetails.getState());
+        addressHashmap.put("ps",modelPersonalDetails.getPolice());
+
+        complainantHashmap.put("address",addressHashmap);
+
+        //setting dob
+        complainantHashmap.put("dob",modelPersonalDetails.getDOB());
+
+        //setting email
+        complainantHashmap.put("email",modelPersonalDetails.getEmail());
+
+        //setting name
+        complainantHashmap.put("name",modelPersonalDetails.getName());
+
+        //setting phone
+        complainantHashmap.put("phone",modelPersonalDetails.getMobile());
+
+        //setting sex
+        complainantHashmap.put("sex",modelPersonalDetails.getGender());
+
+        HashMap<String,Object> signatureMap=new HashMap<>();
+        signatureMap.put("type","image/jpeg");
+        signatureMap.put("url",signURL);
+
         dataHashMap.put("accepted",0);
-        HashMap<String,Object> childDataHashMap;
-        childDataHashMap=new HashMap<>();
-        childDataHashMap.put("state","uttar pradesh");
-        childDataHashMap.put("district","agra");
-        dataHashMap.put("address",childDataHashMap);
-        baseReference.child("fir").child(String.valueOf(System.currentTimeMillis())).setValue(dataHashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+        dataHashMap.put("complainant",complainantHashmap);
+        dataHashMap.put("content",contentComplaint);
+        dataHashMap.put("crime-sub-type",subNatureComplaint);
+        dataHashMap.put("date",timestamp);
+        dataHashMap.put("fir-no",timestamp);
+        dataHashMap.put("is-crime-present",occurenceKnown);
+        dataHashMap.put("is-victim-present",victimPresent);
+        dataHashMap.put("nature-of-complaint",natureComplaint);
+        dataHashMap.put("signature",signatureMap);
+        dataHashMap.put("status","pending");
+
+        baseReference.child("fir").child(String.valueOf(timestamp)).setValue(dataHashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.d(TAG, "onSuccess: data uploaded ");
+                Log.d(TAG, "onSuccess: fir uploaded");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: failed");
             }
         });
     }

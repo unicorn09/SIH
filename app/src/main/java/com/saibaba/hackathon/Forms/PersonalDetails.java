@@ -206,6 +206,7 @@ Button next;
     }
 
     private void gettext() {
+        checkforempty();
         sname=dname.getText().toString();
         sage=dage.getText().toString();
         sdob=ddob.getText().toString();
@@ -245,6 +246,7 @@ Button next;
         dcheck=findViewById(R.id.pd_dcheck);
        dphoto=findViewById(R.id.pd_dphoto);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -254,8 +256,36 @@ Button next;
         }
         return super.onOptionsItemSelected(item);
     }
-    private void seterror(TextView t) {
+
+
+
+    public void seterror(TextView t) {
         t.setError("Field Empty");
         t.requestFocus();
+    }
+    private void checkforempty() {
+        if(sname.equals(""))
+            seterror(dname);
+        else if(sage.equals(""))
+            seterror(dage);
+        else if(sphone.equals(""))
+            seterror(dphone);
+        else if(sdob.equals(""))
+            seterror(ddob);
+        else if(sfalt1.equals(""))
+            seterror(dflat1);
+        else if(slandmark1.equals(""))
+            seterror(dlandmark1);
+        else if(scity1.equals(""))
+            seterror(dcity1);
+        else if(sflat2.equals(""))
+            seterror(dflat2);
+        else if(slandmark2.equals(""))
+            seterror(dlandmark2);
+        else if(scity2.equals(""))
+            seterror(dcity2);
+
+
+
     }
 }
