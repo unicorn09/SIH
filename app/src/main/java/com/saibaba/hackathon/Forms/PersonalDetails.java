@@ -281,8 +281,13 @@ Button next;
             seterror(dcity2);return;}
 
         ModelPersonalDetails obj=new ModelPersonalDetails(sname,sage,gender,sadd,sdob,semail,sphone,sstate,sdistrict,sstation,sstate2,sdistrict2,sstation2,sadd2);
-        if(nextactivity.equalsIgnoreCase("NOC PROCESSION"))
-            startActivity(new Intent(PersonalDetails.this,ProcessionRequest.class));
+        if(nextactivity.equalsIgnoreCase("NOC PROCESSION")){
+            Intent i=new Intent(PersonalDetails.this,ProcessionRequest.class);
+            Gson gson = new Gson();
+            String DataObjectAsAString = gson.toJson(obj);
+            i.putExtra("object",DataObjectAsAString);
+            startActivity(i);
+        }
         else if(nextactivity.equalsIgnoreCase("NOC PROTEST"))
             startActivity(new Intent(PersonalDetails.this,ProtestRequest.class));
         else if(nextactivity.equalsIgnoreCase("NOC EVENT"))
@@ -295,6 +300,7 @@ Button next;
             startActivity(i);}
         else
             startActivity(new Intent(PersonalDetails.this,FilmShooting.class));
+        finish();
 
     }
 

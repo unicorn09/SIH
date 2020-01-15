@@ -210,7 +210,7 @@
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>
             <EditText
-                android:id="@+id/date"
+                android:id="@+id/sdate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_edittext"

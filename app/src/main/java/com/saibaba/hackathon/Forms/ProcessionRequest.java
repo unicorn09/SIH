@@ -42,7 +42,7 @@ public class ProcessionRequest extends AppCompatActivity {
     ProgressBar progressBar;
     HashMap<String,Object> dataHashMap;
     DatabaseReference baseReference;
-    String instituionName,flatno,landmark,city,address,stateName,districtName,timeLimit,majorParticipants,description,endDate,startDate,crowdDetails,mobileNumber,startAdd,endAdd,majorAdd,otherAdd,signURL;
+    String instituionName,flatno,landmark,city,address,stateName,districtName,timeLimit,majorParticipants,description,endDate,startDate,crowdDetails,mobileNumber,startAdd,endAdd,majorAdd,otherAdd,signURL,type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +68,8 @@ public class ProcessionRequest extends AppCompatActivity {
     }
 
     private void initView() {
+        String types[]=new String[]{"Religious Procession","Political Procession","Agitation","General"};
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,types);
         baseReference= FirebaseDatabase.getInstance().getReference();
         dataHashMap=new HashMap<>();
         signURL="";
@@ -93,6 +95,7 @@ public class ProcessionRequest extends AppCompatActivity {
         paddress=findViewById(R.id.paddress);
         oaddress=findViewById(R.id.oaddress);
         uploadButton=findViewById(R.id.basic_info_next);
+        type_spinner.setAdapter(arrayAdapter);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,6 +138,7 @@ public class ProcessionRequest extends AppCompatActivity {
         endAdd=eaddress.getText().toString();
         majorAdd=paddress.getText().toString();
         otherAdd=oaddress.getText().toString();
+        type=type_spinner.getSelectedItem().toString();
         checkEmpty();
     }
 
@@ -198,6 +202,7 @@ public class ProcessionRequest extends AppCompatActivity {
     }
 
     private void uploadData(){
+        progressBar.setVisibility(View.VISIBLE);
         long timestamp=System.currentTimeMillis();
 
         HashMap<String,Object> addressHashmap;
@@ -249,8 +254,10 @@ public class ProcessionRequest extends AppCompatActivity {
         dataHashMap.put("complainant",complainantHashmap);
         dataHashMap.put("signature",signatureMap);
         dataHashMap.put("institution_name",instituionName);
+        dataHashMap.put("address",address);
         dataHashMap.put("state",stateName);
         dataHashMap.put("district",districtName);
+        dataHashMap.put("type",type);
         dataHashMap.put("timelimit",timeLimit);
         dataHashMap.put("majorParticipants",majorParticipants);
         dataHashMap.put("description",description);
@@ -271,6 +278,7 @@ public class ProcessionRequest extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 Log.d(TAG, "onFailure: failed");
                 showToast("some error occurred");
+                progressBar.setVisibility(View.GONE);
             }
         }).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -291,7 +299,7 @@ public class ProcessionRequest extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1&&requestCode==RESULT_OK){
+        if(requestCode==1&&resultCode==RESULT_OK){
             try{
                 signURL=data.getStringExtra("result");
                 Log.d(TAG, "onActivityResult: "+signURL);
