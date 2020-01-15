@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -57,7 +58,8 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
     ArrayAdapter<String> natureArrayAdapter,subNatureArrayAdapter;
     int victimPresent;
     int occurenceKnown;
-    String signURL,natureComplaint,subNatureComplaint,contentComplaint;
+    ImageView mic;
+    String signURL,natureComplaint,subNatureComplaint,contentComplaint,cont="";
     private static final String TAG = "RegisterFIR";
     private static final int REQUEST_SIGN=1;
     HashMap<String,Object> dataHashMap;
@@ -70,6 +72,20 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
         getSupportActionBar().setTitle("Register FIR");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Fresco.initialize(this);
+        mic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,"hi-IN");
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN");
+
+                if (intent.resolveActivity(RegisterFIR.this.getPackageManager()) != null) {
+                    startActivityForResult(intent, 10);
+                } else {
+                    Toast.makeText(RegisterFIR.this, "Your Device Don't Support Speech Input", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     private void initView(){
         baseReference=FirebaseDatabase.getInstance().getReference();
@@ -94,6 +110,7 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
         nature_spinner.setAdapter(natureArrayAdapter);
         nature_spinner.setOnItemSelectedListener(this);
         sub_spinner.setAdapter(subNatureArrayAdapter);
+        mic=findViewById(R.id.registerfir_mic);
         dataHashMap=new HashMap<>();
 
         not_present.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +238,12 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
             }catch (Exception e){
                 Log.e(TAG, "onActivityResult: "+e.getMessage() );
             }
+        }
+        if (requestCode==10&&resultCode == RESULT_OK && data != null) {
+            ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            cont=content.getText().toString()+" "+(result.get(0));
+            content.setText("");
+            content.setText(cont);
         }
     }
 

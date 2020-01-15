@@ -1,7 +1,6 @@
 package com.saibaba.hackathon.Forms;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -39,9 +38,9 @@ SearchableSpinner ddistrict_spinner,dstate_spinner,dstation_spinner,ddistrict_sp
 TextView male,female,others;
 String nextactivity,sdistrict,sstate,sstation,sstate2,sdistrict2,sstation2,sname,sage,sphone,semail,sdob,sfalt1,sflat2,slandmark1,slandmark2,scity1,scity2,imageurl,gender,sadd,sadd2;
 CheckBox dcheck;
+Button next;
 List<String> statelist,districtlist,stationlist;
 DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("places").child("State");
-Button next;
     String[] station,district,state;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +69,8 @@ Button next;
         });
          final ArrayAdapter<String> stationAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, stationlist);
          final ArrayAdapter<String> districtsAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist);
-//        ArrayAdapter<String> stationAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, stationlist);
+        final ArrayAdapter<String> stationAdapter2 = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, stationlist);
+        final ArrayAdapter<String> districtsAdapter2 = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist);
 
 
 
@@ -112,7 +112,7 @@ Button next;
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                         {
-                            stationlist.add(dataSnapshot1.getKey());
+                            stationlist.add(dataSnapshot1.getValue().toString());
                         }
                         dstation_spinner.setAdapter(stationAdapter);
                     }
@@ -137,11 +137,12 @@ Button next;
                 databaseReference.child(sstate2).child(sdistrict2).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        statelist.clear();
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                         {
-                            stationlist.add(dataSnapshot1.getKey());
+                            stationlist.add(dataSnapshot1.getValue().toString());
                         }
-                        dstation_spinner2.setAdapter(stationAdapter);
+                        dstation_spinner2.setAdapter(stationAdapter2);
                     }
 
                     @Override
@@ -191,6 +192,7 @@ Button next;
                 databaseReference.child(sstate2).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        districtlist.clear();
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                             districtlist.add(dataSnapshot1.getKey().toString());
                         }
@@ -201,8 +203,8 @@ Button next;
 
                     }
                 });
-                ArrayAdapter<String> districtsAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist);
-                ddistrict_spinner2.setAdapter(districtsAdapter);
+                //ArrayAdapter<String> districtsAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist);
+                ddistrict_spinner2.setAdapter(districtsAdapter2);
             }
 
             @Override
@@ -282,7 +284,9 @@ Button next;
                 male.setBackground(getResources().getDrawable(R.drawable.bg_edittext));
             }
         });
+        others.performClick();
     }
+
 
     private void gettext() {
         sname=dname.getText().toString();
@@ -292,7 +296,7 @@ Button next;
         sphone=dphone.getText().toString();
         sfalt1=dflat1.getText().toString();
         slandmark1=dlandmark1.getText().toString();
-        scity2=dcity1.getText().toString();
+        scity1=dcity1.getText().toString();
         sflat2=dflat2.getText().toString();
         slandmark2=dlandmark2.getText().toString();
         scity2=dcity2.getText().toString();
@@ -326,6 +330,8 @@ Button next;
         dcheck=findViewById(R.id.pd_dcheck);
        dphoto=findViewById(R.id.pd_dphoto);
        statelist=new ArrayList<String>();
+       districtlist=new ArrayList<String>();
+       stationlist=new ArrayList<String>();
 
     }
     @Override

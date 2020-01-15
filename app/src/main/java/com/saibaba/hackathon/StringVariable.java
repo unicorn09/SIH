@@ -37,4 +37,7 @@ public class StringVariable {
     public static final String Signature="Signature";
     //sharedprefernce name
     public static final String SHAREDPREFERNCE="shared";
+
+    //forms
+    public static final String PROCESSION_REQUEST="procession_requests";
 }

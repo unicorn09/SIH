@@ -138,20 +138,42 @@
                 android:paddingEnd="15dp"
                 android:textSize="15sp"
                 />
-            <EditText
-                android:id="@+id/content"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="Enter FIR Content"
-                android:layout_margin="8dp"
-                android:inputType="textMultiLine"
-                android:paddingLeft="15dp"
-                android:gravity="top|left"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                >
+                <EditText
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="254dp"
+                    android:background="@drawable/bg_edittext"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:minLines="6"
+                    android:gravity="top|left"
+                    android:maxLines="10"
+                    android:scrollbars="vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="40dp"
+                    android:textColor="#798184"
+                    android:textColorHint="#798184"
+                    android:hint="FIR Content"
+                    />
+                <ImageView
+                    android:id="@+id/registerfir_mic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_microphone"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    ></ImageView>
+            </RelativeLayout>
 
 
 
-                android:textColor="#798184"
+            android:textColor="#798184"
                 android:minLines="6"
                 android:maxLines="8"
                 android:textColorHint="#798184"/>
