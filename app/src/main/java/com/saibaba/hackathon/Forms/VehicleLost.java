@@ -167,56 +167,56 @@ private String signature;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==GALLERY_REQUEST  && data!=null && data.getData()!=null){
-            uri=data.getData();
-            Log.e("harshuri",uri.toString());
-            progressBar2.setVisibility(View.VISIBLE);
-            upload.setVisibility(View.GONE);
-            if(uri!=null){
-                final StorageReference filereference= FirebaseStorage.getInstance().getReference().child("OWNER BOOK DETAILS").child(System.currentTimeMillis()+"");
-                uploadTask=filereference.putFile(uri);
-                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if(!task.isSuccessful())
-                        {
-                            throw task.getException();
-                        }
-                        return filereference.getDownloadUrl();
-
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-
-                        if(task.isSuccessful()){
-                            Uri downloadUri=task.getResult();
-                            mUri=downloadUri.toString();
-                            progressBar2.setVisibility(View.GONE);
-                            upload.setImageDrawable(getResources().getDrawable(R.drawable.ic_verified));
-                            upload.setVisibility(View.VISIBLE);
-                            imagename.setText(System.currentTimeMillis()+".jpg");
-                        }
-                        else{
-                            Toast.makeText(VehicleLost.this,"No Image Selected",Toast.LENGTH_LONG).show();
-                            progressBar2.setVisibility(View.GONE);
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(VehicleLost.this,e.getMessage(),Toast.LENGTH_LONG).show();
-                        progressBar2.setVisibility(View.GONE);
-                        upload.setVisibility(View.VISIBLE);
-                    }
-                });
-            }
-            else{
-                Toast.makeText(this,"No Image Selected",Toast.LENGTH_LONG).show();
-            }
-
-        }
-        else if(requestCode==2&&resultCode== Activity.RESULT_OK)
+//        if(requestCode==GALLERY_REQUEST  && data!=null && data.getData()!=null){
+//            uri=data.getData();
+//            Log.e("harshuri",uri.toString());
+//            progressBar2.setVisibility(View.VISIBLE);
+//            upload.setVisibility(View.GONE);
+//            if(uri!=null){
+//                final StorageReference filereference= FirebaseStorage.getInstance().getReference().child("OWNER BOOK DETAILS").child(System.currentTimeMillis()+"");
+//                uploadTask=filereference.putFile(uri);
+//                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+//                    @Override
+//                    public Task then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+//                        if(!task.isSuccessful())
+//                        {
+//                            throw task.getException();
+//                        }
+//                        return filereference.getDownloadUrl();
+//
+//                    }
+//                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Uri> task) {
+//
+//                        if(task.isSuccessful()){
+//                            Uri downloadUri=task.getResult();
+//                            mUri=downloadUri.toString();
+//                            progressBar2.setVisibility(View.GONE);
+//                            upload.setImageDrawable(getResources().getDrawable(R.drawable.ic_verified));
+//                            upload.setVisibility(View.VISIBLE);
+//                            imagename.setText(System.currentTimeMillis()+".jpg");
+//                        }
+//                        else{
+//                            Toast.makeText(VehicleLost.this,"No Image Selected",Toast.LENGTH_LONG).show();
+//                            progressBar2.setVisibility(View.GONE);
+//                        }
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(VehicleLost.this,e.getMessage(),Toast.LENGTH_LONG).show();
+//                        progressBar2.setVisibility(View.GONE);
+//                        upload.setVisibility(View.VISIBLE);
+//                    }
+//                });
+//            }
+//            else{
+//                Toast.makeText(this,"No Image Selected",Toast.LENGTH_LONG).show();
+//            }
+//
+//        }
+        if(requestCode==2&&resultCode== Activity.RESULT_OK)
         {
             Log.e("harsh","reached");
             try {
@@ -231,11 +231,11 @@ private String signature;
         }
             }
     private void uploadImage() {
-       /* Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, GALLERY_REQUEST);
-      */  Intent intent=new Intent(VehicleLost.this, Signature.class);
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(intent, GALLERY_REQUEST);
+       Intent intent=new Intent(VehicleLost.this, Signature.class);
         intent.putExtra("harsh","VehicleLost");
         startActivityForResult(intent,2);
     }

@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -187,43 +188,53 @@ public class Signature extends AppCompatActivity {
                 Log.v("log_tag", e.toString());
             }
 */          Uri uri=getImageUri(Signature.this,bitmap);
-            if(uri!=null){
-                final StorageReference filereference= FirebaseStorage.getInstance().getReference().child("Signatures").child(System.currentTimeMillis()+"");
-                uploadTask=filereference.putFile(uri);
-                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if(!task.isSuccessful())
-                        {
-                            throw task.getException();
-                        }
-                        return filereference.getDownloadUrl();
-
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-
-                        if(task.isSuccessful()){
-                            Uri downloadUri=task.getResult();
-                            mUri=downloadUri.toString();
-                            Log.e("h",mUri);
-                            Intent returnIntent=new Intent();
-                            returnIntent.putExtra("result",mUri);
-                            setResult(Activity.RESULT_OK,returnIntent);
-                            }
-                        else{
-                            Toast.makeText(Signature.this,"No Image Selected",Toast.LENGTH_LONG).show();
-                               }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+            if(uri!=null) {
+                final StorageReference filereference = FirebaseStorage.getInstance().getReference().child("Signatures").child(System.currentTimeMillis() + "");
+                uploadTask = filereference.putFile(uri);
+//                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+//                    @Override
+//                    public Task then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+//                        if(!task.isSuccessful())
+//                        {
+//                            throw task.getException();
+//                        }
+//                        return filereference.getDownloadUrl();
+//
+////                    }
+//                }).addOnSuccessListener(new OnCompleteListener<Uri>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Uri> task) {
+//
+//                        if(task.isSuccessful()){
+//                            Uri downloadUri=task.getResult();
+//                            mUri=downloadUri.toString();
+//                            Log.e("h",mUri);
+//                            Intent returnIntent=new Intent();
+//                            returnIntent.putExtra("result",mUri);
+//                            setResult(Activity.RESULT_OK,returnIntent);
+//                            finish();
+//                            }
+//                        else{
+//                            Toast.makeText(Signature.this,"No Image Selected",Toast.LENGTH_LONG).show();
+//                               }
+//                    }
+                uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Signature.this,e.getMessage(),Toast.LENGTH_LONG).show();
-                        }
+                        Toast.makeText(Signature.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        try{
+                            Intent intent=new Intent();
+                            intent.putExtra("result",taskSnapshot.getStorage().getPath());
+                            setResult(RESULT_OK,intent);
+                            finish();
+                        }catch (Exception e){}
+                    }
                 });
-            }
-            else{
+            }else{
                 Toast.makeText(Signature.this,"No Image Selected",Toast.LENGTH_LONG).show();
             }
 
@@ -313,6 +324,7 @@ public class Signature extends AppCompatActivity {
             dirtyRect.bottom = Math.max(lastTouchY, eventY);
         }
     }
+
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);

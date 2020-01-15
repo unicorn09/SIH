@@ -20,6 +20,8 @@ public class ModelPersonalDetails {
         Address2=address2;
     }
 
+    public ModelPersonalDetails(){}
+
     public String getName() {
         return Name;
     }
@@ -122,5 +124,9 @@ public class ModelPersonalDetails {
 
     public void setPolice(String police) {
         Police = police;
+    }
+
+    public String getAddress2() {
+        return Address2;
     }
 }

@@ -16,35 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="#000000">
-            <LinearLayout
-                android:id="@+id/nationality_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingTop="15dp"
-                android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Select Nationality"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/nationality_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/bg_edittextselected"
-                    />
-
-
-            </LinearLayout>
             <LinearLayout
                 android:id="@+id/nature_layout"
                 android:layout_width="match_parent"
@@ -64,7 +36,7 @@
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"/>
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                <Spinner
                     android:id="@+id/nature_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -93,7 +65,7 @@
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"/>
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                <Spinner
                     android:id="@+id/sub_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -169,13 +141,19 @@
             <EditText
                 android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="140dp"
                 android:background="@drawable/bg_edittext"
                 android:hint="Enter FIR Content"
                 android:layout_margin="8dp"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:paddingLeft="15dp"
+                android:gravity="top|left"
+
+
+
                 android:textColor="#798184"
+                android:minLines="6"
+                android:maxLines="8"
                 android:textColorHint="#798184"/>
             <LinearLayout
                 android:id="@+id/place_layout"
@@ -229,93 +207,7 @@
                     android:layout_marginHorizontal="15dp"/>
 
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/file_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingTop="15dp"
-                android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Select File Type"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/file_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/bg_edittextselected"
-                    />
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/filesub_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingTop="15dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Select File Subtype"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/filesub_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/bg_edittextselected"
-                    />
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/app_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingTop="15dp"
-                android:paddingRight="15dp"
-
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Upload Application"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-
-                <ImageView
-                    android:id="@+id/uploadapp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/bg_edittextselected"
-                    />
-
-            </LinearLayout>
             <LinearLayout
                 android:id="@+id/sign_layout"
                 android:layout_width="match_parent"

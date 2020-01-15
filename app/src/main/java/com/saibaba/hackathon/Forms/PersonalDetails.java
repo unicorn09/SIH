@@ -1,9 +1,11 @@
 package com.saibaba.hackathon.Forms;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,12 +18,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.saibaba.hackathon.Adapters.ModelPersonalDetails;
 import com.saibaba.hackathon.R;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonalDetails extends AppCompatActivity {
 EditText dname,dage,dphone,demail,ddob,dflat1,dlandmark1,dcity1,dflat2,dlandmark2,dcity2;
@@ -30,6 +39,8 @@ SearchableSpinner ddistrict_spinner,dstate_spinner,dstation_spinner,ddistrict_sp
 TextView male,female,others;
 String nextactivity,sdistrict,sstate,sstation,sstate2,sdistrict2,sstation2,sname,sage,sphone,semail,sdob,sfalt1,sflat2,slandmark1,slandmark2,scity1,scity2,imageurl,gender,sadd,sadd2;
 CheckBox dcheck;
+List<String> statelist,districtlist,stationlist;
+DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("places").child("State");
 Button next;
     String[] station,district,state;
     @Override
@@ -37,31 +48,35 @@ Button next;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_details);
         initView();
-        male.setBackground(getResources().getDrawable(R.drawable.bg_edittextselected));
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                {
+                    statelist.add(dataSnapshot1.getKey().toString());
+                    Log.e("Pers",dataSnapshot1.getKey());
+                    ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, statelist);
+
+                    dstate_spinner.setAdapter(stateAdapter);
+                    dstate_spinner2.setAdapter(stateAdapter);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+         final ArrayAdapter<String> stationAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, stationlist);
+         final ArrayAdapter<String> districtsAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist);
+//        ArrayAdapter<String> stationAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, stationlist);
+
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        state = new String[]{"Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh",
-                "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand",
-                "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry",
-                "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"};
-
-        district = new String[]{"Araria", "Arwal", "Aurangabad", "Banka", "Begusarai", "Bhagalpur", "Bhojpur", "Buxar", "Darbhanga", "Gaya", "Gopalganj",
-                "Jamui", "Jehanabad", "Kaimur", "Katihar", "Khagaria", "Kishanganj", "Lakhisarai", "Madhepura", "Madhubani", "Munger", "Muzaffarpur",
-                "Nalanda", "Nawada", "Pashchim Champaran", "Patna", "Purbi Champaran", "Purnia", "Rohtas", "Saharsa", "Samastipur", "Saran", "Sheikhpura",
-                "Sitamarhi", "Siwan", "Supaul", "Vaishali"};
-        station=new String[]{"Agamkuan","Bihta","Barh","Digha","Dhanarua","Hathidah","Chowk","Maner","Punpun","S K Puri","Sahpur"};
-        ArrayAdapter<String> stationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, station);
-        dstation_spinner.setAdapter(stationAdapter);
-        dstation_spinner2.setAdapter(stationAdapter);
-        ArrayAdapter<String> stateAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, state);
-        ArrayAdapter<String> districtsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, district);
-
-        dstate_spinner.setAdapter(stateAdapter);
-
-        ddistrict_spinner.setAdapter(districtsAdapter);
-        dstate_spinner2.setAdapter(stateAdapter);
-
-        ddistrict_spinner2.setAdapter(districtsAdapter);
-        nextactivity=getIntent().getStringExtra("NOC");
+         station=new String[]{"Agamkuan","Bihta","Barh","Digha","Dhanarua","Hathidah","Chowk","Maner","Punpun","S K Puri","Sahpur"};
+         nextactivity=getIntent().getStringExtra("NOC");
         if(nextactivity.contains("NOC"))
             getSupportActionBar().setTitle("NOC PERSONAL DETAILS");
         else
@@ -71,7 +86,6 @@ Button next;
             @Override
             public void onClick(View v) {
                 gettext();
-                checkforempty();
                 ModelPersonalDetails obj=new ModelPersonalDetails(sname,sage,gender,sadd,sdob,semail,sphone,sstate,sdistrict,sstation,sstate2,sdistrict2,sstation2,sadd2);
                 if(nextactivity.equalsIgnoreCase("NOC PROCESSION"))
                     startActivity(new Intent(PersonalDetails.this,ProcessionRequest.class));
@@ -93,6 +107,22 @@ Button next;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sdistrict=parent.getItemAtPosition(position).toString();
+                databaseReference.child(sstate).child(sdistrict).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                        {
+                            stationlist.add(dataSnapshot1.getKey());
+                        }
+                        dstation_spinner.setAdapter(stationAdapter);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
 
             @Override
@@ -104,7 +134,22 @@ Button next;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sdistrict2=parent.getItemAtPosition(position).toString();
-            }
+                databaseReference.child(sstate2).child(sdistrict2).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                        {
+                            stationlist.add(dataSnapshot1.getKey());
+                        }
+                        dstation_spinner2.setAdapter(stationAdapter);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -115,6 +160,23 @@ Button next;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sstate=parent.getItemAtPosition(position).toString();
+                databaseReference.child(sstate).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                        {
+                            districtlist.add(dataSnapshot1.getKey().toString());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                ddistrict_spinner.setAdapter(districtsAdapter);
+
             }
 
             @Override
@@ -125,7 +187,22 @@ Button next;
         dstate_spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sstate2=parent.getItemAtPosition(position).toString();
+                sstate2 = parent.getItemAtPosition(position).toString();
+                databaseReference.child(sstate2).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                            districtlist.add(dataSnapshot1.getKey().toString());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                ArrayAdapter<String> districtsAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist);
+                ddistrict_spinner2.setAdapter(districtsAdapter);
             }
 
             @Override
@@ -207,7 +284,6 @@ Button next;
         });
     }
 
-
     private void gettext() {
         sname=dname.getText().toString();
         sage=dage.getText().toString();
@@ -227,7 +303,7 @@ Button next;
     private void initView()
     {
 
-        dname=findViewById(R.id.pd_name);
+        dname=findViewById(R.id.dname);
         dage=findViewById(R.id.pd_age);
         ddob=findViewById(R.id.pd_dob);
         male=findViewById(R.id.pd_male);
@@ -249,6 +325,7 @@ Button next;
         dstation_spinner2=findViewById(R.id.pd_station_spinner2);
         dcheck=findViewById(R.id.pd_dcheck);
        dphoto=findViewById(R.id.pd_dphoto);
+       statelist=new ArrayList<String>();
 
     }
     @Override
@@ -288,4 +365,10 @@ Button next;
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+    }
 }
