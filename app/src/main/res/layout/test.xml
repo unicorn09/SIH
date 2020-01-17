@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/back_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="18dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:layout_marginStart="11.1dp"
+                android:src="@drawable/ic_back"/>
+            <TextView
+                android:id="@+id/harash_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="4dp"
+                android:text="Sanjay Gandhi National Park"
+                android:background="@drawable/location_border"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="10sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/experience_linear"
+            android:orientation="horizontal"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="13sp"
+                android:textColor="#838383"
+                android:letterSpacing="0.01"
+                android:gravity="center"
+                android:lineSpacingExtra="12sp"
+                android:text="Today   |" />
+
+            <TextView
+                android:id="@+id/time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:textSize="13sp"
+                android:textColor="#838383"
+                android:letterSpacing="0.01"
+                android:lineSpacingExtra="12sp"
+                android:text="5:00 PM" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_qna"
+                android:layout_marginStart="120dp" />
+            <TextView
+                android:id="@+id/no_of_reviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4.8dp"
+                android:textSize="14sp"
+                android:textColor="#838383"
+                android:letterSpacing="0.01"
+                android:lineSpacingExtra="11sp"
+                android:text="5"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_rating"
+                android:layout_marginLeft="15.3dp" />
+            <TextView
+                android:id="@+id/avg_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4.8dp"
+                android:textSize="14sp"
+                android:textColor="#838383"
+                android:letterSpacing="0.01"
+                android:lineSpacingExtra="11sp"
+                android:text="4.5"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="6sp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="13dp"
+            android:text="How safer is this place?"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:id="@+id/bullet1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_image_bullet_border"
+                android:layout_marginRight="7.1dp"/>
+            <ImageView
+                android:id="@+id/bullet2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_image_bullet_border"
+                android:layout_marginRight="7.1dp"/>
+            <ImageView
+                android:id="@+id/bullet3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_image_bullet_border"
+                android:layout_marginRight="7.1dp"/>
+            <ImageView
+                android:id="@+id/bullet4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_image_bullet_border"
+                android:layout_marginRight="7.1dp"/>
+            <ImageView
+                android:id="@+id/bullet5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_image_bullet_border" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="9dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <Button
+                android:id="@+id/i_faced_incident"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I faced incident"
+                android:textAllCaps="false"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:backgroundTint="#fff"
+                android:background="@drawable/review_text_border"
+                android:layout_marginBottom="5dp"/>
+            <Button
+                android:id="@+id/i_was_eye_witness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I was eye witness"
+                android:textAllCaps="false"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:backgroundTint="#fff"
+                android:background="@drawable/review_text_border"
+                android:layout_marginBottom="5dp"/>
+            <Button
+                android:id="@+id/i_want_to_give_general_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I want to give general review"
+                android:background="@drawable/review_text_border"
+                android:textAllCaps="false"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:backgroundTint="#fff"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#015b6c"
+                android:lineSpacingExtra="7sp"
+                android:text="Your Experience"
+                android:layout_marginLeft="12dp"
+                />
+
+            <EditText
+                android:id="@+id/personal_review_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#e0e0e0"
+                android:hint="Write here.."
+                android:textSize="12sp"
+                android:textColor="#000"
+                android:letterSpacing="0.01"
+                android:lineSpacingExtra="15sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="9dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="9dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10.6dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#015b6c"
+                android:lineSpacingExtra="7sp"
+                android:text="Suggestions/Request to Police department"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="13.9dp"
+                />
+
+            <EditText
+                android:id="@+id/suggestion_to_police_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#e0e0e0"
+                android:hint="Write here.."
+                android:textSize="12sp"
+                android:textColor="#000"
+                android:letterSpacing="0.01"
+                android:lineSpacingExtra="15sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="9dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="9dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10.6dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#015b6c"
+                android:lineSpacingExtra="7sp"
+                android:text="Suggestions/Request to Other Authorities"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="13.9dp"
+                />
+
+            <EditText
+                android:id="@+id/suggestion_to_other_authority_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#e0e0e0"
+                android:hint="Write here.."
+                android:textSize="12sp"
+                android:textColor="#000"
+                android:letterSpacing="0.01"
+                android:lineSpacingExtra="15sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="9dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="9dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10.6dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:backgroundTint="#8b0045"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="-2sp"
+            android:textAllCaps="false"
+            android:layout_marginTop="11.9dp" />
+
+    </LinearLayout>-->
+</android.support.v4.widget.NestedScrollView>

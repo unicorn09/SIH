@@ -1,24 +1,24 @@
 package com.saibaba.hackathon;
 
-import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-
+import android.util.Log;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
+int color[]={R.color.list_color2,R.color.list_color3,R.color.list_color4,R.color.list_color5,R.color.list_color6,R.color.list_color7,R.color.list_color8,R.color.list_color9,R.color.list_color10};
+int i=0;
     private GoogleMap mMap;
-    private double latitude=-34;
-    private double longitude=151;
-    private Marker marker;
-    private Handler handler;
+    private static final String TAG = "MapsActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,35 +28,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        handler=new Handler();
+        Log.d(TAG, "onCreate: ends");
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.d(TAG, "onMapReady: starts");
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        marker=mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng sydney = new LatLng(25.6164, 85.1411);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
-        updateMarker();
+        getDataOfAlerts();
     }
-    private void updateMarker(){
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                updateMarker();
-            }
-        },1000);
+
+    private void getDataOfAlerts(){
+        i=0;
+        FirebaseDatabase.getInstance().getReference().child("crime-alert").child("Bihar").child("Patna")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                mMap.addCircle(new CircleOptions()
+                                .center(new LatLng((double)dataSnapshot1.child("latitude").getValue(),(double)dataSnapshot1.child("longitude").getValue()))
+                                .radius(500).strokeWidth(0)
+                                .fillColor(color[++i]));
+                                Log.e(TAG,color[i]+"");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 }

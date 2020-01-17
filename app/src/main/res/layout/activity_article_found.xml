@@ -4,10 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Forms.ArticleFound">
+    tools:context=".Forms.ArticleFound"
+    android:background="#0f0f0f">
+    <RelativeLayout
+        android:id="@+id/rellayout_articlefound"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentTop="true"
+        android:background="#0f0f0f"
+        android:paddingHorizontal="15dp"
+        android:layout_marginTop="10dp">
+
+        <Spinner
+            android:id="@+id/articlefoundspinner"
+            android:layout_width="383dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/back_chat_edittext"
+            android:paddingLeft="18dp"
+            android:textColor="#ffff"
+            android:textColorHint="#fff"
+            >
+        </Spinner>
+        <TextView
+            android:id="@+id/textview_articefoundsearch"
+            android:layout_width="383dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_edittext"
+            android:paddingLeft="18dp"
+            android:textColor="#ffff"
+            android:textColorHint="#fff"
+            android:textSize="25dp"
+            android:hint="Select Police Station"
+            />
+        <ImageView
+            android:id="@+id/articlefound_btn_search"
+            android:layout_width="49dp"
+            android:layout_height="31dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_search">
+        </ImageView>
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerarticlefound"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/rellayout_articlefound"
+        />
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.saibaba.hackathon;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +51,11 @@ public class NavigationDrawer extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private TextView name,state,district;
     private FloatingActionButton fab;
+    private FloatingActionButton fab2;
+    private Dialog mdialog;
+
+
+
     public NavigationDrawer() {
     }
 
@@ -81,7 +88,20 @@ public class NavigationDrawer extends AppCompatActivity {
                 public void onClick(View view) {
                    startActivity(new Intent(NavigationDrawer.this, chat.class));     }
             });
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NavigationDrawer.this, chat.class));     }
+        });
+        fab2 = findViewById(R.id.fab2);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NavigationDrawer.this, MapsActivity.class));     }
+        });
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
             NavigationView navigationView = findViewById(R.id.navigationView);
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
@@ -103,6 +123,7 @@ public class NavigationDrawer extends AppCompatActivity {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
+
         }
 
 
@@ -123,6 +144,7 @@ public class NavigationDrawer extends AppCompatActivity {
             editor.apply();
             startActivity(new Intent(NavigationDrawer.this, Login.class));
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -132,6 +154,8 @@ public class NavigationDrawer extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
 
     @Override
     protected void onStart() {

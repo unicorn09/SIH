@@ -1,5 +1,6 @@
 package com.saibaba.hackathon.ui.gallery;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
     private Spinner spinner;
     private TextView dis,stat,policestat;
     private ImageView img;
+    private Context cntx;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
                 ViewModelProviders.of(this).get(GalleryViewModel.class);
         ls=new ArrayList<String>();
 
+        cntx=getActivity();
         //sharedpreference
          SharedPreferences prefs = getActivity().getSharedPreferences(StringVariable.SHAREDPREFERNCE, MODE_PRIVATE);
          state = prefs.getString(StringVariable.USER_STATE, "def");
@@ -64,14 +67,14 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
 
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         //init
-        //img=root.findViewById(R.id.frag_gallery_btn_search);
-        //spinner=root.findViewById(R.id.spinnerpa);
-        //spinner.setOnItemSelectedListener(this);
+        img=root.findViewById(R.id.frag_gallery_btn_search);
+        spinner=root.findViewById(R.id.frag_gallery_spinner);
+        spinner.setOnItemSelectedListener(this);
         dis=root.findViewById(R.id.frag_gallery_district);
         dis.setText(district);
         stat=root.findViewById(R.id.frag_gallery_state);
         stat.setText(state);
-       // policestat=root.findViewById(R.id.textview_gallerypolicest);
+        policestat=root.findViewById(R.id.textview_gallerypolicest);
         db= FirebaseDatabase.getInstance().getReference().child("places").child("State").child(state).child(district);
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -80,6 +83,9 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
                 {
                     ls.add(dataSnapshot1.getValue().toString()+" ("+dataSnapshot1.getKey().toString()+")");
                 }
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(cntx,android.R.layout.simple_spinner_item, ls);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(dataAdapter);
             }
 
             @Override
@@ -87,16 +93,14 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
 
             }
         });
-      /*  img.setOnClickListener(new View.OnClickListener() {
+        img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), PoliceStat.class));
             }
-        });*/
+        });
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, ls);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
+
         return root;
 
 
@@ -104,11 +108,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(view==spinner)
-        {
-            Log.e("spin","reached");
-            policestat.setText(parent.getItemAtPosition(position).toString());
-        }
+           policestat.setText(parent.getItemAtPosition(position).toString());
     }
 
     @Override

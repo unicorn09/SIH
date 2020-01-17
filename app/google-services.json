@@ -8,12 +8,65 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:428032758866:android:c47006f3a71710495b7b8b",
+        "android_client_info": {
+          "package_name": "com.dcodestar.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428032758866-pbefd45ni8k8ibe6fbohbq8m95bjj125.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dcodestar.myapplication",
+            "certificate_hash": "b7c31fea9bfe962887432211facdec5e77c9575f"
+          }
+        },
+        {
+          "client_id": "428032758866-cb0qrjnglhpbf1bn8d30japv55164rq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1Ag0TCuFdggkYOpm_iUMM5n85lGiMmdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428032758866-eh38cinlm68i01nfr5g18m37kvuqg1ri.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:428032758866:android:0c4dfd35bb86e0dc5b7b8b",
         "android_client_info": {
           "package_name": "com.saibaba.hackathon"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "428032758866-448btdnleqbqokvmtl3elclaelv8e2ac.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saibaba.hackathon",
+            "certificate_hash": "ad96a7fe5a614afb63dd58bac2133c1ad20ebaa3"
+          }
+        },
+        {
+          "client_id": "428032758866-nefd5b6ij7m8fjcf23c4rh6unfbodk99.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saibaba.hackathon",
+            "certificate_hash": "b7c31fea9bfe962887432211facdec5e77c9575f"
+          }
+        },
         {
           "client_id": "428032758866-7qtk2efj3577ut5h29tdplsmk42p3ig8.apps.googleusercontent.com",
           "client_type": 1,
@@ -36,7 +89,44 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "428032758866-cb0qrjnglhpbf1bn8d30japv55164rq9.apps.googleusercontent.com",
+              "client_id": "428032758866-eh38cinlm68i01nfr5g18m37kvuqg1ri.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428032758866:android:7a6929ba2ca135bc5b7b8b",
+        "android_client_info": {
+          "package_name": "com.saibaba.sihpoliceapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428032758866-brs0el47dacrc9vm9vql73bubug3fjqr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saibaba.sihpoliceapp",
+            "certificate_hash": "ad96a7fe5a614afb63dd58bac2133c1ad20ebaa3"
+          }
+        },
+        {
+          "client_id": "428032758866-cb0qrjnglhpbf1bn8d30japv55164rq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1Ag0TCuFdggkYOpm_iUMM5n85lGiMmdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428032758866-eh38cinlm68i01nfr5g18m37kvuqg1ri.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

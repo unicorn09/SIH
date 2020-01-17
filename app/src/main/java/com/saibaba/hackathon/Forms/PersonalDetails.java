@@ -313,12 +313,13 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
         dstate_spinner2=findViewById(R.id.pd_state_spinner2);
         dstation_spinner2=findViewById(R.id.pd_station_spinner2);
         dcheck=findViewById(R.id.pd_dcheck);
-       dphoto=findViewById(R.id.pd_dphoto);
-       statelist=new ArrayList<String>();
-       districtlist=new ArrayList<String>();
-       districtlist2=new ArrayList<String>();
-       stationlist2=new ArrayList<String>();
-       stationlist=new ArrayList<String>();
+        dphoto=findViewById(R.id.pd_dphoto);
+        statelist=new ArrayList<String>();
+        districtlist=new ArrayList<String>();
+        districtlist2=new ArrayList<String>();
+        stationlist2=new ArrayList<String>();
+        stationlist=new ArrayList<String>();
+
 
     }
     @Override
