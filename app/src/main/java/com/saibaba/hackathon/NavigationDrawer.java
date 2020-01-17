@@ -102,6 +102,16 @@ public class NavigationDrawer extends AppCompatActivity {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
+
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    if(menuItem.getItemId()==R.id.nav_tools){
+                        startActivity(new Intent(NavigationDrawer.this,MapsActivity.class));
+                    }
+                    return false;
+                }
+            });
         }
 
 
@@ -131,6 +141,8 @@ public class NavigationDrawer extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
 
     @Override
     protected void onStart() {

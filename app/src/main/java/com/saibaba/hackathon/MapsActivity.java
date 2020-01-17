@@ -1,24 +1,22 @@
 package com.saibaba.hackathon;
 
-import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private double latitude=-34;
-    private double longitude=151;
-    private Marker marker;
-    private Handler handler;
+    private static final String TAG = "MapsActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        handler=new Handler();
+        Log.d(TAG, "onCreate: ends");
     }
 
 
@@ -43,20 +41,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.d(TAG, "onMapReady: starts");
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        marker=mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
-        updateMarker();
+        LatLng sydney = new LatLng(25.6164, 85.1411);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,10));
+        getDataOfAlerts();
     }
-    private void updateMarker(){
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                updateMarker();
-            }
-        },1000);
+
+    private void getDataOfAlerts(){
     }
+
 }

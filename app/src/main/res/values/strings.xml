@@ -21,5 +21,6 @@
     <string name="title_activity_police_station_details">PoliceStationDetails</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
