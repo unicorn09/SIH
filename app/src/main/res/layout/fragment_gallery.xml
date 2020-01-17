@@ -49,7 +49,6 @@
         android:text="Bihar"
         android:textStyle="bold"
         >
-
     </TextView>
     </LinearLayout>
     <RelativeLayout
@@ -73,7 +72,19 @@
             android:textColorHint="#fff"
             >
         </Spinner>
-
+        <TextView
+            android:id="@+id/textview_gallerypolicest"
+            android:layout_width="383dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:paddingLeft="18dp"
+            android:textColor="#ffff"
+            android:textColorHint="#fff"
+            android:textSize="25dp"
+            android:hint="Select Police Station"
+            />
         <ImageView
             android:id="@+id/frag_gallery_btn_search"
             android:layout_width="49dp"
@@ -83,4 +94,5 @@
             app:srcCompat="@drawable/ic_search">
         </ImageView>
     </RelativeLayout>
+
 </RelativeLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,14 +10,16 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-   <!-- <ImageView
-        android:layout_width="360dp"
-        android:layout_height="160dp"
-        android:src="@drawable/policeimg"
-        android:layout_marginLeft="0dp"
-        android:elevation="40dp"
-        android:layout_marginTop="0dp"
-        />-->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:elevation="40dp"
+            android:scaleType="fitXY"
+
+            android:src="@drawable/policeimg" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,15 +58,15 @@
         android:lineSpacingExtra="-8.3sp"
         android:text="MOBILE NUMBER"
         />
- <!--   <ImageView
-        android:id="@+id/stationoff"
-        android:layout_width="360dp"
-        android:elevation="30dp"
-        android:layout_height="192dp"
-        android:src="@drawable/station"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="132.3dp"
-        />-->
+
+        <ImageView
+            android:id="@+id/stationoff"
+            android:layout_width="match_parent"
+            android:layout_height="192dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="132.3dp"
+            android:elevation="30dp"
+            android:src="@drawable/station" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,7 +105,7 @@
         android:lineSpacingExtra="-8.3sp"
         android:text="MOBILE NUMBER"
         />
- <!--   <ImageView
+    <ImageView
         android:id="@+id/suboff"
         android:layout_width="360dp"
         android:layout_height="200.7dp"
@@ -111,7 +113,7 @@
         android:elevation="20dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="289.7dp"
-        />-->
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -150,13 +152,14 @@
         android:lineSpacingExtra="-8.3sp"
         android:text="MOBILE NUMBER"
         />
- <!--   <ImageView
-        android:layout_width="360dp"
-        android:layout_height="201.3dp"
-        android:src="@drawable/bg"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="463.7dp"
 
-        />-->
+        <ImageView
+            android:layout_width="360dp"
+            android:layout_height="201.3dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="463.7dp"
+            android:src="@drawable/bg"
+
+            />
     </FrameLayout>
-</ScrollView>
+</RelativeLayout>

@@ -86,6 +86,7 @@ public class NavigationDrawer extends AppCompatActivity {
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
             //setting data in app bar
+
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_navigation_drawer);
             name=(TextView)headerView.findViewById(R.id.nav_head_name);
             name.setText(sname);

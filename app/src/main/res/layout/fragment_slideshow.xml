@@ -1,19 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:paddingHorizontal="10dp"
+    >
     <TextView
-        android:id="@+id/text_slideshow"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_alignParentTop="true"
+        android:text="Emergency Contact Details"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="30dp"
+        android:textColor="#fff"
+        ></TextView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="15dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/list_color8">
+
+                <RelativeLayout
+                    android:id="@+id/topBarLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </ImageView>
+                    <TextView
+                        android:id="@+id/tv_username_blog_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="9dp"
+                        android:layout_marginTop="9dp"
+                        android:lineHeight="31sp"
+                        android:lineSpacingExtra="19sp"
+                        android:text="Divyansh Gupta"
+                        android:textColor="#fff"
+                        android:textSize="25dp" />
+
+
+
+                    <TextView
+                        android:id="@+id/tv_postTime_blog_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="14dp"
+                        android:lineHeight="31sp"
+                        android:lineSpacingExtra="22sp"
+                        android:text="8865042608"
+                        android:textColor="#fff"
+                        android:textSize="20dp"
+                        android:layout_centerVertical="true"/>
+                    <TextView
+                        android:id="@+id/tv_post_blog_item2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_username_blog_item"
+                        android:layout_marginLeft="9dp"
+                        android:lineHeight="31sp"
+                        android:lineSpacingExtra="22sp"
+                        android:text="Friend"
+                        android:alpha=".8"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="10dp"/>
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/img_noticeadapter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_content_blog_item"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone">
+
+                </ImageView>
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="15dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/list_color7">
+
+                <RelativeLayout
+                    android:id="@+id/topBarLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </ImageView>
+                    <TextView
+                        android:id="@+id/tv_username_blog_item1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="9dp"
+                        android:layout_marginTop="9dp"
+                        android:lineHeight="31sp"
+                        android:lineSpacingExtra="19sp"
+                        android:text="Payal Khattri"
+                        android:textColor="#fff"
+                        android:textSize="25dp" />
+
+
+
+                    <TextView
+                        android:id="@+id/tv_postTime_blog_item1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="14dp"
+                        android:lineHeight="31sp"
+                        android:lineSpacingExtra="22sp"
+                        android:text="8529368504"
+                        android:textColor="#fff"
+                        android:textSize="20dp"
+                        android:layout_centerVertical="true"/>
+                    <TextView
+                        android:id="@+id/tv_post_blog_item21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_username_blog_item1"
+                        android:layout_marginLeft="9dp"
+                        android:lineHeight="31sp"
+                        android:lineSpacingExtra="22sp"
+                        android:text="Friend"
+                        android:alpha=".8"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="10dp"/>
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:id="@+id/img_noticeadapter1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_content_blog_item"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone">
+
+                </ImageView>
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="15dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/list_color4">
+
+                <RelativeLayout
+                    android:id="@+id/topBarLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </ImageView>
+                    <TextView
+                        android:id="@+id/tv_username_blog_item3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="9dp"
+                        android:layout_marginTop="9dp"
+                        android:lineHeight="31sp"
+                        android:lineSpacingExtra="19sp"
+                        android:text="Manish Kumar"
+                        android:textColor="#fff"
+                        android:textSize="25dp" />
+
+                    <TextView
+                        android:id="@+id/tv_postTime_blog_item3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="14dp"
+                        android:lineHeight="31sp"
+                        android:lineSpacingExtra="22sp"
+                        android:text="8340247596"
+                        android:textColor="#fff"
+                        android:textSize="20dp"
+                        android:layout_centerVertical="true"/>
+                    <TextView
+                        android:id="@+id/tv_post_blog_item23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_username_blog_item3"
+                        android:layout_marginLeft="9dp"
+                        android:lineHeight="31sp"
+                        android:lineSpacingExtra="22sp"
+                        android:text="Friend"
+                        android:alpha=".8"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="10dp"/>
+                </RelativeLayout>
+
+
+
+                <ImageView
+                    android:id="@+id/img_noticeadapter3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_content_blog_item"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone">
+
+                </ImageView>
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</RelativeLayout>

@@ -40,4 +40,10 @@ public class StringVariable {
 
     //forms
     public static final String PROCESSION_REQUEST="procession_requests";
+
+    //Emergency
+    public static final String EMERGENCY="EmergencyContact";
+    public static final String EMERGENCYPHONE="mobile";
+    public static final String EMERGENCYNAME="Name";
+    public static final String EMERGENCYREL="Relation";
 }

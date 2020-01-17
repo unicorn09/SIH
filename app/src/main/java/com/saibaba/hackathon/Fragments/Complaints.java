@@ -177,6 +177,4 @@ public class Complaints extends Fragment {
                 break;
         }
     }
-
-
 }

@@ -39,7 +39,7 @@ TextView male,female,others;
 String nextactivity,sdistrict,sstate,sstation,sstate2,sdistrict2,sstation2,sname,sage,sphone,semail,sdob,sfalt1,sflat2,slandmark1,slandmark2,scity1,scity2,imageurl,gender,sadd,sadd2;
 CheckBox dcheck;
 Button next;
-List<String> statelist,districtlist,stationlist;
+List<String> statelist,districtlist,districtlist2,stationlist,stationlist2;
 DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("places").child("State");
     String[] station,district,state;
     @Override
@@ -47,30 +47,11 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_details);
         initView();
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
-                {
-                    statelist.add(dataSnapshot1.getKey().toString());
-                    Log.e("Pers",dataSnapshot1.getKey());
-                    ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, statelist);
 
-                    dstate_spinner.setAdapter(stateAdapter);
-                    dstate_spinner2.setAdapter(stateAdapter);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
          final ArrayAdapter<String> stationAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, stationlist);
          final ArrayAdapter<String> districtsAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist);
-        final ArrayAdapter<String> stationAdapter2 = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, stationlist);
-        final ArrayAdapter<String> districtsAdapter2 = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist);
+        final ArrayAdapter<String> stationAdapter2 = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, stationlist2);
+        final ArrayAdapter<String> districtsAdapter2 = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist2);
 
 
 
@@ -110,6 +91,7 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
                 databaseReference.child(sstate).child(sdistrict).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        stationlist.clear();
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                         {
                             stationlist.add(dataSnapshot1.getValue().toString());
@@ -137,10 +119,10 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
                 databaseReference.child(sstate2).child(sdistrict2).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        statelist.clear();
+                        stationlist2.clear();
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                         {
-                            stationlist.add(dataSnapshot1.getValue().toString());
+                            stationlist2.add(dataSnapshot1.getValue().toString());
                         }
                         dstation_spinner2.setAdapter(stationAdapter2);
                     }
@@ -167,7 +149,9 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                         {
                             districtlist.add(dataSnapshot1.getKey().toString());
+                            Log.e("district",dataSnapshot1.getKey().toString());
                         }
+                        ddistrict_spinner.setAdapter(districtsAdapter);
                     }
 
                     @Override
@@ -176,7 +160,7 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
                     }
                 });
 
-                ddistrict_spinner.setAdapter(districtsAdapter);
+
 
             }
 
@@ -192,9 +176,9 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
                 databaseReference.child(sstate2).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        districtlist.clear();
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                            districtlist.add(dataSnapshot1.getKey().toString());
+                            districtlist2.add(dataSnapshot1.getKey().toString());
+                            ddistrict_spinner2.setAdapter(districtsAdapter2);
                         }
                     }
 
@@ -204,7 +188,7 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
                     }
                 });
                 //ArrayAdapter<String> districtsAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist);
-                ddistrict_spinner2.setAdapter(districtsAdapter2);
+
             }
 
             @Override
@@ -216,6 +200,7 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sstation=parent.getItemAtPosition(position).toString();
+
             }
 
             @Override
@@ -331,6 +316,8 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
        dphoto=findViewById(R.id.pd_dphoto);
        statelist=new ArrayList<String>();
        districtlist=new ArrayList<String>();
+       districtlist2=new ArrayList<String>();
+       stationlist2=new ArrayList<String>();
        stationlist=new ArrayList<String>();
 
     }
@@ -370,11 +357,29 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
             seterror(dcity2);
 
     }
-
     @Override
     protected void onStart() {
         super.onStart();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                {
+                    statelist.add(dataSnapshot1.getKey().toString());
+                    Log.e("Pers",dataSnapshot1.getKey());
+                    ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, statelist);
+                    dstate_spinner.setAdapter(stateAdapter);
+                    dstate_spinner2.setAdapter(stateAdapter);
+                }
 
 
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
+
 }
