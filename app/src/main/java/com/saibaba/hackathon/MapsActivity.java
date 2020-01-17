@@ -8,10 +8,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -51,6 +55,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void getDataOfAlerts(){
-    }
+        FirebaseDatabase.getInstance().getReference().child("crime-alert").child("Bihar").child("Patna")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                mMap.addCircle(new CircleOptions()
+                                .center(new LatLng((double)dataSnapshot1.child("latitude").getValue(),(double)dataSnapshot1.child("longitude").getValue()))
+                                .radius(2000)
+                                .fillColor(R.color.colorAccent));
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
 }
