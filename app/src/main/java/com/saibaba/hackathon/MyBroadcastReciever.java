@@ -87,7 +87,6 @@ public class MyBroadcastReciever extends BroadcastReceiver {
                                             updateaddress(location);
                                         }
                                     });
-                                    context.startActivity(new Intent(context,NavigationDrawer.class));
                                     seconds_screenon = 0;
                                     seconds_screenoff = 0;
                                     sent_msg = false;
@@ -130,7 +129,6 @@ public class MyBroadcastReciever extends BroadcastReceiver {
                                             updateaddress(location);
                                         }
                                     });
-                                    context.startActivity(new Intent(context,NavigationDrawer.class));
                                     seconds_screenon = 0;
                                     seconds_screenoff = 0;
                                     sent_msg = false;

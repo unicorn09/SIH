@@ -70,8 +70,7 @@ public class chat extends AppCompatActivity {
                 responseMessageList.add(responseMessage);
                 RetrieveFeedTask task = new RetrieveFeedTask();
                 task.execute();
-                if (!isLastVisible())
-                    recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+                recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
             }
         });}
                 //harsh-------> This will write your question to json
@@ -148,7 +147,6 @@ public class chat extends AppCompatActivity {
                 messageAdapter.notifyDataSetChanged();
             }
            */
-           if (!isLastVisible())
                 recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
         }
         catch (Exception ex) {

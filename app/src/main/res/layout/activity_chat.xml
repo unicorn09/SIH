@@ -11,8 +11,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/conversation"
         android:layout_width="match_parent"
-        android:layout_height="508dp"
+        android:layout_height="match_parent"
         android:textSize="16sp"
+        android:layout_marginBottom="80dp"
         android:background="#0f0f0f"/>
 
     <RelativeLayout

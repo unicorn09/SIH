@@ -1,6 +1,7 @@
 package com.saibaba.hackathon.Forms;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,9 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -39,8 +41,6 @@ import com.saibaba.hackathon.Adapters.ModelPersonalDetails;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.Signature;
 import com.saibaba.hackathon.StringVariable;
-//import com.squareup.picasso.Picasso;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,6 +63,14 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
     private static final String TAG = "RegisterFIR";
     private static final int REQUEST_SIGN=1;
     HashMap<String,Object> dataHashMap;
+    private Dialog mdialog;
+    private Button yesbtn;
+    private ImageView nobtn;
+    String lan[]={"bn-IN","en-IN","gu-IN","ta-IN","te-IN","ur-IN","hi-IN","ml-IN","mr-IN","kn-IN"};
+    String lan1;
+    private Spinner spinner;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,19 +79,67 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
         initView();
         getSupportActionBar().setTitle("Register FIR");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mdialog=new Dialog(this);
+
+
         Fresco.initialize(this);
         mic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,"hi-IN");
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN");
+                mdialog.setContentView(R.layout.popup_language);
+                try {
+                    mdialog.getWindow().getDecorView().setBackgroundResource(android.R.color.transparent);
+                    mdialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
+                } catch (Exception e) {
 
-                if (intent.resolveActivity(RegisterFIR.this.getPackageManager()) != null) {
-                    startActivityForResult(intent, 10);
-                } else {
-                    Toast.makeText(RegisterFIR.this, "Your Device Don't Support Speech Input", Toast.LENGTH_SHORT).show();
                 }
+                mdialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                mdialog.show();
+                mdialog.setCanceledOnTouchOutside(false);
+                mdialog.setCancelable(false);
+                yesbtn = mdialog.findViewById(R.id.dialog_submit);
+                nobtn = mdialog.findViewById(R.id.close);
+                spinner=mdialog.findViewById(R.id.languagespinner);
+                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(RegisterFIR.this,
+                        android.R.layout.simple_spinner_item,lan);
+                spinner.setAdapter(adapter);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        lan1=parent.getItemAtPosition(position).toString();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                yesbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mdialog.dismiss();
+                        Toast.makeText(RegisterFIR.this,"Language Selected",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,lan1);
+                        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, lan1);
+
+                        if (intent.resolveActivity(RegisterFIR.this.getPackageManager()) != null) {
+                            startActivityForResult(intent, 10);
+                        } else {
+                            Toast.makeText(RegisterFIR.this, "Your Device Don't Support Speech Input", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+                nobtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mdialog.dismiss();
+
+                    }
+                });
+
             }
         });
     }
@@ -336,7 +392,6 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
         });
         Log.d(TAG, "uploadDataToFirebase: user uid is "+FirebaseAuth.getInstance().getCurrentUser().getUid());
         baseReference.child(StringVariable.USERS).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("fir").child(""+timestamp).setValue("0");
-
     }
 
     private void showToast(String msg){

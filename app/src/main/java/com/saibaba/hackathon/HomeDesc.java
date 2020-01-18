@@ -39,7 +39,6 @@ Fragment fragment;
             getSupportActionBar().setTitle("Missing Person");
             fragment=new missingpersonfrag();
         }
-
         else if(name.equalsIgnoreCase("Lost & Found"))
             fragment=new LostAndFound();
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_homedesc,fragment).commit();

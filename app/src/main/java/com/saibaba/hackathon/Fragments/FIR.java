@@ -45,7 +45,7 @@ public class FIR extends Fragment {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         arrayList=new ArrayList<>();
-        arrayList.add(new Model("File FIR","File eFIR / View FIR",getResources().getDrawable(R.drawable.ic_verified)));
+        arrayList.add(new Model("File FIR","File eFIR / View FIR"));
         arrayList.add(new Model("View FIR","File eFIR / View FIR"));
         adapter=new Model_Adapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
