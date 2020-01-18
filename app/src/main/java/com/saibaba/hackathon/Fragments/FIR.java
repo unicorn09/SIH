@@ -45,7 +45,7 @@ public class FIR extends Fragment {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         arrayList=new ArrayList<>();
-        arrayList.add(new Model("File FIR","File eFIR / View FIR"));
+        arrayList.add(new Model("File FIR","File eFIR / View FIR",getResources().getDrawable(R.drawable.ic_verified)));
         arrayList.add(new Model("View FIR","File eFIR / View FIR"));
         adapter=new Model_Adapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
@@ -55,7 +55,7 @@ public class FIR extends Fragment {
                     @Override public void onItemClick(View view, int position) {
                        if(position==0)
                        {
-                           Intent i=new Intent(getActivity(), PersonalDetails.class);
+                           Intent i=new Intent(getActivity(), RegisterFIR.class);
                            i.putExtra("NOC","FIR REGISTRY");
                            startActivity(i);
                        }
