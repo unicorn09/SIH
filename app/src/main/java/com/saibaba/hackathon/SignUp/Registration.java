@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,10 @@ public class Registration extends AppCompatActivity {
     private ProgressDialog progressDialog;
     FirebaseUser firebaseUser;
     String otp,passotp;
+    private String[] stations;
+    private Spinner mstation;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +71,7 @@ public class Registration extends AppCompatActivity {
                 "Jamui", "Jehanabad", "Kaimur", "Katihar", "Khagaria", "Kishanganj", "Lakhisarai", "Madhepura", "Madhubani", "Munger", "Muzaffarpur",
                 "Nalanda", "Nawada", "Pashchim Champaran", "Patna", "Purbi Champaran", "Purnia", "Rohtas", "Saharsa", "Samastipur", "Saran", "Sheikhpura",
                 "Sitamarhi", "Siwan", "Supaul", "Vaishali"};
-
+        stations=new String[]{"BR26001","BR26002","BR26003","BR26004","BR26005","BR26006"};
         verifyNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,10 +88,11 @@ public class Registration extends AppCompatActivity {
 
         ArrayAdapter<String> stateAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, states);
         ArrayAdapter<String> districtsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, districts);
+        ArrayAdapter<String> stationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, stations);
 
         mstate.setAdapter(stateAdapter);
         mdistrict.setAdapter(districtsAdapter);
-
+        mstation.setAdapter(stationAdapter);
         male.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,6 +148,7 @@ public class Registration extends AppCompatActivity {
         mobile=findViewById(R.id.info_phone);
         mdistrict=findViewById(R.id.district_spinner1);
         mstate=findViewById(R.id.state_spinner);
+        mstation=findViewById(R.id.station_spinner);
         gender = "male";
         male.setBackground(getResources().getDrawable(R.drawable.bg_edittextselected));
         female.setBackground(getResources().getDrawable(R.drawable.bg_edittext));
@@ -236,7 +243,7 @@ public class Registration extends AppCompatActivity {
             SharedPreferences.Editor editor = getSharedPreferences(StringVariable.SHAREDPREFERNCE, MODE_PRIVATE).edit();
             editor.putString(StringVariable.USER_NAME, name);
             editor.putString(StringVariable.USER_EMAIL, firebaseUser.getEmail());
-            //editor.putString(StringVariable.USER_IMAGE, firebaseUser.getPhotoUrl().toString());
+            editor.putString("station", mstation.getSelectedItem().toString());
             editor.putString(StringVariable.USER_DISTRICT,mdistrict.getSelectedItem().toString());
             editor.putString(StringVariable.USER_STATE,mstate.getSelectedItem().toString());
             editor.putString(StringVariable.USER_MOBILE,mobile.getText().toString());

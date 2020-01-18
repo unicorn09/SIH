@@ -241,6 +241,34 @@
                     android:paddingBottom="5dp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/district_spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/district_layout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="Station"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/district_spinner1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

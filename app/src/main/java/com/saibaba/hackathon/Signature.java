@@ -189,7 +189,7 @@ public class Signature extends AppCompatActivity {
             }
 */          Uri uri=getImageUri(Signature.this,bitmap);
             if(uri!=null) {
-                final StorageReference filereference = FirebaseStorage.getInstance().getReference().child("Signatures").child(System.currentTimeMillis() + "");
+                final StorageReference filereference = FirebaseStorage.getInstance().getReference().child("Signatures").child(System.currentTimeMillis() + ".jpeg");
                 uploadTask = filereference.putFile(uri);
 //                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
 //                    @Override
@@ -228,7 +228,9 @@ public class Signature extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         try{
                             Intent intent=new Intent();
-                            intent.putExtra("result",taskSnapshot.getStorage().getPath());
+                            String urlSign=taskSnapshot.getStorage().getPath();
+                            urlSign=urlSign.substring(1);
+                            intent.putExtra("result",urlSign);
                             setResult(RESULT_OK,intent);
                             finish();
                         }catch (Exception e){}

@@ -1,6 +1,7 @@
 package com.saibaba.hackathon.Forms;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -25,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.saibaba.hackathon.Adapters.ModelPersonalDetails;
 import com.saibaba.hackathon.R;
+import com.saibaba.hackathon.StringVariable;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.io.Serializable;
@@ -53,7 +55,7 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
         final ArrayAdapter<String> stationAdapter2 = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, stationlist2);
         final ArrayAdapter<String> districtsAdapter2 = new ArrayAdapter<String>(PersonalDetails.this, android.R.layout.simple_list_item_1, districtlist2);
 
-
+       final SharedPreferences sp=getSharedPreferences(StringVariable.SHAREDPREFERNCE,MODE_PRIVATE);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
          station=new String[]{"Agamkuan","Bihta","Barh","Digha","Dhanarua","Hathidah","Chowk","Maner","Punpun","S K Puri","Sahpur"};
@@ -67,7 +69,17 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
             @Override
             public void onClick(View v) {
                 gettext();
-                ModelPersonalDetails obj=new ModelPersonalDetails(sname,sage,gender,sadd,sdob,semail,sphone,sstate,sdistrict,sstation,sstate2,sdistrict2,sstation2,sadd2);
+                sname=sp.getString(StringVariable.USER_NAME,"");
+                sage=sp.getString(StringVariable.USER_AGE,"");
+                gender=sp.getString(StringVariable.USER_GENDER,"");
+                sadd=sp.getString(StringVariable.USER_ADDRESS,"");
+                sdob=sp.getString(StringVariable.USER_DOB,"");
+                semail=sp.getString(StringVariable.USER_EMAIL,"");
+                sphone=sp.getString(StringVariable.USER_MOBILE,"");
+                sstate=sstate2=sp.getString(StringVariable.USER_STATE,"");
+                sdistrict=sdistrict2=sp.getString(StringVariable.USER_DISTRICT,"");
+                sstation=sstation2=sp.getString("station","");
+                ModelPersonalDetails obj=new ModelPersonalDetails(sname,sage,gender,"",sdob,semail,sphone,sstate,sdistrict,sstation,sstate2,sdistrict2,sstation2,"");
                 if(nextactivity.equalsIgnoreCase("NOC PROCESSION"))
                     startActivity(new Intent(PersonalDetails.this,ProcessionRequest.class));
                 else if(nextactivity.equalsIgnoreCase("NOC PROTEST"))
@@ -94,7 +106,7 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
                         stationlist.clear();
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                         {
-                            stationlist.add(dataSnapshot1.getValue().toString());
+                            stationlist.add(dataSnapshot1.getKey()+" ("+dataSnapshot1.getValue()+")");
                         }
                         dstation_spinner.setAdapter(stationAdapter);
                     }
@@ -122,7 +134,7 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
                         stationlist2.clear();
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                         {
-                            stationlist2.add(dataSnapshot1.getValue().toString());
+                            stationlist2.add(dataSnapshot1.getKey()+" ("+dataSnapshot1.getValue()+")");
                         }
                         dstation_spinner2.setAdapter(stationAdapter2);
                     }
@@ -200,7 +212,8 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sstation=parent.getItemAtPosition(position).toString();
-
+                sstation=sstation.substring(0,7);
+                Log.d("divyansh>>>", "onItemSelected: "+sstation);
             }
 
             @Override
@@ -212,6 +225,8 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sstation2=parent.getItemAtPosition(position).toString();
+               sstation2=sstation2.substring(0,7);
+                Log.d("divyansh>>>", "onItemSelected: "+sstation2);
             }
 
             @Override
