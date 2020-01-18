@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.saibaba.hackathon.HomeDesc;
 import com.saibaba.hackathon.R;
 
@@ -40,6 +42,7 @@ public class Model_Adapter extends RecyclerView.Adapter<Model_Adapter.MyViewhold
     public void onBindViewHolder(@NonNull final MyViewholder holder, final int i) {
         holder.name.setText(post.get(i).getName());
         holder.desc.setText(post.get(i).getDesc());
+        holder.image.setImageDrawable(post.get(i).getImg());
         int colorRes = 0;
         switch(i % 9) {
             case 0: colorRes = R.color.list_color8;
@@ -90,12 +93,13 @@ public class Model_Adapter extends RecyclerView.Adapter<Model_Adapter.MyViewhold
     class MyViewholder extends RecyclerView.ViewHolder {
         TextView name, desc;
         RelativeLayout relativeLayout;
+        ImageView image;
         public MyViewholder(View itemview) {
             super(itemview);
             name = (TextView) itemview.findViewById(R.id.namerecycle1);
             desc= (TextView) itemview.findViewById(R.id.descrecycle1);
             relativeLayout=itemview.findViewById(R.id.rellay_home);
-
+            image=itemview.findViewById(R.id.iconrecycle1);
         }
     }
 }
