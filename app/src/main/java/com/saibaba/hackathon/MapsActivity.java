@@ -1,5 +1,6 @@
 package com.saibaba.hackathon;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,11 +51,19 @@ int i=0;
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
                             for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                                mMap.addCircle(new CircleOptions()
-                                .center(new LatLng((double)dataSnapshot1.child("latitude").getValue(),(double)dataSnapshot1.child("longitude").getValue()))
-                                .radius(500).strokeWidth(0)
-                                .fillColor(color[++i]));
-                                Log.e(TAG,color[i]+"");
+                                CircleOptions circleOptions=new CircleOptions();
+                                circleOptions.radius(1000);
+                                circleOptions.center(new LatLng((double)dataSnapshot1.child("latitude").getValue(),(double)dataSnapshot1.child("longitude").getValue()));
+                                circleOptions.strokeWidth(0);
+                                long crimes=(long)dataSnapshot1.child("alerts").getValue();
+                                if(crimes<200){
+                                    circleOptions.fillColor(0x50ffc107);
+                                }else if(crimes<400){
+                                    circleOptions.fillColor(0x50FF5722);
+                                }else{
+                                    circleOptions.fillColor(0x50ff0000);
+                                }
+                                mMap.addCircle(circleOptions);
                             }
                         }
                     }
