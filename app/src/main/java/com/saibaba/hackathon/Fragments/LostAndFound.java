@@ -46,9 +46,9 @@ public class LostAndFound extends Fragment {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         arrayList=new ArrayList<>();
-        arrayList.add(new Model("VEHICLE LOST","File eFIR / View FIR"));
-        arrayList.add(new Model("ARTICLE LOST","Event Request / Protest Request etc."));
-        arrayList.add(new Model("ARTICLE FOUND","Vehicle /  Article Lost / Recovered"));
+        arrayList.add(new Model("VEHICLE LOST","Report lost vehicle",getResources().getDrawable(R.drawable.ic_directions_car_white_24dp)));
+        arrayList.add(new Model("ARTICLE LOST","Event Request / Protest Request etc.",getResources().getDrawable(R.drawable.ic_card_travel_white_24dp)));
+        arrayList.add(new Model("ARTICLE FOUND","Vehicle /  Article Lost / Recovered",getResources().getDrawable(R.drawable.ic_assignment_turned_in_white_24dp)));
         adapter=new Model_Adapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(

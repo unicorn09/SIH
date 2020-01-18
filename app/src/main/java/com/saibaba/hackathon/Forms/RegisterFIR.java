@@ -392,6 +392,7 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
         });
         Log.d(TAG, "uploadDataToFirebase: user uid is "+FirebaseAuth.getInstance().getCurrentUser().getUid());
         baseReference.child(StringVariable.USERS).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("fir").child(""+timestamp).setValue("0");
+        baseReference.child(StringVariable.USERS).child(modelPersonalDetails.getPolice()).child("fir").child(String.valueOf(timestamp)).setValue("0");
     }
 
     private void showToast(String msg){

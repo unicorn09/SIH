@@ -289,6 +289,7 @@ public class ProcessionRequest extends AppCompatActivity {
             }
         });
         baseReference.child(StringVariable.USERS).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("NOC").child(StringVariable.PROCESSION_REQUEST).child(String.valueOf(timestamp)).setValue("0");
+        baseReference.child("police-station").child(modelPersonalDetails.getPolice()).child("noc").child(String.valueOf(timestamp)).setValue("0");
 
     }
 

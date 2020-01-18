@@ -49,9 +49,9 @@ public class Verification extends Fragment {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         arrayList=new ArrayList<>();
-        arrayList.add(new Model("CHARACTER CERTIFICATE","File eFIR / View FIR"));
-        arrayList.add(new Model("EMPLOYEE VERIFICATION","Threat / Defamation / Anonymous"));
-        arrayList.add(new Model("TENANT VERIFICATION","Event Request / Protest Request etc."));
+        arrayList.add(new Model("CHARACTER CERTIFICATE","Verify person",getResources().getDrawable(R.drawable.ic_person_white_24dp)));
+        arrayList.add(new Model("EMPLOYEE VERIFICATION","Verify employee",getResources().getDrawable(R.drawable.ic_person_add_white_24dp)));
+        arrayList.add(new Model("TENANT VERIFICATION","Verify tenant",getResources().getDrawable(R.drawable.ic_person_pin_circle_white_24dp)));
         adapter=new Model_Adapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(

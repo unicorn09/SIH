@@ -43,12 +43,12 @@ public class HomeFragment extends Fragment {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         arrayList=new ArrayList<>();
-        arrayList.add(new Model("FIR","File eFIR / View FIR"));
-        arrayList.add(new Model("COMPLAIN","Threat / Defamation / Anonymous"));
-        arrayList.add(new Model("NOC","Event Request / Protest Request etc."));
-        arrayList.add(new Model("LOST & FOUND","Vehicle /  Article Lost / Recovered"));
-        arrayList.add(new Model("MISSING PERSON","Report Missing / Found"));
-        arrayList.add(new Model("VERIFICATION","Employee / Tenant / Character "));
+        arrayList.add(new Model("FIR","File eFIR / View FIR",getResources().getDrawable(R.drawable.ic_assignment_white_24dp)));
+        arrayList.add(new Model("COMPLAIN","Threat / Defamation / Anonymous",getResources().getDrawable(R.drawable.ic_format_list_bulleted_white_24dp)));
+        arrayList.add(new Model("NOC","Event Request / Protest Request etc.",getResources().getDrawable(R.drawable.ic_chrome_reader_mode_white_24dp)));
+        arrayList.add(new Model("LOST & FOUND","Vehicle /  Article Lost / Recovered",getResources().getDrawable(R.drawable.ic_room_white_24dp)));
+        arrayList.add(new Model("MISSING PERSON","Report Missing / Found",getResources().getDrawable(R.drawable.ic_person_add_white_24dp)));
+        arrayList.add(new Model("VERIFICATION","Employee / Tenant / Character ",getResources().getDrawable(R.drawable.ic_assignment_turned_in_white_24dp)));
         adapter=new Model_Adapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
 

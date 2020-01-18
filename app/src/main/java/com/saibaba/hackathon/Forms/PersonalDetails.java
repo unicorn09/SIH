@@ -292,7 +292,7 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
     private void initView()
     {
 
-        dname=findViewById(R.id.dname);
+        dname=findViewById(R.id.pd_name);
         dage=findViewById(R.id.pd_age);
         ddob=findViewById(R.id.pd_dob);
         male=findViewById(R.id.pd_male);

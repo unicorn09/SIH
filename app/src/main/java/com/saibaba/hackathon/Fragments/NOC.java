@@ -48,10 +48,10 @@ public class NOC extends Fragment {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         arrayList=new ArrayList<>();
-        arrayList.add(new Model("PROCESSION REQUEST","File eFIR / View FIR"));
-        arrayList.add(new Model("PROTEST/STRIKE REQUEST","Threat / Defamation / Anonymous"));
-        arrayList.add(new Model("EVENT PERFORMANCE","Event Request / Protest Request etc."));
-        arrayList.add(new Model("FILM SHOOTING","Vehicle /  Article Lost / Recovered"));
+        arrayList.add(new Model("PROCESSION REQUEST","File Procession Request",getResources().getDrawable(R.drawable.ic_event_white_24dp)));
+        arrayList.add(new Model("PROTEST/STRIKE REQUEST","Threat / Defamation / Anonymous",getResources().getDrawable(R.drawable.ic_event_seat_white_24dp)));
+        arrayList.add(new Model("EVENT PERFORMANCE","Event Request / Protest Request etc.",getResources().getDrawable(R.drawable.ic_group_white_24dp)));
+        arrayList.add(new Model("FILM SHOOTING","Vehicle /  Article Lost / Recovered",getResources().getDrawable(R.drawable.ic_linked_camera_white_24dp)));
         adapter=new Model_Adapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(
