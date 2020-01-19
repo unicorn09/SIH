@@ -11,6 +11,13 @@ public class ModelNotice {
         Imageurl = imageurl;
     }
 
+    public ModelNotice(String name, String time, String content) {
+        Name = name;
+        Time = time;
+        Content = content;
+    }
+
+
     public String getName() {
         return Name;
     }

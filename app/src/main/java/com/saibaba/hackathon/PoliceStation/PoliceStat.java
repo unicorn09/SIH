@@ -21,15 +21,6 @@ public class PoliceStat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_police_stat);
-        tabLayout = findViewById(R.id.tabLayout_blogs);
-        viewPager = findViewById(R.id.viewPager_blogs);
-        getSupportActionBar().setTitle("Police Station Details");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        viewPagerAdapter =new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new Officers(),"Police Station");
-        viewPagerAdapter.addFragment(new Notices(),"Notices");
-        viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
 
     }
     @Override

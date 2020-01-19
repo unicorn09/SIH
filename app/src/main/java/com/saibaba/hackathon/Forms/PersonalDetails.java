@@ -1,12 +1,15 @@
 package com.saibaba.hackathon.Forms;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.speech.RecognizerIntent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.util.Log;
-import android.view.Display;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +20,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,13 +30,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.saibaba.hackathon.Adapters.ModelPersonalDetails;
+import com.saibaba.hackathon.HomeDesc;
+import com.saibaba.hackathon.NavigationDrawer;
 import com.saibaba.hackathon.R;
+import com.saibaba.hackathon.SignUp.Login;
 import com.saibaba.hackathon.StringVariable;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PersonalDetails extends AppCompatActivity {
 EditText dname,dage,dphone,demail,ddob,dflat1,dlandmark1,dcity1,dflat2,dlandmark2,dcity2;
@@ -44,6 +54,14 @@ Button next;
 List<String> statelist,districtlist,districtlist2,stationlist,stationlist2;
 DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("places").child("State");
     String[] station,district,state;
+
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,31 +87,26 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
             @Override
             public void onClick(View v) {
                 gettext();
-                sname=sp.getString(StringVariable.USER_NAME,"");
-                sage=sp.getString(StringVariable.USER_AGE,"");
-                gender=sp.getString(StringVariable.USER_GENDER,"");
-                sadd=sp.getString(StringVariable.USER_ADDRESS,"");
-                sdob=sp.getString(StringVariable.USER_DOB,"");
-                semail=sp.getString(StringVariable.USER_EMAIL,"");
-                sphone=sp.getString(StringVariable.USER_MOBILE,"");
-                sstate=sstate2=sp.getString(StringVariable.USER_STATE,"");
-                sdistrict=sdistrict2=sp.getString(StringVariable.USER_DISTRICT,"");
-                sstation=sstation2=sp.getString("station","");
-                ModelPersonalDetails obj=new ModelPersonalDetails(sname,sage,gender,"",sdob,semail,sphone,sstate,sdistrict,sstation,sstate2,sdistrict2,sstation2,"");
-                if(nextactivity.equalsIgnoreCase("NOC PROCESSION"))
-                    startActivity(new Intent(PersonalDetails.this,ProcessionRequest.class));
-                else if(nextactivity.equalsIgnoreCase("NOC PROTEST"))
-                    startActivity(new Intent(PersonalDetails.this,ProtestRequest.class));
-                else if(nextactivity.equalsIgnoreCase("NOC EVENT"))
-                    startActivity(new Intent(PersonalDetails.this,EventPerformance.class));
-                else if(nextactivity.equalsIgnoreCase("fir registry"))
-                {   Intent i=new Intent(PersonalDetails.this,RegisterFIR.class);
-                    Gson gson = new Gson();
-                    String DataObjectAsAString = gson.toJson(obj);
-                    i.putExtra("object",DataObjectAsAString);
-                    startActivity(i);}
-                else
-                    startActivity(new Intent(PersonalDetails.this,FilmShooting.class));
+                if(validate(semail)) {
+                    ModelPersonalDetails obj = new ModelPersonalDetails(sname, sage, gender, "", sdob, semail, sphone, sstate, sdistrict, sstation, sstate2, sdistrict2, sstation2, "");
+                    if (nextactivity.equalsIgnoreCase("NOC PROCESSION"))
+                        startActivity(new Intent(PersonalDetails.this, ProcessionRequest.class));
+                    else if (nextactivity.equalsIgnoreCase("NOC PROTEST"))
+                        startActivity(new Intent(PersonalDetails.this, ProtestRequest.class));
+                    else if (nextactivity.equalsIgnoreCase("NOC EVENT"))
+                        startActivity(new Intent(PersonalDetails.this, EventPerformance.class));
+                    else if (nextactivity.equalsIgnoreCase("fir registry")) {
+                        Intent i = new Intent(PersonalDetails.this, RegisterFIR.class);
+                        Gson gson = new Gson();
+                        String DataObjectAsAString = gson.toJson(obj);
+                        i.putExtra("object", DataObjectAsAString);
+                        startActivity(i);
+                    } else
+                        startActivity(new Intent(PersonalDetails.this, FilmShooting.class));
+                }else{
+                    demail.setError("invalid email");
+                    demail.requestFocus();
+                }
             }
         });
         ddistrict_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -343,7 +356,18 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
             case android.R.id.home:
                 super.onBackPressed();
                 return true;
+            case R.id.action_mic1:
+                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,"en-IN");
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-IN");
+
+                    if (intent.resolveActivity(PersonalDetails.this.getPackageManager()) != null) {
+                        startActivityForResult(intent, 10);
+                    } else {
+                        Toast.makeText(PersonalDetails.this, "Your Device Don't Support Speech Input", Toast.LENGTH_SHORT).show();
+                    }
         }
+
         return super.onOptionsItemSelected(item);
     }
     public void seterror(TextView t) {
@@ -374,6 +398,13 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
 
     }
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu1, menu);
+        return true;
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -397,5 +428,47 @@ DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference
             }
         });
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==10&&resultCode == RESULT_OK && data != null) {
+            ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            if((result.get(0).contains("name")))
+            {
+                int index=result.get(0).indexOf("name");
+                index+=4;
+                dname.setText(result.get(0).substring(index+1));
+            }
+            else if((result.get(0).contains("age")))
+            {
+                int index=result.get(0).indexOf("age");
+                index+=3;
+                dage.setText(result.get(0).substring(index+1));
+            }
+            else if(result.get(0).contains("date of birth"))
+            {
+                int index=result.get(0).indexOf("date");
+                index+=13;
+                ddob.setText(result.get(0).substring(index+1));
+            }
+            else if((result.get(0).contains("email")))
+            {
+                int index=result.get(0).indexOf("email");
+                index+=5;
+                demail.setText(result.get(0).substring(index+1));
+            }
+            else if((result.get(0).contains("email")))
+            {
+                int index=result.get(0).indexOf("email");
+                index+=5;
+                demail.setText(result.get(0).substring(index+1));
+            }
+            else if((result.get(0).contains("email")))
+            {
+                int index=result.get(0).indexOf("email");
+                index+=5;
+                demail.setText(result.get(0).substring(index+1));
+            }
+        }
+    }
 }

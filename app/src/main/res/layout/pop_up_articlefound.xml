@@ -21,7 +21,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="#172c31">
+            android:background="#000000">
 
             <ImageView
                 android:id="@+id/blog_profile_pic"

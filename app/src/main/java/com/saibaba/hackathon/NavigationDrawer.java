@@ -13,7 +13,9 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -39,10 +41,15 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.internal.Constants;
 import com.google.firebase.auth.FirebaseAuth;
+import com.saibaba.hackathon.Forms.ArticleFound;
+import com.saibaba.hackathon.Forms.ComplaintForm;
+import com.saibaba.hackathon.Forms.PersonalDetails;
+import com.saibaba.hackathon.Forms.RegisterFIR;
 import com.saibaba.hackathon.SignUp.Login;
 import com.saibaba.hackathon.chatbot.chat;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -53,8 +60,6 @@ public class NavigationDrawer extends AppCompatActivity {
     private FloatingActionButton fab;
     private FloatingActionButton fab2;
     private Dialog mdialog;
-
-
 
     public NavigationDrawer() {
     }
@@ -144,6 +149,19 @@ public class NavigationDrawer extends AppCompatActivity {
             editor.apply();
             startActivity(new Intent(NavigationDrawer.this, Login.class));
         }
+        else if(item.getItemId()==R.id.action_mic)
+        {
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,"en-IN");
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-IN");
+
+            if (intent.resolveActivity(NavigationDrawer.this.getPackageManager()) != null) {
+                startActivityForResult(intent, 10);
+            } else {
+                Toast.makeText(NavigationDrawer.this, "Your Device Don't Support Speech Input", Toast.LENGTH_SHORT).show();
+            }
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -155,7 +173,35 @@ public class NavigationDrawer extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==10&&resultCode == RESULT_OK && data != null) {
+            ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            if((result.get(0).contains("FIR")))
+            {
+                Intent i=new Intent(this, PersonalDetails.class);
+                i.putExtra("NOC","FIR REGISTRY");
+                startActivity(i);
+            }
+            else if((result.get(0).contains("complaint"))||(result.get(0).contains("file complaint")))
+            {
+                Intent intent=new Intent(this, HomeDesc.class);
+                intent.putExtra("Name","Complain");
+                startActivity(intent);
+            }
+            else if(result.get(0).contains("article found"))
+            {
+                startActivity(new Intent(NavigationDrawer.this, ArticleFound.class));
 
+            }
+            else if((result.get(0).contains("NOC")))
+            {
+                Intent i=new Intent(NavigationDrawer.this,HomeDesc.class);
+
+            }
+        }
+    }
 
     @Override
     protected void onStart() {

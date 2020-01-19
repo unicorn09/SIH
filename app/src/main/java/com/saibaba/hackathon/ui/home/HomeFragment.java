@@ -51,7 +51,6 @@ public class HomeFragment extends Fragment {
         arrayList.add(new Model("VERIFICATION","Employee / Tenant / Character ",getResources().getDrawable(R.drawable.ic_assignment_turned_in_white_24dp)));
         adapter=new Model_Adapter(getContext(),arrayList);
         recyclerView.setAdapter(adapter);
-
         return v;
     }
 }

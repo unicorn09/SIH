@@ -2,14 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="Sign Out"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_mic"
+        android:id="@+id/action_mic1"
         android:orderInCategory="100"
         android:title="MIC"
         app:showAsAction="always"
         android:icon="@drawable/microphone"/>
+
 </menu>

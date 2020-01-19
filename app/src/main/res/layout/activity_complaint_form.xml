@@ -75,6 +75,7 @@
                 android:hint="Write Complaint"
                 android:layout_margin="15dp"
                 android:inputType="text"
+                android:gravity="top|left"
                 android:paddingLeft="15dp"
                 android:textColor="#798184"
                 android:textColorHint="#798184"/>

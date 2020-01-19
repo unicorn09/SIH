@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#00171d">
+            android:background="#000000">
 
             <EditText
                 android:id="@+id/csub"

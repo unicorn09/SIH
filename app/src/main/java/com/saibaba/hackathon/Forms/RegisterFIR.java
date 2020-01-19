@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -41,36 +42,47 @@ import com.saibaba.hackathon.Adapters.ModelPersonalDetails;
 import com.saibaba.hackathon.R;
 import com.saibaba.hackathon.Signature;
 import com.saibaba.hackathon.StringVariable;
+import com.saibaba.hackathon.chatbot.chat;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RegisterFIR extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-    Spinner nature_spinner,sub_spinner,file_spinner,filesub_spinner;
-    TextView present,not_present,yes,no;
+    Spinner nature_spinner, sub_spinner, file_spinner, filesub_spinner;
+    String timestamp;
+    TextView present, not_present, yes, no;
     ImageView uploadsign;
+    String time = String.valueOf(System.currentTimeMillis());
     EditText content;
     Button basic_info_text;
     DatabaseReference baseReference;
-    ArrayList<String> natureArrayList,subNatureArrayList;
+    ArrayList<String> natureArrayList, subNatureArrayList;
     DatabaseReference databaseReference;
     ProgressBar progressBar;
-    ArrayAdapter<String> natureArrayAdapter,subNatureArrayAdapter;
+    ArrayAdapter<String> natureArrayAdapter, subNatureArrayAdapter;
     int victimPresent;
     int occurenceKnown;
     ImageView mic;
-    String signURL,natureComplaint,subNatureComplaint,contentComplaint,cont="";
+    String signURL, natureComplaint, subNatureComplaint, contentComplaint, cont = "";
     private static final String TAG = "RegisterFIR";
-    private static final int REQUEST_SIGN=1;
-    HashMap<String,Object> dataHashMap;
+    private static final int REQUEST_SIGN = 1;
+    HashMap<String, Object> dataHashMap;
     private Dialog mdialog;
     private Button yesbtn;
     private ImageView nobtn;
-    String lan[]={"bn-IN","en-IN","gu-IN","ta-IN","te-IN","ur-IN","hi-IN","ml-IN","mr-IN","kn-IN"};
+    String encrypted_content;
+    String lan[] = {"bn-IN", "en-IN", "gu-IN", "ta-IN", "te-IN", "ur-IN", "hi-IN", "ml-IN", "mr-IN", "kn-IN"};
+    String la[]={"Bangla","English","Gujrati","Tamil","Tamil","Telgu","Urdu","Hindi","Malalyam","Maratha","Karnataka"};
     String lan1;
     private Spinner spinner;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +91,8 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
         initView();
         getSupportActionBar().setTitle("Register FIR");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mdialog=new Dialog(this);
-
+        mdialog = new Dialog(this);
+        timestamp=String.valueOf(System.currentTimeMillis());
 
         Fresco.initialize(this);
         mic.setOnClickListener(new View.OnClickListener() {
@@ -99,15 +111,15 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
                 mdialog.setCancelable(false);
                 yesbtn = mdialog.findViewById(R.id.dialog_submit);
                 nobtn = mdialog.findViewById(R.id.close);
-                spinner=mdialog.findViewById(R.id.languagespinner);
+                spinner = mdialog.findViewById(R.id.languagespinner);
                 final ArrayAdapter<String> adapter = new ArrayAdapter<String>(RegisterFIR.this,
-                        android.R.layout.simple_spinner_item,lan);
+                        android.R.layout.simple_spinner_item, la);
                 spinner.setAdapter(adapter);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        lan1=parent.getItemAtPosition(position).toString();
+                        lan1 = parent.getItemAtPosition(position).toString();
                     }
 
                     @Override
@@ -119,9 +131,9 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onClick(View v) {
                         mdialog.dismiss();
-                        Toast.makeText(RegisterFIR.this,"Language Selected",Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterFIR.this, "Language Selected", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,lan1);
+                        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, lan1);
                         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, lan1);
 
                         if (intent.resolveActivity(RegisterFIR.this.getPackageManager()) != null) {
@@ -143,38 +155,39 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
             }
         });
     }
-    private void initView(){
-        baseReference=FirebaseDatabase.getInstance().getReference();
-        natureArrayList=new ArrayList<>();
-        subNatureArrayList=new ArrayList<>();
-        natureArrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,natureArrayList);
-        subNatureArrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,subNatureArrayList);
+
+    private void initView() {
+        baseReference = FirebaseDatabase.getInstance().getReference();
+        natureArrayList = new ArrayList<>();
+        subNatureArrayList = new ArrayList<>();
+        natureArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, natureArrayList);
+        subNatureArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, subNatureArrayList);
         getNatureList();
         natureArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subNatureArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        nature_spinner=findViewById(R.id.nature_spinner);
-        sub_spinner=findViewById(R.id.sub_spinner);
-        content=findViewById(R.id.content);
-        uploadsign=findViewById(R.id.uploadsign);
-        present=findViewById(R.id.present);
-        not_present=findViewById(R.id.not_present);
-        yes=findViewById(R.id.yes);
-        no=findViewById(R.id.no);
-        basic_info_text=findViewById(R.id.basic_info_next);
-        progressBar=findViewById(R.id.info_progress);
+        nature_spinner = findViewById(R.id.nature_spinner);
+        sub_spinner = findViewById(R.id.sub_spinner);
+        content = findViewById(R.id.content);
+        uploadsign = findViewById(R.id.uploadsign);
+        present = findViewById(R.id.present);
+        not_present = findViewById(R.id.not_present);
+        yes = findViewById(R.id.yes);
+        no = findViewById(R.id.no);
+        basic_info_text = findViewById(R.id.basic_info_next);
+        progressBar = findViewById(R.id.info_progress);
         basic_info_text.setOnClickListener(this);
         nature_spinner.setAdapter(natureArrayAdapter);
         nature_spinner.setOnItemSelectedListener(this);
         sub_spinner.setAdapter(subNatureArrayAdapter);
-        mic=findViewById(R.id.registerfir_mic);
-        dataHashMap=new HashMap<>();
+        mic = findViewById(R.id.registerfir_mic);
+        dataHashMap = new HashMap<>();
 
         not_present.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 not_present.setBackgroundResource(R.drawable.bg_edittextselected);
                 present.setBackgroundResource(R.drawable.bg_edittext);
-                victimPresent=0;
+                victimPresent = 0;
             }
         });
         present.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +195,7 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
             public void onClick(View v) {
                 present.setBackgroundResource(R.drawable.bg_edittextselected);
                 not_present.setBackgroundResource(R.drawable.bg_edittext);
-                victimPresent=1;
+                victimPresent = 1;
             }
         });
         present.performClick();
@@ -192,7 +205,7 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
             public void onClick(View v) {
                 yes.setBackgroundResource(R.drawable.bg_edittextselected);
                 no.setBackgroundResource(R.drawable.bg_edittext);
-                occurenceKnown=1;
+                occurenceKnown = 1;
             }
         });
         no.setOnClickListener(new View.OnClickListener() {
@@ -200,22 +213,23 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
             public void onClick(View v) {
                 no.setBackgroundResource(R.drawable.bg_edittextselected);
                 yes.setBackgroundResource(R.drawable.bg_edittext);
-                occurenceKnown=0;
+                occurenceKnown = 0;
             }
         });
         yes.callOnClick();
 
-        signURL="";
+        signURL = "";
         uploadsign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(RegisterFIR.this, Signature.class),REQUEST_SIGN);
+                startActivityForResult(new Intent(RegisterFIR.this, Signature.class), REQUEST_SIGN);
             }
         });
 
-        natureComplaint=subNatureComplaint=contentComplaint="";
+        natureComplaint = subNatureComplaint = contentComplaint = "";
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -228,23 +242,22 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if(v==basic_info_text){
+        if (v == basic_info_text) {
             getData();
-            uploadDataToFirebase();
         }
     }
 
-    private void getNatureList(){
-        databaseReference=baseReference.child("nature-of-complaint");
+    private void getNatureList() {
+        databaseReference = baseReference.child("nature-of-complaint");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         natureArrayList.add(dataSnapshot1.getKey());
                     }
                 }
-                Log.d(TAG, "onDataChange: "+natureArrayList);
+                Log.d(TAG, "onDataChange: " + natureArrayList);
                 natureArrayAdapter.notifyDataSetChanged();
             }
 
@@ -260,8 +273,8 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
         databaseReference.child(natureArrayList.get(position)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         subNatureArrayList.add(dataSnapshot1.getKey());
                     }
                     subNatureArrayAdapter.notifyDataSetChanged();
@@ -283,96 +296,101 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult: "+requestCode+" result code "+resultCode);
-        if(requestCode==REQUEST_SIGN&&resultCode== Activity.RESULT_OK){
-            try{
-                signURL=data.getStringExtra("result");
-                Log.d(TAG, "onActivityResult: "+signURL);
-                if(signURL!=""){
-                   // Picasso.get().load(signURL).into(uploadsign);
+        Log.d(TAG, "onActivityResult: " + requestCode + " result code " + resultCode);
+        if (requestCode == REQUEST_SIGN && resultCode == Activity.RESULT_OK) {
+            try {
+                signURL = data.getStringExtra("result");
+                Log.d(TAG, "onActivityResult: " + signURL);
+                if (signURL != "") {
+                    // Picasso.get().load(signURL).into(uploadsign);
                 }
-            }catch (Exception e){
-                Log.e(TAG, "onActivityResult: "+e.getMessage() );
+            } catch (Exception e) {
+                Log.e(TAG, "onActivityResult: " + e.getMessage());
             }
         }
-        if (requestCode==10&&resultCode == RESULT_OK && data != null) {
+        if (requestCode == 10 && resultCode == RESULT_OK && data != null) {
             ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            cont=content.getText().toString()+" "+(result.get(0));
+            cont = content.getText().toString() + " " + (result.get(0));
             content.setText("");
             content.setText(cont);
         }
     }
 
-    private void getData(){
-        natureComplaint=nature_spinner.getSelectedItem().toString();
-        subNatureComplaint=sub_spinner.getSelectedItem().toString();
-        contentComplaint=content.getText().toString();
-        if(contentComplaint.length()==0){
+    private void getData() {
+        natureComplaint = nature_spinner.getSelectedItem().toString();
+        subNatureComplaint = sub_spinner.getSelectedItem().toString();
+        contentComplaint = content.getText().toString();
+        if (contentComplaint.length() == 0) {
             content.setError("can't be empty");
             content.requestFocus();
+        }else{
+
+            uploadDataToFirebase();
         }
     }
 
-    private void uploadDataToFirebase(){
+    private void uploadDataToFirebase() {
         progressBar.setVisibility(View.VISIBLE);
-        long timestamp=System.currentTimeMillis();
 
-        HashMap<String,Object> addressHashmap;
-        Intent intent=getIntent();
-        String dataObjectAsString=intent.getStringExtra("object");
-        Gson gson=new Gson();
-        ModelPersonalDetails modelPersonalDetails=gson.fromJson(dataObjectAsString,new ModelPersonalDetails().getClass());
 
+        HashMap<String, Object> addressHashmap;
+        Intent intent = getIntent();
+        String dataObjectAsString = intent.getStringExtra("object");
+        Gson gson = new Gson();
+        ModelPersonalDetails modelPersonalDetails = gson.fromJson(dataObjectAsString, new ModelPersonalDetails().getClass());
+//        RetrieveFeedTask task = new RetrieveFeedTask();
+//        task.execute();
         //complainant hashmap
-        HashMap<String,Object> complainantHashmap=new HashMap<>();
+        HashMap<String, Object> complainantHashmap = new HashMap<>();
 
         //permanent address hasmap
-        addressHashmap=new HashMap<>();
-        addressHashmap.put("address",modelPersonalDetails.getAddress2());
-        addressHashmap.put("district",modelPersonalDetails.getDistrict2());
-        addressHashmap.put("state",modelPersonalDetails.getState2());
-        addressHashmap.put("ps",modelPersonalDetails.getPolice2());
+        addressHashmap = new HashMap<>();
+        addressHashmap.put("address", modelPersonalDetails.getAddress2());
+        addressHashmap.put("district", modelPersonalDetails.getDistrict2());
+        addressHashmap.put("state", modelPersonalDetails.getState2());
+        addressHashmap.put("ps", modelPersonalDetails.getPolice2());
 
-        complainantHashmap.put("perm-address",addressHashmap);
+        complainantHashmap.put("perm-address", addressHashmap);
 
         //address hashmap
-        addressHashmap.put("address",modelPersonalDetails.getAddress());
-        addressHashmap.put("district",modelPersonalDetails.getDistrict());
-        addressHashmap.put("state",modelPersonalDetails.getState());
-        addressHashmap.put("ps",modelPersonalDetails.getPolice());
+        addressHashmap.put("address", modelPersonalDetails.getAddress());
+        addressHashmap.put("district", modelPersonalDetails.getDistrict());
+        addressHashmap.put("state", modelPersonalDetails.getState());
+        addressHashmap.put("ps", modelPersonalDetails.getPolice());
 
-        complainantHashmap.put("address",addressHashmap);
+        complainantHashmap.put("address", addressHashmap);
 
         //setting dob
-        complainantHashmap.put("dob",modelPersonalDetails.getDOB());
+        complainantHashmap.put("dob", modelPersonalDetails.getDOB());
 
         //setting email
-        complainantHashmap.put("email",modelPersonalDetails.getEmail());
+        complainantHashmap.put("email", modelPersonalDetails.getEmail());
 
         //setting name
-        complainantHashmap.put("name",modelPersonalDetails.getName());
+        complainantHashmap.put("name", modelPersonalDetails.getName());
 
         //setting phone
-        complainantHashmap.put("phone",modelPersonalDetails.getMobile());
+        complainantHashmap.put("phone", modelPersonalDetails.getMobile());
 
         //setting sex
-        complainantHashmap.put("sex",modelPersonalDetails.getGender());
+        complainantHashmap.put("sex", modelPersonalDetails.getGender());
+        complainantHashmap.put("uid",FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        HashMap<String,Object> signatureMap=new HashMap<>();
-        signatureMap.put("type","image/jpeg");
-        signatureMap.put("url",signURL);
+        HashMap<String, Object> signatureMap = new HashMap<>();
+        signatureMap.put("type", "image/jpeg");
+        signatureMap.put("url", signURL);
 
-        dataHashMap.put("accepted",0);
-        dataHashMap.put("complainant",complainantHashmap);
-        dataHashMap.put("content",contentComplaint);
-        dataHashMap.put("crime-sub-type",subNatureComplaint);
-        dataHashMap.put("date",timestamp);
-        dataHashMap.put("fir-no",timestamp);
-        dataHashMap.put("is-crime-present",occurenceKnown);
-        dataHashMap.put("is-victim-present",victimPresent);
-        dataHashMap.put("nature-of-complaint",natureComplaint);
-        dataHashMap.put("signature",signatureMap);
-        dataHashMap.put("status","pending");
+        dataHashMap.put("accepted", 0);
+        dataHashMap.put("complainant", complainantHashmap);
+        dataHashMap.put("content", contentComplaint);
+        dataHashMap.put("crime-sub-type", subNatureComplaint);
+        dataHashMap.put("date", timestamp);
+        dataHashMap.put("fir-no", timestamp);
+        dataHashMap.put("is-crime-present", occurenceKnown);
+        dataHashMap.put("is-victim-present", victimPresent);
+        dataHashMap.put("nature-of-complaint", natureComplaint);
+        dataHashMap.put("signature", signatureMap);
+        dataHashMap.put("status", "pending");
 
         baseReference.child("fir").child(String.valueOf(timestamp)).setValue(dataHashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -390,13 +408,76 @@ public class RegisterFIR extends AppCompatActivity implements View.OnClickListen
                 showToast("Some error occurred");
             }
         });
-        Log.d(TAG, "uploadDataToFirebase: user uid is "+FirebaseAuth.getInstance().getCurrentUser().getUid());
-        baseReference.child(StringVariable.USERS).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("fir").child(""+timestamp).setValue("0");
+        Log.d(TAG, "uploadDataToFirebase: user uid is " + FirebaseAuth.getInstance().getCurrentUser().getUid());
+        baseReference.child(StringVariable.USERS).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("fir").child("" + timestamp).setValue("0");
         baseReference.child("police-station").child(modelPersonalDetails.getPolice()).child("fir").child(String.valueOf(timestamp)).setValue("0");
     }
 
-    private void showToast(String msg){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    private void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-}
+    class RetrieveFeedTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                Log.d("Harsh------->", "called");
+                GetText();
+                Log.d("Harsh-------->", "after called");
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                Toast.makeText(RegisterFIR.this, e.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("Harsh-------->", "Exception occurred " + e);
+            }
+            return null;
+        }
+    }
+        public void GetText () throws UnsupportedEncodingException {
+
+            String text = "";
+            BufferedReader reader = null;
+
+            try {
+                // Defined URL  where to send data
+                URL url = new URL("https://lit-ridge-96428.herokuapp.com/encrypt");
+
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+
+                //conn.setRequestProperty("Authorization", " EndpointKey 5d29ff99-88af-469d-9e7a-d72693244963");
+                conn.setRequestProperty("Content-Type", "application/json");
+
+                //Create JSONObject here
+                JSONObject jsonParam = new JSONObject();
+                jsonParam.put("firNo", timestamp);
+                jsonParam.put("text",contentComplaint);
+
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(jsonParam.toString());
+                wr.flush();
+                Log.d("karma", "json is " + jsonParam);
+                reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+
+                // harsh--------->     Read Server Response
+                while ((line = reader.readLine()) != null) {
+                    // harsh------>      Append server response in string
+                    sb.append(line + "\n");
+                }
+
+
+                text = sb.toString();
+                JSONObject object=new JSONObject(text);
+                Log.e("harsh",object.toString());
+                encrypted_content=object.getString("encryptedData");
+                Log.d(TAG, "harsh:"+ encrypted_content);
+            } catch (Exception e) {
+                Log.e("hahah", "sdnlds");
+            }
+        }
+    }
+
